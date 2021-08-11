@@ -1,39 +1,27 @@
 import React from "react";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const MainNavbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a className="navbar-brand" href="#">
-				<i className="fas fa-american-sign-language-interpreting" /> Follow The Signs
-			</a>
-			<button
-				className="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarNavAltMarkup"
-				aria-controls="navbarNavAltMarkup"
-				aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span className="navbar-toggler-icon" />
-			</button>
-			<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-				<div className="navbar-nav ml-auto">
-					<a className="text-white nav-link" href="#">
-						News
-					</a>
-					<a className="text-white nav-link" href="#">
-						Resources
-					</a>
-					<a className="text-white nav-link" href="#">
-						Total Users Online
-					</a>
-					<a className="text-white nav-link" href="#">
-						Your Connections Online
-					</a>
-					<button className="btn btn-primary">Sign Up</button>
-				</div>
-			</div>
-		</nav>
+		<Navbar bg="dark" variant="dark" expand="lg">
+			<Navbar.Brand href="#home">
+				<i className="fas fa-sign-language" /> Follow The Signs
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls="basic-navbar-nav" />
+			<Navbar.Collapse id="basic-navbar-nav">
+				<Nav className="mr-auto">
+					<Nav.Link href="#home">Home</Nav.Link>
+					<Nav.Link href="#link">Link</Nav.Link>
+					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
+						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+						<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+						<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+						<NavDropdown.Divider />
+						<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+					</NavDropdown>
+				</Nav>
+			</Navbar.Collapse>
+		</Navbar>
 	);
 };
