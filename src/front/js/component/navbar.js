@@ -1,25 +1,30 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Nav, DropdownButton, Dropdown, Container } from "react-bootstrap";
 
 export const MainNavbar = () => {
 	return (
-		<Navbar bg="dark" variant="dark" expand="lg">
+		<Navbar bg="dark" variant="dark" expand="lg" sticky="top" className="px-5">
 			<Navbar.Brand href="#home">
 				<i className="fas fa-sign-language" /> Follow The Signs
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="mr-auto">
-					<Nav.Link href="#home">Home</Nav.Link>
-					<Nav.Link href="#link">Link</Nav.Link>
-					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
-						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-						<NavDropdown.Divider />
-						<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-					</NavDropdown>
+				<Nav className="ml-auto">
+					<Nav.Link href="#home" className="px-3">
+						News
+					</Nav.Link>
+					<Nav.Link href="#link" className="px-3">
+						Events
+					</Nav.Link>
+					<Nav.Link href="#link" className="px-3">
+						Discussion
+					</Nav.Link>
+					<DropdownButton align="right" title="Login" id="dropdown-menu-align-right" className="pl-3">
+						<Dropdown.Item eventKey="1">Login</Dropdown.Item>
+						<Dropdown.Item eventKey="2">Sign Up</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Item eventKey="4">Sign Out</Dropdown.Item>
+					</DropdownButton>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
