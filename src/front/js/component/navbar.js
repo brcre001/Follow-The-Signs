@@ -3,7 +3,7 @@ import { Navbar, Nav, DropdownButton, Dropdown, Container } from "react-bootstra
 
 export const MainNavbar = () => {
 	return (
-		<Navbar bg="dark" variant="dark" expand="lg" sticky="top" className="px-5">
+		<Navbar bg="dark" variant="dark" expand="lg" className="px-5">
 			<Navbar.Brand href="#home">
 				<i className="fas fa-sign-language" /> Follow The Signs
 			</Navbar.Brand>
