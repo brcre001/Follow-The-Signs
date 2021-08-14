@@ -3,16 +3,18 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export const HomeEventCards = () => {
-	return (
-		<Card style={{ width: "18rem" }}>
-			<Card.Img variant="top" src="holder.js/100px180" />
-			<Card.Body>
-				<Card.Title>Card Title</Card.Title>
-				<Card.Text>
-					Some quick example text to build on the card title and make up the bulk of the cards content.
-				</Card.Text>
-				<Button variant="primary">Go somewhere</Button>
-			</Card.Body>
-		</Card>
-	);
+	return [1, 2, 3, 4, 5, 6].map(() => (
+		<>
+			<Card className="col col-md-4" style={{ width: "18rem" }}>
+				<Card.Img variant="top" src="holder.js/100px180" />
+				<Card.Body>
+					<Card.Title>Deaf Meetup</Card.Title>
+					<Card.Text>
+						We will be meeting up together to meet other people and practice our languages.
+					</Card.Text>
+					<Button variant="primary">Learn More</Button>
+				</Card.Body>
+			</Card>
+		</>
+	));
 };

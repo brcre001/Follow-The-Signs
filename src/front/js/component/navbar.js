@@ -1,5 +1,8 @@
 import React from "react";
-import { Navbar, Nav, DropdownButton, Dropdown, Container } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export const MainNavbar = () => {
 	return (
