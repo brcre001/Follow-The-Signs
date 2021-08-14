@@ -16,3 +16,12 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/users', methods=['GET'])
+def get_all_users():
+
+    users = User.query.all()
+    if users == False: return "There are no users in the database.", 404
+    users = list(map(lambda user: user.serialize(), users))
+
+    return jsonify(users), 200
