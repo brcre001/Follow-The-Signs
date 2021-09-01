@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ControlledCarousel } from "../component/carousel";
 import { HomeEventCards } from "../component/card";
+import { News } from "./news";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
