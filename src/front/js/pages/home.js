@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { ControlledCarousel } from "../component/carousel";
+import { RecentNewsCarousel } from "../component/RecentNewsCarousel";
 import { HomeEventCards } from "../component/card";
 import { News } from "./news";
 
@@ -17,7 +17,7 @@ export const Home = () => {
 			<div className="px-5 py-3 h-100">
 				<h2>News</h2>
 				<div className="text-center">
-					<ControlledCarousel />
+					<RecentNewsCarousel />
 				</div>
 			</div>
 

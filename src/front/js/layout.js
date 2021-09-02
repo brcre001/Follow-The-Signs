@@ -5,14 +5,11 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-<<<<<<< HEAD
 import { News } from "./pages/news";
 import { Events } from "./pages/events";
 
-=======
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
->>>>>>> 3bcc52eae275c665b6eb2572a1bef56abf50be8f
 import injectContext from "./store/appContext";
 
 import { MainNavbar } from "./component/navbar";
@@ -55,7 +52,7 @@ const Layout = () => {
 							<Signup />
 						</Route>
 						<Route>
-							<h1>Not found!</h1>
+							<h1 className="m-auto"> 404 Not found!</h1>
 						</Route>
 					</Switch>
 					<Footer />
