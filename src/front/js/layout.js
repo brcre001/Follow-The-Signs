@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { News } from "./pages/news";
 import { Events } from "./pages/events";
+import { Discussions } from "./pages/discussions";
 
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
@@ -50,6 +51,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/signup">
 							<Signup />
+						</Route>
+						<Route exact path="/discussions">
+							<Discussions />
 						</Route>
 						<Route>
 							<h1 className="m-auto"> 404 Not found!</h1>
