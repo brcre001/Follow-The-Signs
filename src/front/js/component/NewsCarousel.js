@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-export const RecentNewsCarousel = () => {
+export const NewsCarousel = () => {
 	const [index, setIndex] = useState(0);
 
 	const handleSelect = (selectedIndex, e) => {

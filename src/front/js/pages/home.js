@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import { RecentNewsCarousel } from "../component/RecentNewsCarousel";
+import { NewsCarousel } from "../component/NewsCarousel";
 import { HomeEventCards } from "../component/card";
-import { News } from "./news";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -11,24 +10,23 @@ export const Home = () => {
 	return (
 		<>
 			<div className="text-center pt-3">
-				<h1>Follow The Signs</h1>
-				<hr />
+				<h1 className="m-0">Follow The Signs</h1>
 			</div>
-			<div className="px-5 py-3 h-100">
+			<div className="px-5 pt-3 h-100">
 				<h2>News</h2>
 				<div className="text-center">
-					<RecentNewsCarousel />
+					<NewsCarousel />
 				</div>
 			</div>
 
-			<div className="px-5 py-3 h-100">
+			<div className="px-5 pt-3 h-100">
 				<h2>Events</h2>
 				<div className="row m-2">
 					<HomeEventCards />
 				</div>
 			</div>
 
-			<div className="px-5 py-3 h-100">
+			<div className="px-5 pt-3 h-100">
 				<h2>Discussions</h2>
 			</div>
 		</>
