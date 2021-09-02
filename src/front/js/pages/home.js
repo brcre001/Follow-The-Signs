@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { NewsCarousel } from "../component/NewsCarousel";
-import { HomeEventCards } from "../component/card";
+import { HomeEventCards } from "../component/HomeEventCards";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);

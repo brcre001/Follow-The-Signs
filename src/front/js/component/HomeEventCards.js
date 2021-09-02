@@ -3,9 +3,9 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export const HomeEventCards = () => {
-	return [1, 2, 3, 4, 5, 6].map(() => (
+	return [1, 2, 3, 4, 5, 6].map(index => (
 		<>
-			<Card className="col col-md-4" style={{ width: "18rem" }}>
+			<Card className="col-12 col-md-4" style={{ width: "18rem" }}>
 				<Card.Img variant="top" src="holder.js/100px180" />
 				<Card.Body>
 					<Card.Title>Deaf Meetup</Card.Title>
