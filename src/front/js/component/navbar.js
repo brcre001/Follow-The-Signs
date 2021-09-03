@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 export const MainNavbar = () => {
 	return (
-		<Navbar bg="dark" variant="dark" expand="lg" className="px-5">
+		<Navbar bg="dark" variant="dark" sticky="top" expand="lg" className="px-5">
 			<Navbar.Brand>
 				<Link to="/" className="text-white">
 					<i className="fas fa-sign-language" /> Follow The Signs
