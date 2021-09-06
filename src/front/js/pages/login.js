@@ -25,7 +25,6 @@ export const Login = () => {
 				</InputGroup>
 
 				<div className="d-flex justify-content-around">
-					<p>Forgot Username?</p>
 					<p>Forgot Password?</p>
 				</div>
 
