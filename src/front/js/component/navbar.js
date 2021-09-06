@@ -22,7 +22,7 @@ export const MainNavbar = () => {
 						Events
 					</Link>
 					<Link to="discussions" className="my-auto text-white px-3">
-						Discussion
+						Discussions
 					</Link>
 					<Link to="/login" className="px-3 py-0">
 						<Button className="rounded-pill px-4">Login</Button>
