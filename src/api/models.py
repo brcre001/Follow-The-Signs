@@ -20,7 +20,7 @@ class User(db.Model):
     join_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     pivots = db.relationship('Discussion', secondary=pivots, lazy='subquery',
         backref=db.backref('users', lazy=True))
-    comments = db.relationship('Comment', backref='user', lazy=True)
+    comments = db.relationship('Comment', backref='users', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.email
