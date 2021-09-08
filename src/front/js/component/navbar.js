@@ -24,6 +24,9 @@ export const MainNavbar = () => {
 					<Link to="discussions" className="my-auto text-white px-3">
 						Discussions
 					</Link>
+					<Link to="/connections" className="my-auto text-white px-3">
+						Connections
+					</Link>
 					<Link to="/login" className="px-3 py-0">
 						<Button className="rounded-pill px-4">Login</Button>
 					</Link>
