@@ -4,6 +4,11 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+pivots = db.Table('pivots',
+        db.Column('dicussion_id', db.Integer, db.ForeignKey('discussion.id'), primary_key=True),
+        db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    )
+
 class User(db.Model):
     # These are ATTRIBUTES
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +18,9 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     join_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    pivots = db.relationship('Discussion', secondary=pivots, lazy='subquery',
+        backref=db.backref('users', lazy=True))
+    comments = db.relationship('Comment', backref='user', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -26,7 +34,8 @@ class User(db.Model):
             # Decided not to serialize email for security purposes
             # do not serialize the password, its a security breach
             "is_active": self.is_active,
-            "join_date": self.join_date
+            "join_date": self.join_date,
+            "comments": list(map(lambda comment: comment.serialize(), self.comments))
         }
 
 class News(db.Model):
@@ -98,17 +107,17 @@ class Discussion(db.Model):
             "description": self.description,
         }
 
+class Comment(db.Model):
+    # These are ATTRIBUTES
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(120), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-# pivot_table = db.Table('Pivot',
-#     db.Column('comment_id', db.Integer, db.ForeignKey('comment.id'), primary_key=True),
-#     db.Column('dicussion_id', db.Integer, db.ForeignKey('discussion.id'), primary_key=True),
-#     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
-# )
+    def __repr__(self):
+        return '<Comment %r>' % self.body
 
-# class Page(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     tags = db.relationship('Tag', secondary=tags, lazy='subquery',
-#         backref=db.backref('pages', lazy=True))
-
-# class Tag(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
+    def serialize(self):
+        return {
+            "id": self.id,
+            "body": self.body
+        }
