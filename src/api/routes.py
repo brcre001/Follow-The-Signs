@@ -11,14 +11,6 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 # app = Flask(__name__)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend"
-    }
-
-    return jsonify(response_body), 200
 
 @api.route('/users', methods=['GET'])
 @jwt_required()

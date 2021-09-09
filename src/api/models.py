@@ -30,7 +30,7 @@ class User(db.Model):
             "id": self.id,
             "full_name": self.full_name,
             "username": self.username,
-            # "email": self.email,
+            "email": self.email,
             # Decided not to serialize email for security purposes
             # do not serialize the password, its a security breach
             "is_active": self.is_active,
