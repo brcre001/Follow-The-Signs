@@ -1,8 +1,16 @@
-// .jumbotron {
-        // background: url("https://images.pexels.com/photos/6321244/pexels-photo-6321244.jpeg?cs=srgb&dl=pexels-cottonbro-6321244.jpg&fm=jpg")no-repeat center center; 
-// }
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Questrial&family=Source+Sans+Pro:wght@200&display=swap');
 
-// THIS IS ANIMATION FOR THE JUMBOTRON
+.jumbotron {
+    background: #23526e;
+    // SECOND COLOR CHOICE
+    // background: #AEC0C2;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.text-color {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .page-animation{
     animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;

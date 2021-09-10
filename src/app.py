@@ -3,6 +3,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask_socketio import SocketIO, send
+from api.socket import initialize_socket
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
@@ -16,10 +18,8 @@ from api.commands import initialize_commands
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+
 from flask_jwt_extended import JWTManager
-
-
-
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
@@ -38,6 +38,9 @@ jwt = JWTManager(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db)
 db.init_app(app)
+
+# Initialize socket for chat
+initialize_socket(app)
 
 # Allow CORS requests to this API
 CORS(app)
@@ -72,9 +75,6 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
-
-
-
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

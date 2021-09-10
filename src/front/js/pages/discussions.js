@@ -22,7 +22,7 @@ export const Discussions = () => {
 			<div className="jumbotron jumbotron-fluid">
 				<div className="container page-animation">
 					<h1 className="display-4 text-center">Discussions Board</h1>
-					<p className="lead text-center">
+					<p className="lead text-center text-color">
 						Create, Read, Or Comment <br />A place to read discussions and chat with people.
 					</p>
 					<Form className="d-flex">
@@ -34,10 +34,10 @@ export const Discussions = () => {
 
 			{/* THIS IS THE CREATE BUTTON */}
 			<div className="discussion-creation">
+				<h2 className="discussion-article text-center">Discussions & Articles</h2>
 				<Button className="ml-5 mb-2" variant="primary" onClick={handleShow}>
 					Create <i className="fas fa-plus" />
 				</Button>
-				<h2 className="discussion-article text-center">Discussions & Articles</h2>
 			</div>
 
 			{/* THIS IS THE MODEL */}
@@ -74,44 +74,51 @@ export const Discussions = () => {
 							rows="3"
 						/>
 
-						<div className="d-flex border-top">
-							<p className="lead">Add to Your Post</p>
+						<div className="d-flex justify-content-between border-top">
+							<div className="mt-4">
+								<p className="lead">Add to Your Post</p>
+							</div>
 							<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Photo/Video</Tooltip>}>
-								<Button className="ml-auto mt-2">
-									<i className="fas fa-images" />
-								</Button>
+								<div className="mt-4">
+									<Button className="btn mt-3">
+										<i className="fas fa-images"></i>
+									</Button>
+								</div>
 							</OverlayTrigger>
 						</div>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
+					<Button className="btn btn-sm" variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
-					<Button variant="primary">Post Discussion</Button>
+					<Button className="btn btn-sm" variant="primary">
+						Post Discussion
+					</Button>
 				</Modal.Footer>
 			</Modal>
-
-			{cardLoop.map(index => (
-				<div className="row justify-content-center p-1" key={index}>
-					<Card className="col-6 mt-5" style={{ width: "18rem" }}>
-						<Card.Img
-							rounded
-							className="p-3"
-							variant="top"
-							href="https://placeholder.com/"
-							src="https://via.placeholder.com/80x40"
-						/>
-						{/* OLD PLACEHOLDER TAG CODE
+			<div className="px-5 pt-3">
+				{cardLoop.map(index => (
+					<div className="row justify-content-center p-1" key={index}>
+						<Card className="col-12">
+							<Card.Img
+								rounded
+								// className="p-3"
+								variant="top"
+								// href="https://placeholder.com/"
+								// src="https://via.placeholder.com/80x40"
+							/>
+							{/* OLD PLACEHOLDER TAG CODE
 				src="https://via.placeholder.com/100x180" */}
-						<Card.Body>
-							<Card.Title> Interesting Discussion!</Card.Title>
-							<Card.Text>This will be an discussion that you may be interested in.</Card.Text>
-							<Button variant="primary">Learn More</Button>
-						</Card.Body>
-					</Card>
-				</div>
-			))}
+							<Card.Body>
+								<Card.Title> Interesting Discussion!</Card.Title>
+								<Card.Text>This will be an discussion that you may be interested in.</Card.Text>
+								<Button variant="primary">Learn More</Button>
+							</Card.Body>
+						</Card>
+					</div>
+				))}
+			</div>
 		</>
 	);
 };

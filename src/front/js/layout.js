@@ -8,6 +8,7 @@ import { Single } from "./pages/single";
 import { News } from "./pages/news";
 import { Events } from "./pages/events";
 import { Discussions } from "./pages/discussions";
+import { Connections } from "./pages/connections";
 
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
@@ -31,9 +32,6 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/home">
-							<Home />
-						</Route>
 						<Route exact path="/demo">
 							<Demo />
 						</Route>
@@ -54,6 +52,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/discussions">
 							<Discussions />
+						</Route>
+						<Route exact path="/connections">
+							<Connections />
 						</Route>
 						<Route>
 							<h1 className="m-auto"> 404 Not found!</h1>
