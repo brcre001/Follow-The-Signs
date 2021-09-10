@@ -58,7 +58,9 @@ export const Login = () => {
 						} catch (tokenError) {
 							setError(tokenError.message);
 						}
-					}}></Button>
+					}}>
+					Login
+				</Button>
 				<p>Dont have an account?</p>
 				<Link to="/signup">
 					<Button variant="primary" className="px-5 rounded-pill">

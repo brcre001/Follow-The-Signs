@@ -1,0 +1,18 @@
+// THIS IS THE FONT STYLE FOR NAVBAR
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Questrial&display=swap');
+
+// THIS IS TO CHANGE THE COLOR THE NAVBAR
+.navbar-style {
+    background: #081B26;
+}
+.navbar-light .navbar-toggler {
+    border-color: white;
+}
+// THIS IS TO CHANGE THE COLOR THE NAVBAR TAB TEXT
+.navbar-light .navbar-text {
+    color: #4E8DA6;
+}
+
+.navbar-light .navbar-text:hover{
+    color: #83c1da;
+}
