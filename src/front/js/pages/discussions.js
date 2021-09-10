@@ -35,7 +35,7 @@ export const Discussions = () => {
 			{/* THIS IS THE CREATE BUTTON */}
 			<div className="discussion-creation">
 				<Button className="ml-5 mb-2" variant="primary" onClick={handleShow}>
-					Create <i className="fas fa-plus"></i>
+					Create <i className="fas fa-plus" />
 				</Button>
 				<h2 className="discussion-article text-center">Discussions & Articles</h2>
 			</div>
@@ -55,7 +55,7 @@ export const Discussions = () => {
 								<h2 className="display-5 text-center">Create a discussion</h2>
 							</div>
 							<div>
-								<i className="fas fa-user-circle fa-lg"></i>
+								<i className="fas fa-user-circle fa-lg" />
 								<span className="font-weight-lighter pl-2">Username</span>{" "}
 								{/*This is for the username while change when login */}
 							</div>
@@ -71,13 +71,14 @@ export const Discussions = () => {
 							className="form-control border-0"
 							id="exampleFormControlTextarea1"
 							placeholder="What's on your mind?"
-							rows="3"></textarea>
+							rows="3"
+						/>
 
 						<div className="d-flex border-top">
 							<p className="lead">Add to Your Post</p>
 							<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Photo/Video</Tooltip>}>
 								<Button className="ml-auto mt-2">
-									<i className="fas fa-images"></i>
+									<i className="fas fa-images" />
 								</Button>
 							</OverlayTrigger>
 						</div>
