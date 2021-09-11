@@ -27,7 +27,7 @@ export const Login = () => {
 						aria-describedby="basic-addon2"
 						onChange={e => setUsername(e.target.value)}
 						value={username}
-						required={true}
+						// required={true}
 					/>
 				</InputGroup>
 
@@ -39,7 +39,7 @@ export const Login = () => {
 						aria-describedby="basic-addon2"
 						onChange={e => setPassword(e.target.value)}
 						value={password}
-						required={true}
+						// required={true}
 					/>
 				</InputGroup>
 

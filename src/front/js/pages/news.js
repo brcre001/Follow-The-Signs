@@ -2,6 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { NewsCarousel } from "../component/NewsCarousel";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 
 const array = [1, 2, 3, 4, 5, 6];
 
@@ -23,12 +25,26 @@ const Cards = array.map(() => (
 
 export const News = () => {
 	return (
-		<div className="px-5 pt-3">
-			<h1>Recent News</h1>
-			<div className="text-center py-2">
-				<NewsCarousel />
+		<>
+			<div className="jumbotron jumbotron-fluid">
+				<div className="container page-animation">
+					<h1 className="display-4 text-center">News Board</h1>
+					<p className="lead text-center text-color">
+						Keep up to date with the latest news <br /> Information dealing with and for the deaf community
+					</p>
+					<Form className="d-flex">
+						<FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
+						<Button className="search-bar">Search</Button>
+					</Form>
+				</div>
 			</div>
-			{Cards}
-		</div>
+			<div className="px-5 pt-3">
+				<h1>Recent News</h1>
+				<div className="text-center py-2">
+					<NewsCarousel />
+				</div>
+				{Cards}
+			</div>
+		</>
 	);
 };

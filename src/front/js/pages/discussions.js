@@ -34,7 +34,7 @@ export const Discussions = () => {
 
 			{/* THIS IS THE CREATE BUTTON */}
 			<div className="discussion-creation">
-				<h2 className="discussion-article text-center">Discussions & Articles</h2>
+				{/* <h2 className="discussion-article text-center">Discussions & Articles</h2> */}
 				<Button className="ml-5 mb-2" variant="primary" onClick={handleShow}>
 					Create <i className="fas fa-plus" />
 				</Button>
