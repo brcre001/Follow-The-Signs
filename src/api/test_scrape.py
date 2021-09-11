@@ -124,4 +124,31 @@ print("This is the title tested against ALL sites: " + jobstitle)
 
 
 
+#################### Step 3:  ##################
+#####  Parse HTML Code With Beautiful Soup #####
+################################################
+
+## STILL USING THIS PAGE: ## 
+## https://realpython.com/beautiful-soup-web-scraper-python/
+
+## import requests - Already Imported ## 
+from bs4 import BeautifulSoup
+
+URL = "https://realpython.github.io/fake-jobs/"
+page = requests.get(URL)
+
+soup = BeautifulSoup(page.content, "html.parser")
+
+# Note: You’ll want to pass page.content instead of page.text to avoid problems with character encoding. The .content attribute holds raw bytes, which can be decoded better than the text representation you printed earlier using the .text attribute.
+
+
+# results = soup.find(id="ResultsContainer")
+# print(results.prettify())
+
+
+## 
+
+
+
+
 

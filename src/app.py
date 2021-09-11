@@ -12,6 +12,13 @@ from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
 from api.admin import setup_admin
+from api.commands import initialize_commands
+
+#from models import Person
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+
 from flask_jwt_extended import JWTManager
 
 ENV = os.getenv("FLASK_ENV")
@@ -40,6 +47,9 @@ CORS(app)
 
 # add the admin
 setup_admin(app)
+
+# Initialize Commands:
+initialize_commands(app)
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
