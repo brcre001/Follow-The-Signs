@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
+import { withRouter, Route, Switch } from "react-router-dom";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
@@ -9,10 +8,6 @@ import { News } from "./pages/news";
 import { Events } from "./pages/events";
 import { Discussions } from "./pages/discussions";
 import { Connections } from "./pages/connections";
-
-import { Login } from "./pages/login";
-import { Signup } from "./pages/signup";
-import injectContext from "./store/appContext";
 
 import { MainNavbar } from "./component/Navbar";
 import { Footer } from "./component/Footer";
@@ -25,46 +20,38 @@ const Layout = () => {
 
 	return (
 		<div className="h-75">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<MainNavbar />
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/news">
-							<News />
-						</Route>
-						<Route exact path="/events">
-							<Events />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						<Route exact path="/login">
-							<Login />
-						</Route>
-						<Route exact path="/signup">
-							<Signup />
-						</Route>
-						<Route exact path="/discussions">
-							<Discussions />
-						</Route>
-						<Route exact path="/connections">
-							<Connections />
-						</Route>
-						<Route>
-							<h1 className="m-auto"> 404 Not found!</h1>
-						</Route>
-					</Switch>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
+			{/* <BrowserRouter basename={basename}> */}
+			<MainNavbar />
+			<Switch>
+				<Route exact path="/">
+					<Home />
+				</Route>
+				<Route exact path="/demo">
+					<Demo />
+				</Route>
+				<Route exact path="/news">
+					<News />
+				</Route>
+				<Route exact path="/events">
+					<Events />
+				</Route>
+				<Route exact path="/single/:theid">
+					<Single />
+				</Route>
+				<Route exact path="/discussions">
+					<Discussions />
+				</Route>
+				<Route exact path="/connections">
+					<Connections />
+				</Route>
+				<Route>
+					<h1 className="m-auto"> 404 Not found!</h1>
+				</Route>
+			</Switch>
+			<Footer />
+			{/* </BrowserRouter> */}
 		</div>
 	);
 };
 
-export default injectContext(Layout);
+export default withRouter(Layout);

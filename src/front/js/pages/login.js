@@ -27,6 +27,7 @@ export const Login = () => {
 						aria-describedby="basic-addon2"
 						onChange={e => setUsername(e.target.value)}
 						value={username}
+						required={true}
 					/>
 				</InputGroup>
 
@@ -38,6 +39,7 @@ export const Login = () => {
 						aria-describedby="basic-addon2"
 						onChange={e => setPassword(e.target.value)}
 						value={password}
+						required={true}
 					/>
 				</InputGroup>
 
@@ -52,6 +54,7 @@ export const Login = () => {
 						e.preventDefault();
 						setError(null);
 						try {
+							if (username == "" || password == "") throw Error("Missing Username or Password");
 							const token = await actions.login(username, password);
 							if (token) history.push("/");
 						} catch (tokenError) {

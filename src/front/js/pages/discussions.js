@@ -97,7 +97,6 @@ export const Discussions = () => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-
 			<div className="row px-5 pt-3 mx-auto justify-content-center">
 				{cardLoop.map(index => (
 					<div className="justify-content-center p-1" key={index}>
