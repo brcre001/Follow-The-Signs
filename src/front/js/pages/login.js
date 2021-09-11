@@ -53,7 +53,6 @@ export const Login = () => {
 						setError(null);
 						try {
 							const token = await actions.login(username, password);
-							console.log(token);
 							if (token) history.push("/");
 						} catch (tokenError) {
 							setError(tokenError.message);

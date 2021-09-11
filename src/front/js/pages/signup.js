@@ -7,7 +7,7 @@ import "../../styles/login.scss";
 export const Signup = () => {
 	return (
 		<>
-			<div className="text-center my-5 w-50 mx-auto my-auto">
+			<div className="text-center my-5 w-50 mx-auto">
 				<h1>Follow The Signs</h1>
 
 				<h6 className="text-left">Email address</h6>

@@ -96,9 +96,10 @@ export const Discussions = () => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			<div className="px-5 pt-3">
+
+			<div className="row px-5 pt-3 mx-auto justify-content-center">
 				{cardLoop.map(index => (
-					<div className="row justify-content-center p-1" key={index}>
+					<div className="justify-content-center p-1" key={index}>
 						<Card className="col-12">
 							<Card.Img
 								rounded
