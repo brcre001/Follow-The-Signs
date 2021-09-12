@@ -9,8 +9,13 @@ export const Home = () => {
 
 	return (
 		<>
-			<div className="text-center pt-3">
-				<h1 className="m-0">Follow The Signs</h1>
+			<div className="jumbotron jumbotron-fluid">
+				<div className="container page-animation">
+					<h1 className="display-4 text-center">Follow The Signs</h1>
+					<p className="lead text-center text-color">
+						A place for the deaf community to stay informed, connected and educated
+					</p>
+				</div>
 			</div>
 			<div className="px-5 pt-3 h-100">
 				<h2>News</h2>

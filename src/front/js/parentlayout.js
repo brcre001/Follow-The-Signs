@@ -22,6 +22,7 @@ const ParentLayout = () => {
 						<Login />
 					</Route>
 					<Route exact path="/signup">
+						<MainNavbar navigation={false} />
 						<Signup />
 					</Route>
 					<Route>

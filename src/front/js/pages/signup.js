@@ -29,7 +29,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
-				<h6 className="text-left signup-tetx">Password</h6>
+				<h6 className="text-left signup-text">Password</h6>
 				<InputGroup className="mb-3">
 					<FormControl placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
 				</InputGroup>
