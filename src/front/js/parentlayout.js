@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { MainNavbar } from "./component/Navbar";
+import { Footer } from "./component/Footer";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
 import Layout from "./layout";
@@ -29,6 +30,7 @@ const ParentLayout = () => {
 						<Layout />
 					</Route>
 				</Switch>
+				<Footer />
 			</ScrollToTop>
 		</BrowserRouter>
 	);

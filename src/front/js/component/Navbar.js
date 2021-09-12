@@ -10,7 +10,8 @@ export const MainNavbar = props => {
 	const { navigation } = props;
 	return (
 		// variant="dark" bg="dark"  PERVOIUS COLOR FOR NAVBAR & TABS
-		<Navbar sticky="top" expand="lg" className="navbar-style px-5">
+		// added variant="dark" again to have the collapsed sidebar in white
+		<Navbar sticky="top" expand="lg" variant="dark" className="navbar-style px-5">
 			<Navbar.Brand>
 				<Link to="/" className="text-white">
 					<i className="fas fa-sign-language" /> Follow The Signs
@@ -26,7 +27,7 @@ export const MainNavbar = props => {
 						<Link to="/events" className="my-auto navbar-text px-3">
 							Events
 						</Link>
-						<Link to="discussions" className="my-auto navbar-text px-3">
+						<Link to="/discussions" className="my-auto navbar-text px-3">
 							Discussions
 						</Link>
 						<Link to="/connections" className="my-auto navbar-text px-3">

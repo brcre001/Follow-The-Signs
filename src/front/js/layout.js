@@ -8,9 +8,7 @@ import { News } from "./pages/news";
 import { Events } from "./pages/events";
 import { Discussions } from "./pages/discussions";
 import { Connections } from "./pages/connections";
-
 import { MainNavbar } from "./component/Navbar";
-import { Footer } from "./component/Footer";
 
 //create your first component
 const Layout = () => {
@@ -19,8 +17,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="">
-			{/* <BrowserRouter basename={basename}> */}
+		<div>
 			<MainNavbar />
 			<Switch>
 				<Route exact path="/">
@@ -48,8 +45,6 @@ const Layout = () => {
 					<h1 className="m-auto"> 404 Not found!</h1>
 				</Route>
 			</Switch>
-			<Footer />
-			{/* </BrowserRouter> */}
 		</div>
 	);
 };
