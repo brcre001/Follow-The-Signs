@@ -19,7 +19,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="h-75">
+		<div className="">
 			{/* <BrowserRouter basename={basename}> */}
 			<MainNavbar />
 			<Switch>

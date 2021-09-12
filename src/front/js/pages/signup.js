@@ -2,15 +2,16 @@ import React from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
-import "../../styles/login.scss";
+import { Link } from "react-router-dom";
+import "../../styles/signup.scss";
 
 export const Signup = () => {
 	return (
 		<>
-			<div className="text-center my-5 w-50 mx-auto">
-				<h1>Follow The Signs</h1>
+			<div className="container text-center w-50 mx-auto signup">
+				<h1 className="signup-text">Follow The Signs</h1>
 
-				<h6 className="text-left">Email address</h6>
+				<h6 className="text-left signup-text">Email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
 						placeholder="Email address"
@@ -19,7 +20,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
-				<h6 className="text-left">Confirm email address</h6>
+				<h6 className="text-left signup-text">Confirm email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
 						placeholder="Confirm email address"
@@ -28,19 +29,23 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
-				<h6 className="text-left">Password</h6>
+				<h6 className="text-left signup-tetx">Password</h6>
 				<InputGroup className="mb-3">
 					<FormControl placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
 				</InputGroup>
 
-				<h6 className="text-left">Username</h6>
+				<h6 className="text-left signup-text">Username</h6>
 				<InputGroup className="mb-3">
 					<FormControl placeholder="Username" aria-label="Username" aria-describedby="basic-addon2" />
 				</InputGroup>
 
-				<Button variant="primary" className="px-5 rounded-pill">
-					Sign Up
-				</Button>
+				<Button className="px-5 rounded-pill button-color">Sign Up</Button>
+				<div className="mt-3">
+					<p className="m-0 signup-subtext">Have an account?</p>
+					<Link to="/login">
+						<Button className="px-5 rounded-pill button-color">Login</Button>
+					</Link>
+				</div>
 			</div>
 		</>
 	);

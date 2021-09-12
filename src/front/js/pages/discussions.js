@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -15,6 +16,7 @@ export const Discussions = () => {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	const { actions, store } = useContext(Context);
 
 	const cardLoop = [1, 2, 3, 4, 5, 6];
 	return (
@@ -34,7 +36,7 @@ export const Discussions = () => {
 
 			{/* THIS IS THE CREATE BUTTON */}
 			<div className="discussion-creation">
-				{/* <h2 className="discussion-article text-center">Discussions & Articles</h2> */}
+				<h2 className="discussion-article text-center">Discussions & Articles</h2>
 				<Button className="ml-5 mb-2" variant="primary" onClick={handleShow}>
 					Create <i className="fas fa-plus" />
 				</Button>
@@ -56,7 +58,7 @@ export const Discussions = () => {
 							</div>
 							<div>
 								<i className="fas fa-user-circle fa-lg" />
-								<span className="font-weight-lighter pl-2">Username</span>{" "}
+								<span className="font-weight-lighter pl-2">{store.currentUser?.username}</span>{" "}
 								{/*This is for the username while change when login */}
 							</div>
 						</div>

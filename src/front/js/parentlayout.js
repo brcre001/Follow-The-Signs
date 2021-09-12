@@ -14,24 +14,22 @@ const ParentLayout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="h-75">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Switch>
-						<Route exact path="/login">
-							<MainNavbar navigation={false} />
-							<Login />
-						</Route>
-						<Route exact path="/signup">
-							<Signup />
-						</Route>
-						<Route>
-							<Layout />
-						</Route>
-					</Switch>
-				</ScrollToTop>
-			</BrowserRouter>
-		</div>
+		<BrowserRouter basename={basename}>
+			<ScrollToTop>
+				<Switch>
+					<Route exact path="/login">
+						<MainNavbar navigation={false} />
+						<Login />
+					</Route>
+					<Route exact path="/signup">
+						<Signup />
+					</Route>
+					<Route>
+						<Layout />
+					</Route>
+				</Switch>
+			</ScrollToTop>
+		</BrowserRouter>
 	);
 };
 
