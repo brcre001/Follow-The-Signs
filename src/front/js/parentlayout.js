@@ -5,6 +5,7 @@ import { MainNavbar } from "./component/Navbar";
 import { Footer } from "./component/Footer";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
+import { About } from "./pages/aboutus";
 import Layout from "./layout";
 import injectContext from "./store/appContext";
 
@@ -28,6 +29,9 @@ const ParentLayout = () => {
 					</Route>
 					<Route>
 						<Layout />
+					</Route>
+					<Route exact path="/about">
+						<About />
 					</Route>
 				</Switch>
 				<Footer />
