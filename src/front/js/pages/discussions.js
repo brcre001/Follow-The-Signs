@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
+
 import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 import FormControl from "react-bootstrap/FormControl";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import "../../styles/discussions.scss";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 export const Discussions = () => {
 	const [modalShow, setModalShow] = useState(false);
@@ -18,7 +18,7 @@ export const Discussions = () => {
 	const handleShow = () => setShow(true);
 	const { actions, store } = useContext(Context);
 
-	const cardLoop = [1, 2, 3, 4, 5, 6];
+	const cardLoop = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	return (
 		<>
 			<div className="jumbotron jumbotron-fluid">
@@ -37,12 +37,12 @@ export const Discussions = () => {
 			{/* THIS IS THE CREATE BUTTON */}
 			<div className="discussion-creation">
 				<h2 className="discussion-article text-center">Discussions</h2>
-				<Button className="ml-5 mb-2" variant="primary" onClick={handleShow}>
+				<Button className="ml-5" variant="primary" onClick={handleShow}>
 					Create <i className="fas fa-plus" />
 				</Button>
 			</div>
 
-			{/* THIS IS THE MODEL */}
+			{/* THIS IS THE MODAL */}
 			<Modal
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
@@ -99,19 +99,12 @@ export const Discussions = () => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			<div className="row px-5 pt-3 mx-auto justify-content-center">
+
+			{/* This is how the cards are made */}
+			<div className="row px-5 py-3 justify-content-center">
 				{cardLoop.map(index => (
 					<div className="justify-content-center p-1" key={index}>
 						<Card className="col-12">
-							<Card.Img
-								rounded
-								// className="p-3"
-								variant="top"
-								// href="https://placeholder.com/"
-								// src="https://via.placeholder.com/80x40"
-							/>
-							{/* OLD PLACEHOLDER TAG CODE
-				src="https://via.placeholder.com/100x180" */}
 							<Card.Body>
 								<Card.Title> Interesting Discussion!</Card.Title>
 								<Card.Text>This will be an discussion that you may be interested in.</Card.Text>
@@ -124,33 +117,3 @@ export const Discussions = () => {
 		</>
 	);
 };
-
-{
-	/* <div className="ml-auto pr-5">
-<Button>
-	Create <i className="fas fa-plus"></i>
-</Button>
-</div> */
-}
-// return [1, 2, 3, 4, 5, 6].map(() => (
-// 	<>
-// 		<div className="row justify-content-center p-1">
-// 			<Card className="col-6 mt-5">
-// 				<Card.Img
-// 					rounded
-// 					className="p-3"
-// 					variant="top"
-// 					href="https://placeholder.com/"
-// 					src="https://via.placeholder.com/80x40"
-// 				/>
-// 				{/* OLD PLACEHOLDER TAG CODE
-// 				src="https://via.placeholder.com/100x180" */}
-// 				<Card.Body>
-// 					<Card.Title> Interesting Discussion!</Card.Title>
-// 					<Card.Text>This will be an discussion that you may be interested in.</Card.Text>
-// 					<Button variant="primary">Learn More</Button>
-// 				</Card.Body>
-// 			</Card>
-// 		</div>
-// 	</>
-// ));

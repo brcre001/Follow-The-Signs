@@ -15,7 +15,7 @@ export const Home = () => {
 					<div className="home-animation">
 						<h1 className="display-4 text-center home-text">Follow The Signs</h1>
 						<p className="lead text-center home-subtext mt-3">
-							A place for the deaf community to stay informed, connected and educated
+							A place for the deaf community to stay informed, connected, and educated
 						</p>
 					</div>
 				</div>
