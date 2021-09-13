@@ -9,8 +9,8 @@ export const Signup = () => {
 	return (
 		<>
 			<div className="container text-center w-50 mx-auto signup">
-				<h1 className="signup-text">Follow The Signs</h1>
-
+				<i className="fas fa-sign-language fa-7x mb-4" />
+				<h2 className="mb-5 signup-text">Follow The Signs</h2>
 				<h6 className="text-left signup-text">Email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl

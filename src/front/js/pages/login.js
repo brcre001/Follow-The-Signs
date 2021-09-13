@@ -18,7 +18,10 @@ export const Login = () => {
 		<>
 			<div className="container text-center w-50 mx-auto login">
 				<div className="login-style">
-					<h1 className="mb-5 login-text">Follow The Signs</h1>
+					<div className="mb-4">
+						<i className="fas fa-sign-language fa-7x m-2" />
+					</div>
+					<h2 className="mb-5 login-text">Follow The Signs</h2>
 					{error && <div className="alert alert-danger">{error}</div>}
 					<h6 className="text-left login-text">Email address</h6>
 					<InputGroup className="mb-3">
@@ -45,7 +48,9 @@ export const Login = () => {
 					</InputGroup>
 
 					<div className="d-flex justify-content-around mb-1 login-subtext">
-						<p className="m-0">Forgot Password?</p>
+						<Link to="/">
+							<p className="m-0 text-dark">Forgot Password?</p>
+						</Link>
 					</div>
 
 					<Button

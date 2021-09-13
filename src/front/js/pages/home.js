@@ -3,18 +3,21 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { NewsCarousel } from "../component/NewsCarousel";
 import { HomeEventCards } from "../component/HomeEventCards";
+import "../../styles/home.scss";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<>
-			<div className="jumbotron jumbotron-fluid">
-				<div className="container page-animation">
-					<h1 className="display-4 text-center">Follow The Signs</h1>
-					<p className="lead text-center text-color">
-						A place for the deaf community to stay informed, connected and educated
-					</p>
+			<div className="jumbotron-home">
+				<div className="container">
+					<div className="home-animation">
+						<h1 className="display-4 text-center home-text">Follow The Signs</h1>
+						<p className="lead text-center home-subtext mt-3">
+							A place for the deaf community to stay informed, connected and educated
+						</p>
+					</div>
 				</div>
 			</div>
 			<div className="px-5 pt-3 h-100">
@@ -25,8 +28,8 @@ export const Home = () => {
 			</div>
 
 			<div className="px-5 pt-3 h-100">
-				<h2>Events</h2>
-				<div className="row m-2">
+				<h2 className="mb-4">Events</h2>
+				<div className="row mb-2">
 					<HomeEventCards />
 				</div>
 			</div>

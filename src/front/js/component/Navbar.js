@@ -34,7 +34,7 @@ export const MainNavbar = props => {
 							Connections
 						</Link>
 						<Link to="/login" className="px-3 py-0">
-							<Button className="rounded-pill px-4">Login</Button>
+							<Button className="rounded-pill col-12">Login</Button>
 						</Link>
 					</Nav>
 				</Navbar.Collapse>
