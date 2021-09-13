@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "../../styles/login.scss";
 
 export const Login = () => {
-	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [error, setError] = useState(null);
 	const [password, setPassword] = useState("");
 	const { actions, store } = useContext(Context);
@@ -29,8 +29,8 @@ export const Login = () => {
 							placeholder="Email address"
 							aria-label="Email address"
 							aria-describedby="basic-addon2"
-							onChange={e => setUsername(e.target.value)}
-							value={username}
+							onChange={e => setEmail(e.target.value)}
+							value={email}
 							// required={true}
 						/>
 					</InputGroup>
@@ -59,8 +59,8 @@ export const Login = () => {
 							e.preventDefault();
 							setError(null);
 							try {
-								if (username == "" || password == "") throw Error("Missing Username or Password");
-								const token = await actions.login(username, password);
+								if (email == "" || password == "") throw Error("Missing Username or Password");
+								const token = await actions.login(email, password);
 								if (token) history.push("/");
 							} catch (tokenError) {
 								setError(tokenError.message);

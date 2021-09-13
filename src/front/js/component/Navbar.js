@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Context } from "../store/appContext";
 import PropTypes, { bool } from "prop-types";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -8,6 +10,8 @@ import "../../styles/navbar.scss";
 
 export const MainNavbar = props => {
 	const { navigation } = props;
+	const { actions, store } = useContext(Context);
+	const history = useHistory();
 	return (
 		// variant="dark" bg="dark"  PERVOIUS COLOR FOR NAVBAR & TABS
 		// added variant="dark" again to have the collapsed sidebar in white
@@ -34,9 +38,15 @@ export const MainNavbar = props => {
 							Connections
 						</Link>
 					</Nav>
-					<Link to="/login" className="justify-content-end">
-						<Button className="rounded-pill col-12 px-4">Login</Button>
-					</Link>
+					{store.currentUser ? (
+						<Button variant="danger" onClick={() => actions.logout}>
+							Logout
+						</Button>
+					) : (
+						<Link to="/login" className="justify-content-end">
+							<Button className="rounded-pill col-12 px-4">Login</Button>
+						</Link>
+					)}
 				</Navbar.Collapse>
 			)}
 		</Navbar>
