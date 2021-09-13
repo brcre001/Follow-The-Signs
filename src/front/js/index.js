@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/index.scss";
 
 //import your own components
-import Layout from "./layout";
+import ParentLayout from "./parentlayout";
 
 //render your react application
-ReactDOM.render(<Layout />, document.querySelector("#app"));
+ReactDOM.render(<ParentLayout />, document.querySelector("#app"));
