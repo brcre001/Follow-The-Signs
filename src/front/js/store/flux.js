@@ -22,11 +22,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			login: async (username, password) => {
-				const resp = await fetch(`https://3001-brown-swan-p597r7g2.ws-us16.gitpod.io/api/token`, {
+			login: async (email, password) => {
+				const resp = await fetch(`${process.env.BACKEND_URL}/api/token`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ username, password })
+					body: JSON.stringify({ email, password })
 				});
 
 				if (!resp.ok) throw "Problem with the response";
@@ -41,8 +41,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				// save your token in the localStorage
 				localStorage.setItem("jwt-token", data.token);
-				setStore({ currentUser: { username, token: data.token } });
+				setStore({ currentUser: { email, token: data.token } });
 				return data.token;
+			},
+
+			logout: async () => {
+				localStorage.removeItem("jwt-token", data.token);
+				setStore({ currentUser: null });
 			},
 
 			changeColor: (index, color) => {

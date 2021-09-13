@@ -1,22 +1,21 @@
-/* General Styles */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Questrial&family=Source+Sans+Pro:wght@200&display=swap');
-.login {
+.signup {
     margin: 200px;
     
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     padding: 30px;
   }
+
+  .signup-text {
+    font-family: 'Libre Baskerville', serif;
+    color: #081B26;
+    }
   
-.login-text {
-  font-family: 'Libre Baskerville', serif;
-  color: #081B26;
+  .signup-subtext {
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
-.login-subtext {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-.button-color {
-  background: #23526e;
-  border: none;
-}
+  .button-color {
+    background: #23526e;
+    border: none;
+  }

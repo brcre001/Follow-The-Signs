@@ -1,5 +1,54 @@
 /* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Questrial&family=Source+Sans+Pro:wght@200&display=swap');
 
-// body, * {
-//     border: 1px dashed black
+.jumbotron-home {
+   height: 100%;
+   margin: 18rem 3rem;
+//    background: url("../img/home-page.png") right;
+   background-repeat: no-repeat;
+   background-size: contain;
+
+
+    /* Position and center the image to scale nicely on all screens */
+    position: relative;
+}
+
+.home-text {
+    font-family: 'Libre Baskerville', serif;
+    animation: 5s home-animation .5s forwards;
+    transform:translateX(-100%);
+
+}
+
+.home-animation {
+    // background: #081B26;
+    // color: white;
+    width: 100%;
+    overflow: hidden;
+    
+    
+
+}
+
+// .home-animation:hover {
+//     width: 300px;
 // }
+
+.home-subtext {
+    font-family: 'Source Sans Pro', sans-serif;
+    animation: home-subtext ease 15s;
+    animation-iteration-count: 1;
+}
+@keyframes home-animation{
+    to {
+      transform:translateX(0);
+    }
+  }
+  @keyframes home-subtext  {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}

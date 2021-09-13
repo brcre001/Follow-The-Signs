@@ -9,7 +9,7 @@ export const NewsCarousel = () => {
 	};
 
 	return (
-		<Carousel activeIndex={index} onSelect={handleSelect} className="h-25">
+		<Carousel activeIndex={index} onSelect={handleSelect} className="h-50">
 			<Carousel.Item>
 				<img
 					className="d-block w-100 rounded"
