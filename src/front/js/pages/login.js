@@ -41,6 +41,7 @@ export const Login = () => {
 							placeholder="Password"
 							aria-label="Password"
 							aria-describedby="basic-addon2"
+							type="Password"
 							onChange={e => setPassword(e.target.value)}
 							value={password}
 							// required={true}
