@@ -1,6 +1,10 @@
 from urllib.request import urlopen #  Py Lib Tools for working with URLs
 import re # Regular Expression Module 
 import requests
+from flask import Flask, request, jsonify, url_for, Blueprint
+
+api = Blueprint('api', __name__)
+
 
 ##  https://realpython.com/python-web-scraping-practical-introduction/ ##
 
@@ -142,11 +146,53 @@ soup = BeautifulSoup(page.content, "html.parser")
 # Note: You’ll want to pass page.content instead of page.text to avoid problems with character encoding. The .content attribute holds raw bytes, which can be decoded better than the text representation you printed earlier using the .text attribute.
 
 
-# results = soup.find(id="ResultsContainer")
+results = soup.find(id="ResultsContainer")
+
+## This will get ALL the ResultsContainer: 
+# (Spoiler alert, it's a lot of info)
 # print(results.prettify())
 
 
-## 
+####### Find Elements by HTML Class Name ####### 
+# Here we find just the cards with job listings of the page : 
+
+# THIS COMMAND WILL GET ~ALL~  
+job_elements = results.find_all("div", class_="card-content")
+
+# THIS COMMAND WILL GET ~ONE~ (the first one) 
+first_job_elements = results.find("h2", class_="title")
+
+array_of_job_elements = []
+
+for i in job_elements:
+    if i not in array_of_job_elements:
+        array_of_job_elements.append(i)
+
+# body = list(html.children)[3]
+# print(single_job_elements)
+
+print("#######################")
+print(len(array_of_job_elements))
+print("#######################")
+print(array_of_job_elements[0])
+print("#######################")
+# print(array_of_job_elements[1])
+# print("#######################")
+# print(array_of_job_elements[3])
+# print("#######################")
+
+# @api.route('/news', methods=['GET'])
+# def example():
+#     data = {
+#         'robotNames': ['Wall-E', 'Bender', 'Rosie']
+#     }
+#     return render_template('index.html', data=data)
+
+
+
+
+
+
 
 
 
