@@ -6,6 +6,7 @@ import { Footer } from "./component/Footer";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
 import { About } from "./pages/aboutus";
+import { Congrats } from "./pages/congrats";
 import Layout from "./layout";
 import injectContext from "./store/appContext";
 
@@ -26,6 +27,10 @@ const ParentLayout = () => {
 					<Route exact path="/signup">
 						<MainNavbar navigation={false} />
 						<Signup />
+					</Route>
+					<Route exact path="/congrats">
+						<MainNavbar navigation={false} />
+						<Congrats />
 					</Route>
 					<Route>
 						<Layout />

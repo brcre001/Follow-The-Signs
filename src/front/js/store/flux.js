@@ -70,19 +70,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return data;
 			},
 
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
+			createUser: async (full_name, username, email, password) => {
+				//
+				let response = await fetch(`${process.env.BACKEND_URL}/api/user`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ full_name, username, email, password })
 				});
+				if (!response.ok) {
+					throw Error("Invalid input");
+				}
+				let new_user = await response.json();
 
-				//reset the global store
-				setStore({ demo: demo });
+				return new_user;
 			}
 		}
 	};

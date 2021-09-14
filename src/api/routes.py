@@ -12,7 +12,7 @@ api = Blueprint('api', __name__)
 # app = Flask(__name__)
 
 
-@api.route('/users', methods=['GET'])
+@api.route('/user', methods=['GET'])
 @jwt_required()
 def get_all_users():
 
@@ -21,6 +21,14 @@ def get_all_users():
     users = list(map(lambda user: user.serialize(), users))
 
     return jsonify(users), 200
+
+@api.route('/user', methods=["POST"])
+def create_user():
+    request_data = request.get_json()
+    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(new_user.serialize())
 
 @api.route('/me', methods=['GET'])
 @jwt_required()
