@@ -45,9 +45,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return data.token;
 			},
 
-			logout: async () => {
-				localStorage.removeItem("jwt-token", data.token);
+			logout: () => {
+				localStorage.removeItem("jwt-token");
 				setStore({ currentUser: null });
+			},
+
+			syncSession: async () => {
+				let token = localStorage.getItem("jwt-token");
+				const resp = await fetch(`${process.env.BACKEND_URL}/api/me`, {
+					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+				});
+
+				if (!resp.ok) throw "Problem with the response";
+
+				if (resp.status === 401) {
+					throw "Invalid credentials";
+				} else if (resp.status === 400) {
+					throw "Invalid email or password format";
+				}
+
+				const data = await resp.json();
+				setStore({ currentUser: { email: data.email, token: data.token } });
+
+				return data;
 			},
 
 			changeColor: (index, color) => {

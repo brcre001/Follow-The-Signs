@@ -22,6 +22,13 @@ def get_all_users():
 
     return jsonify(users), 200
 
+@api.route('/me', methods=['GET'])
+@jwt_required()
+def get_me():
+    current_user_id = get_jwt_identity()
+    me = User.query.filter_by(id=current_user_id).first()
+    return jsonify(me.serialize()), 200
+
 @api.route("/token", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
