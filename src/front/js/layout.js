@@ -10,6 +10,8 @@ import { Discussions } from "./pages/discussions";
 import { Connections } from "./pages/connections";
 import { MainNavbar } from "./component/Navbar";
 import { About } from "./pages/aboutus";
+import { Private } from "./component/Private.js";
+
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -27,7 +29,9 @@ const Layout = () => {
 					<Demo />
 				</Route>
 				<Route exact path="/news">
-					<News />
+					<Private>
+						<News />
+					</Private>
 				</Route>
 				<Route exact path="/events">
 					<Events />

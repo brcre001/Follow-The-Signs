@@ -39,7 +39,7 @@ export const MainNavbar = props => {
 						</Link>
 					</Nav>
 					{store.currentUser ? (
-						<Button variant="danger" onClick={() => actions.logout}>
+						<Button variant="danger" onClick={() => actions.logout()}>
 							Logout
 						</Button>
 					) : (
