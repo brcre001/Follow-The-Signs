@@ -22,6 +22,7 @@ flask-socketio = "*"
 click = "*"
 beautifulsoup4 = "*"
 requests = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.8"
