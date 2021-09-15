@@ -24,7 +24,7 @@ export const Signup = () => {
 			<div className="container text-center w-50 mx-auto signup">
 				<i className="fas fa-sign-language fa-7x mb-4" />
 				<h2 className="mb-5 signup-text">Follow The Signs</h2>
-				{alert && <Alert variant="danger">Invalid Input!</Alert>}
+				{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
 				<h6 className="text-left signup-text">Full Name</h6>
 				<InputGroup className="mb-3">
 					<FormControl

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import FormControl from "react-bootstrap/FormControl";
 import { Link } from "react-router-dom";
 import "../../styles/login.scss";
@@ -22,7 +23,7 @@ export const Login = () => {
 						<i className="fas fa-sign-language fa-7x m-2" />
 					</div>
 					<h2 className="mb-5 login-text">Follow The Signs</h2>
-					{error && <div className="alert alert-danger">{error}</div>}
+					{error && <Alert variant="danger">{error}</Alert>}
 					<h6 className="text-left login-text">Email address</h6>
 					<InputGroup className="mb-3">
 						<FormControl
@@ -64,7 +65,7 @@ export const Login = () => {
 								const token = await actions.login(email, password);
 								if (token) history.push("/");
 							} catch (tokenError) {
-								setError(tokenError.message);
+								setError("Login didn't work");
 							}
 						}}>
 						Login
