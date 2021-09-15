@@ -1,9 +1,9 @@
 from urllib.request import urlopen #  Py Lib Tools for working with URLs
 import re # Regular Expression Module 
 import requests
-from flask import Flask, request, jsonify, url_for, Blueprint
+# from flask import Flask, request, jsonify, url_for, Blueprint
 
-api = Blueprint('api', __name__)
+# api = Blueprint('api', __name__)
 
 
 ##  https://realpython.com/python-web-scraping-practical-introduction/ ##
@@ -163,19 +163,33 @@ job_elements = results.find_all("div", class_="card-content")
 first_job_elements = results.find("h2", class_="title")
 
 array_of_job_elements = []
-
+# print(first_job_elements)
 for i in job_elements:
-    if i not in array_of_job_elements:
-        array_of_job_elements.append(i)
+    title_start_index = i.find("<title>")
+    title_end_index = i.find("</title>")
 
+# print(title_end_index)
+
+    title = html[title_start_index:title_end_index]
+    print("This is the first example: " + title)
+    news = News(title=title, description=description, imageURL=imageURL, category=category)
+    db.session.add(news)
+    db.session.commit()
+    # if i not in array_of_job_elements:
+    #     array_of_job_elements.append(i)
+
+# print(job_elements)
+print("#######################1")
+# print(array_of_job_elements[0])
+print("#######################")
 # body = list(html.children)[3]
 # print(single_job_elements)
 
-print("#######################")
-print(len(array_of_job_elements))
-print("#######################")
-print(array_of_job_elements[0])
-print("#######################")
+# print("#######################")
+# print(len(array_of_job_elements))
+# print("#######################")
+# print(array_of_job_elements[0])
+# print("#######################")
 # print(array_of_job_elements[1])
 # print("#######################")
 # print(array_of_job_elements[3])
