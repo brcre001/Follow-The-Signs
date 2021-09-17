@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 // import socket io
 import io from "socket.io-client";
 
-// endpoint variable
+// ENDPOINT VARIABLE
 let endPoint = process.env.BACKEND_URL;
-// connect with server using socket io
+
+// CONNECT WITH SERVER USING SOCKET IO
 let socket = io.connect(`${endPoint}`);
 
-// Functional component
 export const Messenger = () => {
-	// create state using hooks
+	// CREATE STATE USING HOOKS
 	const [messages, setMessages] = useState(["Hello And Welcome"]);
 	const [message, setMessage] = useState("");
 
@@ -28,15 +28,15 @@ export const Messenger = () => {
 		});
 	};
 
-	// On change input field this will call
+	// ON CHANGE INPUT FILED THIS WILL CALL
 	const onChange = e => {
 		setMessage(e.target.value);
 	};
 
-	// When send button pressed this method called
+	// WHEN SEND BUTTON IS PRESSED THIS METHOD IS CALLED
 	const sendMessage = () => {
 		if (message !== "") {
-			// When btn clicked emit the message to server
+			// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
 			console.log("emitting the message");
 			socket.emit("message", message);
 			setMessage("");
@@ -45,14 +45,13 @@ export const Messenger = () => {
 		}
 	};
 
-	// Return the view
 	return (
 		<div className="text-center">
 			<h2>FTS Chat</h2>
 			<h2>Room: Session</h2>
 			<br />
 			<div className="text-left m-2">
-				{/* display each and every message in the state as a for loop */}
+				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
 				{messages.length > 0 &&
 					messages.map((msg, index) => (
 						<div key={index}>
@@ -60,10 +59,12 @@ export const Messenger = () => {
 						</div>
 					))}
 			</div>
+
 			<div>
-				{/* input field */}
+				{/* MESSAGE BAR */}
 				<input
 					className="m-2 w-50"
+					onChange={e => onChange(e)}
 					onKeyPress={e => {
 						if (e.key == "Enter") {
 							sendMessage();
@@ -71,10 +72,10 @@ export const Messenger = () => {
 					}}
 					value={message}
 					name="message"
-					onChange={e => onChange(e)}
 				/>
 				<br />
-				{/* Btn */}
+
+				{/* SEND MESSAGE BUTTON */}
 				<button className="btn btn-primary m-2" onClick={() => sendMessage()}>
 					Send Message
 				</button>

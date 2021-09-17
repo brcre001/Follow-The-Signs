@@ -11,6 +11,7 @@ export const Home = () => {
 
 	return (
 		<>
+			{/* JUMBOTRON WITH ANIMATION */}
 			<div className="jumbotron-home">
 				<div className="container">
 					<div className="home-animation">
@@ -21,14 +22,17 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
+
+			{/* NEWS SECTION OF HOME PAGE */}
 			<div className="px-5 pt-3 h-100">
-				<h2>Top News</h2>
+				<h2 className="mb-4">Top News</h2>
 				<div className="text-center">
 					<NewsCarousel />
 				</div>
 			</div>
 
-			<div className="px-5 pt-3 h-100">
+			{/* EVENTS SECTION OF HOME PAGE */}
+			<div className="px-5 pt-5 h-100">
 				<h2 className="mb-4">Upcoming Events</h2>
 				<div className="row mb-2">
 					{[1, 2, 3, 4].map(index => (
@@ -37,7 +41,8 @@ export const Home = () => {
 				</div>
 			</div>
 
-			<div className="px-5 pt-3 h-100">
+			{/* DISCUSSIONS SECTION OF HOME PAGE */}
+			<div className="px-5 py-5 h-100">
 				<h2>Trending Discussions</h2>
 				<div className="row py-3 justify-content-center">
 					{[1, 2, 3, 4, 5, 6].map(index => (
