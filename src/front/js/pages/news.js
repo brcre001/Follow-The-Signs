@@ -1,27 +1,11 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { NewsCarousel } from "../component/NewsCarousel";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
+import { NewsCarousel } from "../component/NewsCarousel";
+import { NewsCard } from "../component/NewsCard";
 
 const array = [1, 2, 3, 4, 5, 6];
-
-const Cards = array.map(() => (
-	<>
-		<div className="row justify-content-center p-2">
-			<Card className="col-12">
-				<Card.Img variant="top" src="holder.js/100px180" />
-				<Card.Body>
-					<Card.Title>News Article</Card.Title>
-					<Card.Text>This is an important news event that should be of interest to you.</Card.Text>
-
-					<Button variant="primary">Learn More</Button>
-				</Card.Body>
-			</Card>
-		</div>
-	</>
-));
 
 export const News = () => {
 	return (
@@ -43,7 +27,13 @@ export const News = () => {
 				<div className="text-center py-2">
 					<NewsCarousel />
 				</div>
-				{Cards}
+				<div className="row py-3 justify-content-center">
+					{array.map(index => (
+						<div className="p-1" key={index}>
+							<NewsCard />
+						</div>
+					))}
+				</div>
 			</div>
 		</>
 	);

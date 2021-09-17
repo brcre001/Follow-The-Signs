@@ -19,16 +19,35 @@ export const Signup = () => {
 
 	const history = useHistory();
 
+	const sendSignup = () => {
+		if (fullName == "" || username == "" || email == "" || password == "") {
+			setAlert(true);
+		} else {
+			if (confirmEmail == email) {
+				setAlert(false);
+				actions.createUser(fullName, username, email, password);
+				history.push("/congrats");
+			}
+		}
+	};
+
+	const enterKeyPress = event => {
+		if (event.key == "Enter") {
+			sendSignup();
+		}
+	};
+
 	return (
 		<>
 			<div className="container text-center w-50 mx-auto signup">
 				<i className="fas fa-sign-language fa-7x mb-4" />
 				<h2 className="mb-5 signup-text">Follow The Signs</h2>
-				{alert && <Alert variant="danger">Invalid Input!</Alert>}
+				{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
 				<h6 className="text-left signup-text">Full Name</h6>
 				<InputGroup className="mb-3">
 					<FormControl
 						onChange={event => setFullName(event.target.value)}
+						onKeyPress={e => enterKeyPress(e)}
 						value={fullName}
 						placeholder="Full name"
 						aria-label="Full name"
@@ -40,6 +59,7 @@ export const Signup = () => {
 				<InputGroup className="mb-3">
 					<FormControl
 						onChange={event => setUsername(event.target.value)}
+						onKeyPress={e => enterKeyPress(e)}
 						value={username}
 						placeholder="Username"
 						aria-label="Username"
@@ -51,6 +71,7 @@ export const Signup = () => {
 				<InputGroup className="mb-3">
 					<FormControl
 						onChange={event => setEmail(event.target.value)}
+						onKeyPress={e => enterKeyPress(e)}
 						value={email}
 						placeholder="Email address"
 						aria-label="Email address"
@@ -62,6 +83,7 @@ export const Signup = () => {
 				<InputGroup className="mb-3">
 					<FormControl
 						onChange={event => setConfirmEmail(event.target.value)}
+						onKeyPress={e => enterKeyPress(e)}
 						value={confirmEmail}
 						placeholder="Confirm email address"
 						aria-label="Confirm email address"
@@ -73,6 +95,7 @@ export const Signup = () => {
 				<InputGroup className="mb-3">
 					<FormControl
 						onChange={event => setPassword(event.target.value)}
+						onKeyPress={e => enterKeyPress(e)}
 						value={password}
 						placeholder="Password"
 						aria-label="Password"
@@ -81,19 +104,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
-				<Button
-					onClick={() => {
-						if (fullName != "" || username != "" || email != "" || password != "") {
-							if (confirmEmail == email) {
-								setAlert(false);
-								actions.createUser(fullName, username, email, password);
-								history.push("/congrats");
-							}
-						} else {
-							setAlert(true);
-						}
-					}}
-					className="px-5 rounded-pill button-color">
+				<Button onClick={() => sendSignup()} className="px-5 rounded-pill button-color">
 					Sign Up
 				</Button>
 				<div className="mt-3">

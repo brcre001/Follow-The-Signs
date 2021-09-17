@@ -2,8 +2,6 @@ import React from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import { News } from "./pages/news";
 import { Events } from "./pages/events";
 import { Discussions } from "./pages/discussions";
@@ -39,7 +37,6 @@ const Layout = () => {
 					<Private>
 						<Discussions />
 					</Private>
-					<Discussions />
 				</Route>
 				<Route exact path="/connections">
 					<Connections />

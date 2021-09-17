@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import FormControl from "react-bootstrap/FormControl";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { MainEventsCards } from "../component/MainEventsCards";
+import { EventsCard } from "../component/EventsCard";
 
 const cardLoop = [1, 2, 3, 4, 5, 6];
 
@@ -103,7 +103,7 @@ export const Events = () => {
 
 			<div className="row px-5 py-3 justify-content-center">
 				{cardLoop.map(index => (
-					<MainEventsCards key={index} />
+					<EventsCard key={index} />
 				))}
 			</div>
 		</>

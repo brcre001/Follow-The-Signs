@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
-import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,6 +9,7 @@ import FormControl from "react-bootstrap/FormControl";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import "../../styles/discussions.scss";
+import { DiscussionsCard } from "../component/DiscussionsCard";
 
 export const Discussions = () => {
 	const [modalShow, setModalShow] = useState(false);
@@ -18,7 +18,7 @@ export const Discussions = () => {
 	const handleShow = () => setShow(true);
 	const { actions, store } = useContext(Context);
 
-	const cardLoop = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const cardLoop = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 	return (
 		<>
 			<div className="jumbotron jumbotron-fluid">
@@ -104,13 +104,7 @@ export const Discussions = () => {
 			<div className="row px-5 py-3 justify-content-center">
 				{cardLoop.map(index => (
 					<div className="justify-content-center p-1" key={index}>
-						<Card className="col-12">
-							<Card.Body>
-								<Card.Title> Interesting Discussion!</Card.Title>
-								<Card.Text>This will be an discussion that you may be interested in.</Card.Text>
-								<Button variant="primary">Learn More</Button>
-							</Card.Body>
-						</Card>
+						<DiscussionsCard />
 					</div>
 				))}
 			</div>

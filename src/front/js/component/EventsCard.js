@@ -13,7 +13,7 @@ const styles = {
 	}
 };
 
-export const MainEventsCards = () => {
+export const EventsCard = () => {
 	return (
 		<CardGroup className="col-12 col-lg-6 p-2">
 			<Card style={styles.card}>
