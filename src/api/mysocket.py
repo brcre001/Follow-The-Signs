@@ -4,7 +4,7 @@ from flask_session import Session
 
 def initialize_socket(app):
     app.config['SECRET_KEY'] = "mysecret"
-    app.config['SESSION_TYPE'] = 'filesystem'
+    # app.config['SESSION_TYPE'] = 'filesystem'
 
     # Create Server using socket and fix cors errors
     socketIo = SocketIO(app, cors_allowed_origins="*")
@@ -28,6 +28,7 @@ def initialize_socket(app):
     socketIo.run(app)
 
 # TRYING A ROUTE FOR MULTIPLE SESSIONS/ROOMS
+
 # @app.route('/connections', methods=['GET', 'POST'])
 # def chat():
 #     if(request.method="POST"):

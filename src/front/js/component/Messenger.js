@@ -1,7 +1,10 @@
 // import react and hooks to access state and lifecycle methods
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // import socket io
 import io from "socket.io-client";
+
+// Styles
+import "../../styles/messenger.scss";
 
 // ENDPOINT VARIABLE
 let endPoint = process.env.BACKEND_URL;
@@ -11,13 +14,22 @@ let socket = io.connect(`${endPoint}`);
 
 export const Messenger = () => {
 	// CREATE STATE USING HOOKS
-	const [messages, setMessages] = useState(["Hello And Welcome"]);
+	const [messages, setMessages] = useState(["Hello And Welcome to the Chat!"]);
 	const [message, setMessage] = useState("");
+
+	// Creating reference for end of div
+	const messagesEndRef = useRef(null);
+
+	// Function to scroll to bottom of div
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+	};
 
 	// componentDidUpdate method as hook (useEffect)
 	// this will auto call when message length changes
 	useEffect(() => {
 		getMessages();
+		scrollToBottom();
 	}, [messages.length]);
 
 	// This method will call when first time app render and
@@ -46,18 +58,19 @@ export const Messenger = () => {
 	};
 
 	return (
-		<div className="text-center">
+		<div className="text-center justify-content-center">
 			<h2>FTS Chat</h2>
 			<h2>Room: Session</h2>
 			<br />
-			<div className="text-left m-2">
+			<div className="text-left mx-auto box">
 				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
 				{messages.length > 0 &&
 					messages.map((msg, index) => (
 						<div key={index}>
-							<p>{msg}</p>
+							<p className="px-1">{msg}</p>
 						</div>
 					))}
+				<div ref={messagesEndRef} />
 			</div>
 
 			<div>
@@ -70,6 +83,7 @@ export const Messenger = () => {
 							sendMessage();
 						}
 					}}
+					placeholder="Type your message here"
 					value={message}
 					name="message"
 				/>
