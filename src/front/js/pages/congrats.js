@@ -8,7 +8,7 @@ export const Congrats = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			history.push("/login");
-		}, 5000);
+		}, 3000);
 		return () => clearInterval(interval);
 	}, []);
 

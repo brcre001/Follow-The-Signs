@@ -26,6 +26,12 @@ export const Login = () => {
 		}
 	};
 
+	const enterKeyPress = event => {
+		if (event.key == "Enter") {
+			retrieveLogin();
+		}
+	};
+
 	return (
 		<>
 			<div className="container text-center w-50 mx-auto login">
@@ -46,6 +52,7 @@ export const Login = () => {
 							aria-label="Email address"
 							aria-describedby="basic-addon2"
 							onChange={e => setEmail(e.target.value)}
+							onKeyPress={e => enterKeyPress(e)}
 							value={email}
 							required
 						/>
@@ -60,11 +67,7 @@ export const Login = () => {
 							aria-describedby="basic-addon2"
 							type="Password"
 							onChange={e => setPassword(e.target.value)}
-							onKeyPress={e => {
-								if (e.key == "Enter") {
-									retrieveLogin();
-								}
-							}}
+							onKeyPress={e => enterKeyPress(e)}
 							value={password}
 							required
 						/>
