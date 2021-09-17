@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit
 
 def initialize_socket(app):
     app.config['SECRET_KEY'] = "mysecret"

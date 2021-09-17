@@ -34,7 +34,7 @@ export const Messenger = () => {
 	};
 
 	// When send button pressed this method called
-	const onClick = () => {
+	const sendMessage = () => {
 		if (message !== "") {
 			// When btn clicked emit the message to server
 			console.log("emitting the message");
@@ -47,18 +47,38 @@ export const Messenger = () => {
 
 	// Return the view
 	return (
-		<div>
-			{/* display each and every message in the state as a for loop */}
-			{messages.length > 0 &&
-				messages.map((msg, index) => (
-					<div key={index}>
-						<p>{msg}</p>
-					</div>
-				))}
-			{/* input field */}
-			<input value={message} name="message" onChange={e => onChange(e)} />
-			{/* Btn */}
-			<button onClick={() => onClick()}>Send Message</button>
+		<div className="text-center">
+			<h2>FTS Chat</h2>
+			<h2>Room: Session</h2>
+			<br />
+			<div className="text-left p-2">
+				{/* display each and every message in the state as a for loop */}
+				{messages.length > 0 &&
+					messages.map((msg, index) => (
+						<div key={index}>
+							<p>{msg}</p>
+						</div>
+					))}
+			</div>
+			<div>
+				{/* input field */}
+				<input
+					className="m-2 w-50"
+					onKeyPress={e => {
+						if (e.key == "Enter") {
+							sendMessage();
+						}
+					}}
+					value={message}
+					name="message"
+					onChange={e => onChange(e)}
+				/>
+				<br />
+				{/* Btn */}
+				<button className="btn btn-primary m-2" onClick={() => sendMessage()}>
+					Send Message
+				</button>
+			</div>
 		</div>
 	);
 };
