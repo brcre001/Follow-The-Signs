@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { NewsCarousel } from "../component/NewsCarousel";
 import { MainEventsCards } from "../component/MainEventsCards";
+import { DiscussionsCard } from "../component/DiscussionsCard";
 import "../../styles/home.scss";
 
 export const Home = () => {
@@ -21,14 +22,14 @@ export const Home = () => {
 				</div>
 			</div>
 			<div className="px-5 pt-3 h-100">
-				<h2>News</h2>
+				<h2>Top News</h2>
 				<div className="text-center">
 					<NewsCarousel />
 				</div>
 			</div>
 
 			<div className="px-5 pt-3 h-100">
-				<h2 className="mb-4">Events</h2>
+				<h2 className="mb-4">Upcoming Events</h2>
 				<div className="row mb-2">
 					{[1, 2, 3, 4].map(index => (
 						<MainEventsCards key={index} />
@@ -37,7 +38,14 @@ export const Home = () => {
 			</div>
 
 			<div className="px-5 pt-3 h-100">
-				<h2>Discussions</h2>
+				<h2>Trending Discussions</h2>
+				<div className="row py-3 justify-content-center">
+					{[1, 2, 3, 4, 5, 6].map(index => (
+						<div className="justify-content-center p-1" key={index}>
+							<DiscussionsCard />
+						</div>
+					))}
+				</div>
 			</div>
 		</>
 	);

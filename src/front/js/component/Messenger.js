@@ -51,7 +51,7 @@ export const Messenger = () => {
 			<h2>FTS Chat</h2>
 			<h2>Room: Session</h2>
 			<br />
-			<div className="text-left p-2">
+			<div className="text-left m-2">
 				{/* display each and every message in the state as a for loop */}
 				{messages.length > 0 &&
 					messages.map((msg, index) => (
