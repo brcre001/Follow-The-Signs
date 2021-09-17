@@ -1,15 +1,17 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, News, Event, Discussion, Comment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-
+from api.email_vaildation import send_mail
 api = Blueprint('api', __name__)
 # app = Flask(__name__)
+
 
 
 @api.route('/user', methods=['GET'])
@@ -28,6 +30,7 @@ def create_user():
     new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
     db.session.add(new_user)
     db.session.commit()
+    send_mail(to_email=request_data['email'], subject="Welcome to Follow The Signs", content=f'Welcome to Follow The Signs! Click the link to go back to the {os.getEnv('FRONTEND_URL')}/login')
     return jsonify(new_user.serialize())
 
 @api.route('/me', methods=['GET'])
