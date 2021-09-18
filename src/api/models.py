@@ -42,14 +42,16 @@ class News(db.Model):
     # These are ATTRIBUTES
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, nullable=False)
-    description = db.Column(db.String(300), unique=False, nullable=False)
-    category = db.Column (db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(300), unique=False, nullable=True)
     imageURL = db.Column(db.String(300), unique=True, nullable=False)
+    pageURL = db.Column(db.String(300), unique=True, nullable=False)
     users_like = db.Column(db.Integer, unique=False, nullable=True)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    # category = db.Column (db.String(120), unique=False, nullable=False)
 
     def __repr__(self):
-        return '<News %r>' % self.title
+        return self.title + ' ' + self.imageURL + ' ' + self.pageURL
+        
 
     def serialize(self):
         return {

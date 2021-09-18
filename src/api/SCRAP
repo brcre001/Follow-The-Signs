@@ -1,0 +1,23 @@
+
+########## TOP #############
+This is in the for loop title: <html>
+<head>
+<title >Profile: Poseidon</title>
+</head>
+<body bgcolor="yellow">
+<center>
+<br><br>
+<img src="/static/poseidon.jpg" />
+<h2>Name: Poseidon</h2>
+<br><br>
+Favorite animal: Dolphin
+<br><br>
+Favorite color: Blue
+<br><br>
+Hometown: Sea
+</center>
+</body>
+</html>
+
+This is what is being commited to db <News '<html>\n<head>\n<title >Profile: Poseidon</title>\n</head>\n<body bgcolor="yellow">\n<center>\n<br><br>\n<img src="/static/poseidon.jpg" />\n<h2>Name: Poseidon</h2>\n<br><br>\nFavorite animal: Dolphin\n<br><br>\nFavorite color: Blue\n<br><br>\nHometown: Sea\n</center>\n</body>\n</html>\n'>
+########### BOTTOM ############

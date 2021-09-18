@@ -40,6 +40,16 @@ def news_handler():
 
     return jsonify(news), 200
 
+@api.route('/news', methods=["POST"])
+def create_news():
+    request_data = request.get_json()
+    news = News(
+        title=request_data['title'], imageURL=request_data['imageURL'],
+        description=request_data['description'])
+    db.session.add(news)
+    db.session.commit()
+    return jsonify(news.serialize())
+
 @api.route('/event', methods=['GET'])
 @jwt_required()
 def event_handler():
