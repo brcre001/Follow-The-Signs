@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-import os
+
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, News, Event, Discussion, Comment
 from api.utils import generate_sitemap, APIException
@@ -30,7 +30,7 @@ def create_user():
     new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
     db.session.add(new_user)
     db.session.commit()
-    send_mail(to_email=request_data['email'], subject="Welcome to Follow The Signs", content=f'Welcome to Follow The Signs! Click the link to go back to the {os.getEnv('FRONTEND_URL')}/login')
+    send_mail(to_email=request_data['email'], subject="Welcome to Follow The Signs", content=f'Welcome to Follow The Signs! Click the link to go back to the')
     return jsonify(new_user.serialize())
 
 @api.route('/me', methods=['GET'])
@@ -79,6 +79,8 @@ def event_handler():
 def discussion_handler():
 
     discussions = Discussion.query.all()
+    user_comment =User(comment=request_data['comment'], is_active=True)
+
     if discussions == False: return "Error Can't find news", 404
     discussions = list(map(lambda discussions: discussions.serialize(), discussions))
 
@@ -93,6 +95,17 @@ def comment_handler():
     comments = list(map(lambda comments: comments.serialize(), comments))
 
     return jsonify(comments), 200
+
+# @api.route('/comment', methods=["POST"])
+# @jwt_required()
+# def user_comment_handler():
+#     request_data = request.get_json()
+
+#     user_comment = =User(comment=request_data['comment'], is_active=True)
+    
+
+#     return jsonify(user_comment.serialize())
+
 
 # @api.route("/protected", methods=["GET"])
 # @jwt_required()

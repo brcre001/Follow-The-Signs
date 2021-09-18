@@ -3,6 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			currentUser: null,
 			message: null,
+			comment: null,
+
 			demo: [
 				{
 					title: "FIRST",
@@ -48,6 +50,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				localStorage.removeItem("jwt-token");
 				setStore({ currentUser: null });
+			},
+			userComment: async () => {
+				let user_comment = await fetch(`${process.env.BACKEND_URL}/api/user`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ comment })
+				});
 			},
 
 			syncSession: async () => {
