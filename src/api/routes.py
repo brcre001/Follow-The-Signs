@@ -25,14 +25,6 @@ def get_all_users():
 
     return jsonify(users), 200
 
-@api.route('/user', methods=["POST"])
-def create_user():
-    request_data = request.get_json()
-    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
-    db.session.add(new_user)
-    db.session.commit()
-    send_mail(to_email=request_data['email'], subject="Welcome to Follow The Signs", content=f'Welcome to Follow The Signs! Click the link to go back to the')
-    return jsonify(new_user.serialize())
 
 @api.route('/me', methods=['GET'])
 @jwt_required()
@@ -61,17 +53,14 @@ def event_handler():
 
     return jsonify(events), 200   
 
-@api.route('/discussion', methods=['GET'])
+@api.route('/discussion/<int:position>', methods=['GET'])
 @jwt_required()
-def discussion_handler():
+def discussion_handler(position):
 
-    discussions = Discussion.query.all()
-    user_comment =User(comment=request_data['comment'], is_active=True)
-
-    if discussions == False: return "Error Can't find news", 404
-    discussions = list(map(lambda discussions: discussions.serialize(), discussions))
-
-    return jsonify(discussions), 200
+    discussions = Discussion.query.find_by(id=position).first()
+    if discussions is not False: return "Error Can't find discuss", 404
+    payload = {id=position, discussion.serialize()}
+    return jsonify(payload), 200
 
 @api.route('/comment', methods=['GET'])
 @jwt_required()
@@ -80,10 +69,9 @@ def comment_handler():
     comments = Comment.query.all()
     if comments == False: return "Error Can't find news", 404
     comments = list(map(lambda comments: comments.serialize(), comments))
-
+    # user_comment =User(comment=request_data['comment'], is_active=True)
     return jsonify(comments), 200
 
-<<<<<<< HEAD
 # @api.route('/comment', methods=["POST"])
 # @jwt_required()
 # def user_comment_handler():
@@ -94,7 +82,6 @@ def comment_handler():
 
 #     return jsonify(user_comment.serialize())
 
-=======
 # ALL POST METHODS
 
 @api.route("/token", methods=["POST"])
@@ -118,7 +105,6 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize())
->>>>>>> 19a4e39a7f2bec97c15bef687112f029e509730f
 
 # @api.route("/protected", methods=["GET"])
 # @jwt_required()
