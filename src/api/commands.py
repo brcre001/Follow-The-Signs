@@ -1,13 +1,13 @@
 import click
 from flask import Flask
+from api.news_scrape import dailyMothNewsURL_news_scrape 
 
 def initialize_commands(app): 
     @app.cli.command("scrape")
-    def scrape(site):
-        print("Hello World")
-
-
-
+    def scrape():
+        print("This is the commands dot py")
+        dailyMothNewsURL_news_scrape()
+    # def scrape(site): if you want to use sites
 
 
 

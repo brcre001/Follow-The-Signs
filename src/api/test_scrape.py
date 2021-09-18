@@ -2,6 +2,8 @@ from urllib.request import urlopen #  Py Lib Tools for working with URLs
 import re # Regular Expression Module 
 import requests
 # from flask import Flask, request, jsonify, url_for, Blueprint
+from models import db, News
+
 
 # api = Blueprint('api', __name__)
 
@@ -165,23 +167,54 @@ first_job_elements = results.find("h2", class_="title")
 array_of_job_elements = []
 # print(first_job_elements)
 for i in job_elements:
-    title_start_index = i.find("<title>")
-    title_end_index = i.find("</title>")
+    jobs_start_index = 0
+
+    spaceInFrontOfJobsTitle = page_text.find("< title>") + len("< title>")
+    spaceInBackOfJobsTitle = page_text.find("<title >") + len("<title >")
+    noSpaceInJobsTitle = page_text.find("<title>") + len("<title>")
+
+    if spaceInFrontOfJobsTitle < noSpaceInJobsTitle:
+        title_start_index = noSpaceInJobsTitle
+    else:
+        title_start_index = spaceInFrontOfJobsTitle
+
+    if spaceInBackOfJobsTitle < noSpaceInJobsTitle:
+        title_start_index = noSpaceInJobsTitle
+    else:
+        title_start_index = spaceInBackOfJobsTitle
+
+    title_end_index = 0 
+    endOfJobsTitleFrontSpace = page_text.find("< /title>")
+    endOfJobsTitleBackSpace = page_text.find("</title >")
+    endOfJobsTitleNoSpace = page_text.find("</title>")
+
+    if endOfJobsTitleFrontSpace < endOfJobsTitleNoSpace:
+        title_end_index = endOfJobsTitleNoSpace
+    else:
+        title_end_index = endOfJobsTitleFrontSpace
+
+    if endOfJobsTitleBackSpace < endOfJobsTitleNoSpace:
+        title_end_index = endOfJobsTitleNoSpace
+    else:
+        title_end_index = endOfJobsTitleBackSpace
 
 # print(title_end_index)
-
+    print("########## TOP #############")
     title = html[title_start_index:title_end_index]
-    print("This is the first example: " + title)
-    news = News(title=title, description=description, imageURL=imageURL, category=category)
-    db.session.add(news)
-    db.session.commit()
+    print("This is in the for loop title: " + title)
+    news = News(title=title, description=body, imageURL="img src")
+    print("This is what is being commited to db " + str(news))
+    print("########### BOTTOM ############")
+    ### EVERYTHING ABOVE IS WORKING NO ERRORS ### 
+    # db.session.add(news)
+    # db.session.commit()
+
+
     # if i not in array_of_job_elements:
     #     array_of_job_elements.append(i)
 
 # print(job_elements)
-print("#######################1")
 # print(array_of_job_elements[0])
-print("#######################")
 # body = list(html.children)[3]
 # print(single_job_elements)
 
@@ -201,14 +234,6 @@ print("#######################")
 #         'robotNames': ['Wall-E', 'Bender', 'Rosie']
 #     }
 #     return render_template('index.html', data=data)
-
-
-
-
-
-
-
-
 
 
 
