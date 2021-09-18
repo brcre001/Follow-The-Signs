@@ -1,25 +1,38 @@
+// import socket io
+import io from "socket.io-client";
+// CONNECT WITH SERVER USING SOCKET IO
+let socket = io.connect(`${process.env.BACKEND_URL}`);
+
+let listeners = {
+	// example listeners
+	// messenger: () => null,
+	// home: () => null,
+};
+
+socket.on("message", msg => {
+	// looping all the callbacks that we have for each listenerId that is subscribed
+	console.log("incoming message!!!", msg);
+	Object.keys(listeners).forEach(listenerId => listeners[listenerId](msg));
+});
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			currentUser: null,
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			message: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			// This method will call when first time app render and
+			// Every time message length changes
+			subscribe: (listenerId, callback) => {
+				if (listeners[listenerId] === undefined) {
+					listeners[listenerId] = callback;
+				}
 			},
 
 			login: async (email, password) => {
@@ -65,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				const data = await resp.json();
-				setStore({ currentUser: { email: data.email, token: data.token } });
+				setStore({ currentUser: { email: data.email, token } });
 
 				return data;
 			},
@@ -83,6 +96,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let new_user = await response.json();
 
 				return new_user;
+			},
+			// WHEN SEND BUTTON IS PRESSED THIS METHOD IS CALLED
+			sendMessage: message => {
+				const store = getStore();
+				if (message !== "") {
+					// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
+					console.log("emitting the message", store.currentUser, message);
+					socket.emit("message", { message, token: store.currentUser.token });
+				} else {
+					alert("Please Add A Message");
+				}
 			}
 		}
 	};

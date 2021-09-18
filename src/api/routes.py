@@ -11,6 +11,7 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 # app = Flask(__name__)
 
+# ALL GET METHODS
 
 @api.route('/user', methods=['GET'])
 @jwt_required()
@@ -22,34 +23,12 @@ def get_all_users():
 
     return jsonify(users), 200
 
-@api.route('/user', methods=["POST"])
-def create_user():
-    request_data = request.get_json()
-    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify(new_user.serialize())
-
 @api.route('/me', methods=['GET'])
 @jwt_required()
 def get_me():
     current_user_id = get_jwt_identity()
     me = User.query.filter_by(id=current_user_id).first()
     return jsonify(me.serialize()), 200
-
-@api.route("/token", methods=["POST"])
-def create_token():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    # Query your database for username and password
-    user = User.query.filter_by(email=email, password=password).first()
-    if user is None:
-        # the user was not found on the database
-        return jsonify({"msg": "Bad username or password"}), 401
-    
-    # create a new token with the user id inside
-    access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
 
 @api.route('/news', methods=['GET'])
 @jwt_required()
@@ -90,6 +69,30 @@ def comment_handler():
     comments = list(map(lambda comments: comments.serialize(), comments))
 
     return jsonify(comments), 200
+
+# ALL POST METHODS
+
+@api.route("/token", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    # Query your database for username and password
+    user = User.query.filter_by(email=email, password=password).first()
+    if user is None:
+        # the user was not found on the database
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    # create a new token with the user id inside
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id })
+
+@api.route('/user', methods=["POST"])
+def create_user():
+    request_data = request.get_json()
+    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(new_user.serialize())
 
 # @api.route("/protected", methods=["GET"])
 # @jwt_required()

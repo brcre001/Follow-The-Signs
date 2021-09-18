@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from api.models import User
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from flask_session import Session
+from flask_jwt_extended import decode_token
 
 def initialize_socket(app):
     app.config['SECRET_KEY'] = "mysecret"
+
+    # THIS IS FOR SESSIONS
     # app.config['SESSION_TYPE'] = 'filesystem'
 
     # Create Server using socket and fix cors errors
@@ -20,9 +24,14 @@ def initialize_socket(app):
     # name this funciton will call and send
     # that message to every client listen on Our server
     @socketIo.on("message")
-    def handleMessage(msg):
-        print(msg)
-        send(msg, broadcast=True)
+    def handleMessage(payload):
+        print(payload)
+        current_user_id = decode_token(payload['token'])
+        user = User.query.filter_by(id=current_user_id['sub']).first()
+        payload['username'] = user.username
+        del payload['token']
+        print(payload)
+        send(payload, broadcast=True)
         return None
 
     socketIo.run(app)
