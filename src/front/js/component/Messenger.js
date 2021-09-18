@@ -1,21 +1,15 @@
 // import react and hooks to access state and lifecycle methods
-import React, { useState, useEffect, useRef } from "react";
-// import socket io
-import io from "socket.io-client";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { Context } from "../store/appContext.js";
 
 // Styles
 import "../../styles/messenger.scss";
 
-// ENDPOINT VARIABLE
-let endPoint = process.env.BACKEND_URL;
-
-// CONNECT WITH SERVER USING SOCKET IO
-let socket = io.connect(`${endPoint}`);
-
 export const Messenger = () => {
 	// CREATE STATE USING HOOKS
-	const [messages, setMessages] = useState(["Hello And Welcome to the Chat!"]);
+	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState("");
+	const { actions, store } = useContext(Context);
 
 	// Creating reference for end of div
 	const messagesEndRef = useRef(null);
@@ -25,49 +19,38 @@ export const Messenger = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
 	};
 
+	useEffect(() => {
+		// callback function being passed to the listeners
+		actions.subscribe("messenger", msg => {
+			console.log("useEffect incoming message", msg);
+			setMessages(_messages => [..._messages, msg]);
+		});
+	}, []);
+
 	// componentDidUpdate method as hook (useEffect)
 	// this will auto call when message length changes
 	useEffect(() => {
-		getMessages();
 		scrollToBottom();
 	}, [messages.length]);
-
-	// This method will call when first time app render and
-	// Every time message length changes
-	const getMessages = () => {
-		socket.on("message", msg => {
-			setMessages([...messages, msg]);
-		});
-	};
 
 	// ON CHANGE INPUT FILED THIS WILL CALL
 	const onChange = e => {
 		setMessage(e.target.value);
 	};
-
-	// WHEN SEND BUTTON IS PRESSED THIS METHOD IS CALLED
-	const sendMessage = () => {
-		if (message !== "") {
-			// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
-			console.log("emitting the message");
-			socket.emit("message", message);
-			setMessage("");
-		} else {
-			alert("Please Add A Message");
-		}
-	};
+	console.log("Messenger refreshing with messages: ", messages);
 
 	return (
-		<div className="text-center justify-content-center">
+		<div className="text-center justify-content-center p-2">
 			<h2>FTS Chat</h2>
 			<h2>Room: Session</h2>
 			<br />
 			<div className="text-left mx-auto box">
 				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
 				{messages.length > 0 &&
-					messages.map((msg, index) => (
+					messages.map((payload, index) => (
 						<div key={index}>
-							<p className="px-1">{msg}</p>
+							<p>{payload.username}</p>
+							<p className="px-1">{payload.message}</p>
 						</div>
 					))}
 				<div ref={messagesEndRef} />
@@ -80,7 +63,8 @@ export const Messenger = () => {
 					onChange={e => onChange(e)}
 					onKeyPress={e => {
 						if (e.key == "Enter") {
-							sendMessage();
+							actions.sendMessage(message);
+							setMessage("");
 						}
 					}}
 					placeholder="Type your message here"
@@ -90,7 +74,12 @@ export const Messenger = () => {
 				<br />
 
 				{/* SEND MESSAGE BUTTON */}
-				<button className="btn btn-primary m-2" onClick={() => sendMessage()}>
+				<button
+					className="btn btn-primary m-2"
+					onClick={() => {
+						actions.sendMessage(message);
+						setMessage("");
+					}}>
 					Send Message
 				</button>
 			</div>
