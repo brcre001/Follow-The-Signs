@@ -4,9 +4,10 @@ import "../../styles/home.scss";
 import { NewsCarousel } from "../component/NewsCarousel";
 import { EventsCard } from "../component/EventsCard";
 import { DiscussionsCard } from "../component/DiscussionsCard";
+import PropTypes from "prop-types";
 import "../../styles/home.scss";
 
-export const Home = () => {
+export const Home = props => {
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -45,13 +46,15 @@ export const Home = () => {
 			<div className="px-5 py-5 h-100">
 				<h2>Trending Discussions</h2>
 				<div className="row py-3 justify-content-center">
-					{[1, 2, 3, 4, 5, 6].map(index => (
-						<div className="p-1" key={index}>
-							<DiscussionsCard />
-						</div>
+					{store.discussions.map((discussion, index) => (
+						<DiscussionsCard key={index} index={index} disObject={discussion} />
 					))}
 				</div>
 			</div>
 		</>
 	);
+};
+Home.propTypes = {
+	disObject: PropTypes.object,
+	index: PropTypes.number
 };
