@@ -67,10 +67,18 @@ def event_handler():
 @jwt_required()
 def discussion_handler(position):
 
-    discussions = Discussion.query.find_by(id=position).first()
-    if discussions is not False: return "Error Can't find discuss", 404
-    payload = {id=position, discussion.serialize()}
-    return jsonify(payload), 200
+    discussion = Discussion.query.find_by(id=position).first()
+    if discussion is not False: return "Error Can't find discuss", 404
+    # payload = {id=position, discussion.serialize()}
+    return jsonify(discussion), 200
+
+@api.route('/discussions', methods=['GET'])
+# @jwt_required()
+def discussions_handler():
+    discussions = Discussion.query.all()
+    if discussions == False: return "Error Can't find news", 404
+    discussions = list(map(lambda discussions: discussions.serialize(), discussions))
+    return jsonify(discussions), 200
 
 @api.route('/comment', methods=['GET'])
 @jwt_required()
@@ -115,6 +123,18 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize())
+
+
+
+@api.route('/discussions', methods=["POST"])
+@jwt_required()
+def create_discussion():
+    request_data = request.get_json()
+    new_discussions= Discussion(title=request_data['title'], description=request_data['description'],)
+    db.session.add(new_discussions)
+    db.session.commit()
+    return jsonify(new_discussions.serialize())
+
 
 # @api.route("/protected", methods=["GET"])
 # @jwt_required()

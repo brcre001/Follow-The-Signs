@@ -9,6 +9,7 @@ import FormControl from "react-bootstrap/FormControl";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import "../../styles/discussions.scss";
+import Alert from "react-bootstrap/Alert";
 import { DiscussionsCard } from "../component/DiscussionsCard";
 
 export const Discussions = () => {
@@ -17,8 +18,22 @@ export const Discussions = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const { actions, store } = useContext(Context);
+	const discussions = store.discussions;
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [alert, setAlert] = useState(false);
 
-	const cardLoop = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+	// T IS FOR Title, D IS FOR DESCRIPTION
+	const sendDiscussion = () => {
+		if (title == "" || description == "") {
+			setAlert(true);
+		} else {
+			setAlert(false);
+			actions.createDiscussion(title, description);
+			handleClose;
+		}
+	};
+
 	return (
 		<>
 			<div className="jumbotron jumbotron-fluid">
@@ -69,14 +84,25 @@ export const Discussions = () => {
 						Write something you want to discuss
 					</label> */}
 					<div>
-						<textarea
+						{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
+						<label>Title</label>
+						<input
+							placeholder="Place title here"
+							onChange={event => setTitle(event.target.value)}
+							value={title}
+							required
+						/>
+						<input
 							className="form-control border-0"
 							id="exampleFormControlTextarea1"
-							placeholder="What's on your mind?"
+							placeholder="Write a description"
 							rows="3"
+							required
+							onChange={event => setDescription(event.target.value)}
+							value={description}
 						/>
 
-						<div className="d-flex justify-content-between border-top">
+						{/* <div className="d-flex justify-content-between border-top">
 							<div className="mt-4">
 								<p className="lead">Add to Your Post</p>
 							</div>
@@ -87,14 +113,19 @@ export const Discussions = () => {
 									</Button>
 								</div>
 							</OverlayTrigger>
-						</div>
+						</div> */}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button className="btn btn-sm" variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
-					<Button className="btn btn-sm" variant="primary">
+					<Button
+						className="btn btn-sm"
+						onClick={() => {
+							sendDiscussion();
+						}}
+						variant="primary">
 						Post Discussion
 					</Button>
 				</Modal.Footer>
@@ -102,11 +133,12 @@ export const Discussions = () => {
 
 			{/* This is how the cards are made */}
 			<div className="row px-5 py-3 justify-content-center">
-				{cardLoop.map(index => (
-					<div className="justify-content-center p-1" key={index}>
-						<DiscussionsCard />
-					</div>
-				))}
+				<div className="justify-content-center p-1">
+					{/* MAPPING DISCUSSIONS FROM THE STORE*/}
+					{store.discussions.map((discussion, index) => (
+						<DiscussionsCard key={index} index={index} disObject={discussion} />
+					))}
+				</div>
 			</div>
 		</>
 	);

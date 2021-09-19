@@ -9,6 +9,7 @@ import { Connections } from "./pages/connections";
 import { MainNavbar } from "./component/Navbar";
 import { About } from "./pages/aboutus";
 import { Private } from "./component/Private.js";
+import { Discussion } from "./pages/discussion";
 
 //create your first component
 const Layout = () => {
@@ -40,6 +41,11 @@ const Layout = () => {
 				</Route>
 				<Route exact path="/connections">
 					<Connections />
+				</Route>
+				<Route exact path="/discussion/:theid">
+					<Private>
+						<Discussion />
+					</Private>
 				</Route>
 				<Route exact path="/aboutus">
 					<About />

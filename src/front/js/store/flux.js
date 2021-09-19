@@ -21,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentUser: null,
 			message: null,
 			comment: null,
+			discussions: [],
 
 			demo: [
 				{
@@ -76,13 +77,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("jwt-token");
 				setStore({ currentUser: null });
 			},
-			userComment: async () => {
-				let user_comment = await fetch(`${process.env.BACKEND_URL}/api/user`, {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ comment })
-				});
+
+			getDiscussions: async () => {
+				console.log(`${process.env.BACKEND_URL}/api/discussions`);
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussions`);
+					const discussions = await resp.json();
+					setStore({ discussions: discussions });
+				} catch (error) {
+					console.log(error, "this is and error from the discussion get");
+				}
 			},
+
+			// userComment: async () => {
+			// 	let user_comment = await fetch(`${process.env.BACKEND_URL}/api/user`, {
+			// 		method: "POST",
+			// 		headers: { "Content-Type": "application/json" },
+			// 		body: JSON.stringify({ comment })
+			// 	});
+			// },
 
 			syncSession: async () => {
 				let token = localStorage.getItem("jwt-token");
@@ -118,6 +131,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				return new_user;
 			},
+
+			createDiscussion: async (title, description) => {
+				let response = await fetch(`${process.env.BACKEND_URL}/api/discussions`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ title, description })
+				});
+				if (!response.ok) {
+					throw Error("Missing title or Description");
+				}
+				let new_discussions = await response.json();
+
+				return new_discussions;
+			},
+
 			// WHEN SEND BUTTON IS PRESSED THIS METHOD IS CALLED
 			sendMessage: message => {
 				const store = getStore();
