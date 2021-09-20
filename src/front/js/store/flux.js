@@ -83,6 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussions`);
 					const discussions = await resp.json();
+					console.log(discussions);
 					setStore({ discussions: discussions });
 				} catch (error) {
 					console.log(error, "this is and error from the discussion get");

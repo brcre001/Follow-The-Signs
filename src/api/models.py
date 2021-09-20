@@ -21,6 +21,8 @@ class User(db.Model):
     pivots = db.relationship('Discussion', secondary=pivots, lazy='subquery',
         backref=db.backref('users', lazy=True))
     comments = db.relationship('Comment', backref='users', lazy=True)
+    discussion_comments = db.relationship('DiscussionComment', backref='users', lazy=True)
+
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -97,7 +99,8 @@ class Discussion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.String(300), unique=False, nullable=False)
-    # comment = db.Column(db.ForeignKey('comment.id'))
+    discussion_comments = db.relationship('DiscussionComment', backref='discussion', lazy=True)
+    
 
     def __repr__(self):
         return '<Discussion %r>' % self.title
@@ -107,6 +110,8 @@ class Discussion(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
+            "discussion_comments": list(map(lambda discussion_comments: discussion_comments.serialize(), self.discussion_comments))
+
         }
 
 class Comment(db.Model):
@@ -122,4 +127,21 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "body": self.body
+        }
+
+class DiscussionComment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(120), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    dicussion_id = db.Column(db.Integer, db.ForeignKey('discussion.id'), nullable=False)
+
+    def __repr__(self):
+        return '<DiscussionComment %r>' % self.body
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "body": self.body,
+            "user_id": self.user_id,
+            "dicussion_id": self.dicussion_id,
         }

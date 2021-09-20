@@ -90,6 +90,16 @@ def comment_handler():
     # user_comment =User(comment=request_data['comment'], is_active=True)
     return jsonify(comments), 200
 
+@api.route('/discussion_comment', methods=['GET'])
+@jwt_required()
+def discussion_comment_handler():
+
+    comments = Comment.query.filter_by()
+    if comments == False: return "Error Can't find news", 404
+    comments = list(map(lambda comments: comments.serialize(), comments))
+    # user_comment =User(comment=request_data['comment'], is_active=True)
+    return jsonify(comments), 200
+
 # @api.route('/comment', methods=["POST"])
 # @jwt_required()
 # def user_comment_handler():

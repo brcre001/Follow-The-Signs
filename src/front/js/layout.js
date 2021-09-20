@@ -35,9 +35,9 @@ const Layout = () => {
 					</Private>
 				</Route>
 				<Route exact path="/discussions">
-					<Private>
-						<Discussions />
-					</Private>
+					{/* <Private> */}
+					<Discussions />
+					{/* </Private> */}
 				</Route>
 				<Route exact path="/connections">
 					<Connections />
