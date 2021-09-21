@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, News, Event, Discussion, Comment
+from api.models import db, User, News, Event, Discussion, Comment, DiscussionComment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -90,14 +90,44 @@ def comment_handler():
     # user_comment =User(comment=request_data['comment'], is_active=True)
     return jsonify(comments), 200
 
-@api.route('/discussion_comment', methods=['GET'])
-@jwt_required()
-def discussion_comment_handler():
+# @api.route('/discussion_comment/<int:discussion_id>', methods=['GET'])
+# # @jwt_required()
+# def discussion_comment_caller(discussion_id):
 
-    comments = Comment.query.filter_by()
-    if comments == False: return "Error Can't find news", 404
-    comments = list(map(lambda comments: comments.serialize(), comments))
-    # user_comment =User(comment=request_data['comment'], is_active=True)
+#     request_data = request.get_json()
+#     # print(discussion_id)
+#     discussion_comment = DiscussionComment.query.all()
+
+#     discussion_comment =  list(map(lambda discussion_comment: discussion_comment.serialize(), discussion_comment))
+#     print(discussion_comment, "TEST")
+#     filter_comment = []
+#     for dictionary in discussion_comment:
+#         if(dictionary['discussion_id'] == discussion_id):
+#             filter_comment.append(dictionary)
+#         print(dictionary['discussion_id'], discussion_id)
+
+#     return jsonify(filter_comment), 200
+
+
+@api.route('/discussion_comment/<int:discussion_id>', methods=['GET'])
+# @jwt_required()
+def discussion_comment_puller(discussion_id):
+
+    discussion_comment = DiscussionComment.query.filter_by(discussion_id = discussion_id)
+    if(discussion_comment is None):
+        return "This discussion don't exist ", 400 
+    discussion_comment = list(map(lambda discussion_comment: discussion_comment.serialize(), discussion_comment))
+
+    return jsonify(discussion_comment)
+
+@api.route('/discussion_comment/<int:discussion_id>', methods=['POST'])
+@jwt_required()
+def discussion_comment_handler(discussion_id):
+
+    request_data = request.get_json()
+    discussion_comment = DiscussionComment(body=request_data(body))
+
+   
     return jsonify(comments), 200
 
 # @api.route('/comment', methods=["POST"])

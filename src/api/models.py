@@ -133,7 +133,7 @@ class DiscussionComment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(120), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    dicussion_id = db.Column(db.Integer, db.ForeignKey('discussion.id'), nullable=False)
+    discussion_id = db.Column(db.Integer, db.ForeignKey('discussion.id'), nullable=False)
 
     def __repr__(self):
         return '<DiscussionComment %r>' % self.body
@@ -143,5 +143,5 @@ class DiscussionComment(db.Model):
             "id": self.id,
             "body": self.body,
             "user_id": self.user_id,
-            "dicussion_id": self.dicussion_id,
+            "discussion_id": self.discussion_id,
         }
