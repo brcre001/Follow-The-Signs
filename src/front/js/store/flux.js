@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			comment: null,
 			discussions: [],
+			discussionComments: [],
 
 			demo: [
 				{
@@ -90,13 +91,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// userComment: async () => {
-			// 	let user_comment = await fetch(`${process.env.BACKEND_URL}/api/user`, {
-			// 		method: "POST",
-			// 		headers: { "Content-Type": "application/json" },
-			// 		body: JSON.stringify({ comment })
-			// 	});
-			// },
+			userComment: async discussion_id => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`);
+					const discussion_comment = await resp.json();
+					console.log(discussion_comment);
+					setStore({ discussionComments: discussion_comment });
+				} catch (error) {
+					console.log(error, "this is and error from the discussion get");
+				}
+			},
 
 			syncSession: async () => {
 				let token = localStorage.getItem("jwt-token");
