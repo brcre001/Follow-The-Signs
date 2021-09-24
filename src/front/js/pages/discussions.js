@@ -30,7 +30,7 @@ export const Discussions = () => {
 		} else {
 			setAlert(false);
 			actions.createDiscussion(title, description);
-			handleClose;
+			handleClose();
 		}
 	};
 

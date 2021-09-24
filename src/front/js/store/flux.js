@@ -80,11 +80,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getDiscussions: async () => {
-				console.log(`${process.env.BACKEND_URL}/api/discussions`);
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussions`);
 					const discussions = await resp.json();
-					console.log(discussions);
 					setStore({ discussions: discussions });
 				} catch (error) {
 					console.log(error, "this is and error from the discussion get");
@@ -138,15 +136,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createDiscussion: async (title, description) => {
+				let token = localStorage.getItem("jwt-token");
 				let response = await fetch(`${process.env.BACKEND_URL}/api/discussions`, {
 					method: "POST",
-					headers: { "Content-Type": "application/json" },
+					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
 					body: JSON.stringify({ title, description })
 				});
+				console.log("THIS IS THE RESPONSE", response);
 				if (!response.ok) {
 					throw Error("Missing title or Description");
 				}
 				let new_discussions = await response.json();
+				setStore({ discussions: new_discussions });
 
 				return new_discussions;
 			},

@@ -144,7 +144,7 @@ def discussion_comment_handler(discussion_id):
 
 @api.route("/token", methods=["POST"])
 def create_token():
-    email = request.json.get("email", None)
+    email = request.json.get("email", None).lower()
     password = request.json.get("password", None)
     # Query your database for username and password
     user = User.query.filter_by(email=email, password=password).first()
@@ -159,13 +159,14 @@ def create_token():
 @api.route('/user', methods=["POST"])
 def create_user():
     request_data = request.get_json()
-    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'], password=request_data['password'], is_active=True)
+    new_user = User(full_name=request_data['full_name'], username=request_data['username'], email=request_data['email'].lower(), password=request_data['password'], is_active=True)
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.serialize())
 
 
 
+# THIS FUNCTION DOES A GET AND POST
 @api.route('/discussions', methods=["POST"])
 @jwt_required()
 def create_discussion():
@@ -173,7 +174,10 @@ def create_discussion():
     new_discussions= Discussion(title=request_data['title'], description=request_data['description'],)
     db.session.add(new_discussions)
     db.session.commit()
-    return jsonify(new_discussions.serialize())
+    discussions = Discussion.query.all()
+    if discussions == False: return "Error Can't find news", 404
+    discussions = list(map(lambda discussions: discussions.serialize(), discussions))
+    return jsonify(discussions), 200
 
 
 # @api.route("/protected", methods=["GET"])

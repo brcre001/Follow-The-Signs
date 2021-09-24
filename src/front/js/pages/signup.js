@@ -70,7 +70,7 @@ export const Signup = () => {
 				<h6 className="text-left signup-text">Email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
-						onChange={event => setEmail(event.target.value)}
+						onChange={event => setEmail(event.target.value.toLowerCase())}
 						onKeyPress={e => enterKeyPress(e)}
 						value={email}
 						placeholder="Email address"

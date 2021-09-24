@@ -20,6 +20,7 @@ export const Login = () => {
 		try {
 			if (email == "" || password == "") throw Error("Missing Username or Password");
 			const token = await actions.login(email, password);
+			actions.getDiscussions();
 			if (token) history.push("/");
 		} catch (tokenError) {
 			setError("Invalid Credentials");
@@ -51,7 +52,7 @@ export const Login = () => {
 							placeholder="Email address"
 							aria-label="Email address"
 							aria-describedby="basic-addon2"
-							onChange={e => setEmail(e.target.value)}
+							onChange={e => setEmail(e.target.value.toLowerCase())}
 							onKeyPress={e => enterKeyPress(e)}
 							value={email}
 							required
