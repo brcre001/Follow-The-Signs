@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { NewsCarousel } from "../component/NewsCarousel";
 import { NewsCard } from "../component/NewsCard";
-
-const array = [1, 2, 3, 4, 5, 6];
+import { Context } from "../store/appContext";
 
 export const News = () => {
+	const { actions, store } = useContext(Context);
+	useEffect(() => {
+		actions.getNews();
+	}, []);
+
 	return (
 		<>
 			<div className="jumbotron jumbotron-fluid">
@@ -28,9 +32,14 @@ export const News = () => {
 					<NewsCarousel />
 				</div>
 				<div className="row py-3 justify-content-center">
-					{array.map(index => (
+					{store.news.map((item, index) => (
 						<div className="p-1" key={index}>
-							<NewsCard />
+							<NewsCard
+								title={item.title}
+								description={item.description}
+								imageURL={item.imageURL}
+								pageURL={item.pageURL}
+							/>
 						</div>
 					))}
 				</div>

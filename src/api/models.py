@@ -47,7 +47,7 @@ class News(db.Model):
     description = db.Column(db.String(300), unique=False, nullable=True)
     imageURL = db.Column(db.String(300), unique=False, nullable=False)
     pageURL = db.Column(db.String(300), unique=False, nullable=False)
-    users_like = db.Column(db.Integer, unique=False, nullable=True)
+    # users_like = db.Column(db.Integer, unique=False, nullable=True)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     # category = db.Column (db.String(120), unique=False, nullable=False)
 
@@ -60,10 +60,10 @@ class News(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
-            "category": self.category,
             "imageURL": self.imageURL,
-            "users_like": self.users_like,
-            "creation_date": self.news_creation_date
+            "pageURL": self.pageURL,
+            # "users_like": self.users_like,
+            "creation_date": self.creation_date
         }
 
 class Event(db.Model):

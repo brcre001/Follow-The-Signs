@@ -6,8 +6,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import "../../styles/discussions.scss";
 import Alert from "react-bootstrap/Alert";
 import { DiscussionsCard } from "../component/DiscussionsCard";
@@ -18,7 +16,6 @@ export const Discussions = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const { actions, store } = useContext(Context);
-	const discussions = store.discussions;
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [alert, setAlert] = useState(false);

@@ -83,8 +83,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getEvents: async () => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/events`);
-					const news = await resp.json();
-					setStore({ news: news });
+					const events = await resp.json();
+					setStore({ events: events });
 				} catch (error) {
 					console.log("There was an error retrieving news from API: ", error);
 				}
