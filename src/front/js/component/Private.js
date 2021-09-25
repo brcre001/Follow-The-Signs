@@ -6,8 +6,9 @@ import PropTypes from "prop-types";
 export const Private = props => {
 	const { actions, store } = useContext(Context);
 	const history = useHistory();
-	if (!localStorage.getItem("jwt-token") || localStorage.getItem("jwt-token") == undefined) history.push("/login");
-	console.log("This is the local storage: ", localStorage.getItem("jwt-token"));
+	if (!sessionStorage.getItem("jwt-token") || sessionStorage.getItem("jwt-token") == undefined)
+		history.push("/login");
+	console.log("This is the local storage: ", sessionStorage.getItem("jwt-token"));
 	return <>{props.children}</>;
 };
 

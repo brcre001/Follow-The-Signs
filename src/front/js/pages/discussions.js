@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
@@ -30,6 +30,8 @@ export const Discussions = () => {
 		} else {
 			setAlert(false);
 			actions.createDiscussion(title, description);
+			setTitle("");
+			setDescription("");
 			handleClose();
 		}
 	};

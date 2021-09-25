@@ -23,20 +23,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			comment: null,
 			discussions: [],
 			discussionComments: [],
-
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			news: [],
+			events: []
 		},
+
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -68,15 +58,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await resp.json();
 
-				// save your token in the localStorage
-				localStorage.setItem("jwt-token", data.token);
+				// save your token in the sessionStorage
+				sessionStorage.setItem("jwt-token", data.token);
 				setStore({ currentUser: { email, token: data.token } });
 				return data.token;
 			},
 
 			logout: () => {
-				localStorage.removeItem("jwt-token");
+				sessionStorage.removeItem("jwt-token");
 				setStore({ currentUser: null });
+			},
+
+			getNews: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/news`);
+					const news = await resp.json();
+					setStore({ news: news });
+				} catch (error) {
+					console.log("There was an error retrieving news from API: ", error);
+				}
+			},
+
+			getEvents: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/events`);
+					const news = await resp.json();
+					setStore({ news: news });
+				} catch (error) {
+					console.log("There was an error retrieving news from API: ", error);
+				}
 			},
 
 			getDiscussions: async () => {
@@ -85,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const discussions = await resp.json();
 					setStore({ discussions: discussions });
 				} catch (error) {
-					console.log(error, "this is and error from the discussion get");
+					console.log("There was an error retrieving discussions from API: ", error);
 				}
 			},
 
@@ -101,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			syncSession: async () => {
-				let token = localStorage.getItem("jwt-token");
+				let token = sessionStorage.getItem("jwt-token");
 				const resp = await fetch(`${process.env.BACKEND_URL}/api/me`, {
 					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
 				});
@@ -115,7 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				const data = await resp.json();
-				setStore({ currentUser: { email: data.email, token } });
+				setStore({ currentUser: { email: data.email, username: data.username, token } });
 
 				return data;
 			},
@@ -136,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createDiscussion: async (title, description) => {
-				let token = localStorage.getItem("jwt-token");
+				let token = sessionStorage.getItem("jwt-token");
 				let response = await fetch(`${process.env.BACKEND_URL}/api/discussions`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
