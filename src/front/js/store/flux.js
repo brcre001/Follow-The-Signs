@@ -67,15 +67,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				const data = await resp.json();
+				console.log(data, "this is the resp for the login");
 
-				// save your token in the localStorage
-				localStorage.setItem("jwt-token", data.token);
-				setStore({ currentUser: { email, token: data.token } });
+				// save your token in the sessionStorage
+				sessionStorage.setItem("jwt-token", data.token);
+				setStore({ currentUser: { email, token: data.token, username: data.username } });
 				return data.token;
 			},
 
 			logout: () => {
-				localStorage.removeItem("jwt-token");
+				sessionStorage.removeItem("jwt-token");
 				setStore({ currentUser: null });
 			},
 
@@ -101,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			syncSession: async () => {
-				let token = localStorage.getItem("jwt-token");
+				let token = sessionStorage.getItem("jwt-token");
 				const resp = await fetch(`${process.env.BACKEND_URL}/api/me`, {
 					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
 				});
@@ -115,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				const data = await resp.json();
-				setStore({ currentUser: { email: data.email, token } });
+				setStore({ currentUser: { email: data.email, username: data.username, token } });
 
 				return data;
 			},
@@ -136,7 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createDiscussion: async (title, description) => {
-				let token = localStorage.getItem("jwt-token");
+				let token = sessionStorage.getItem("jwt-token");
 				let response = await fetch(`${process.env.BACKEND_URL}/api/discussions`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },

@@ -28,7 +28,7 @@ export const Discussion = props => {
 					store.discussions[params.theid].discussion_comments.map((item, index) => {
 						return (
 							<p key={index}>
-								{item.user_id}:{item.body}
+								{item.username}:{item.body}
 							</p>
 						);
 					})}

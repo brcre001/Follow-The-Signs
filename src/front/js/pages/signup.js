@@ -82,7 +82,7 @@ export const Signup = () => {
 				<h6 className="text-left signup-text">Confirm email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
-						onChange={event => setConfirmEmail(event.target.value)}
+						onChange={event => setConfirmEmail(event.target.value.toLowerCase())}
 						onKeyPress={e => enterKeyPress(e)}
 						value={confirmEmail}
 						placeholder="Confirm email address"
