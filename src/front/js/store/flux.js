@@ -23,20 +23,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			comment: null,
 			discussions: [],
 			discussionComments: [],
-
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			news: [],
+			events: []
 		},
+
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -79,13 +69,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ currentUser: null });
 			},
 
+			getNews: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/news`);
+					const news = await resp.json();
+					setStore({ news: news });
+				} catch (error) {
+					console.log("There was an error retrieving news from API: ", error);
+				}
+			},
+
+			getEvents: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/events`);
+					const events = await resp.json();
+					setStore({ events: events });
+				} catch (error) {
+					console.log("There was an error retrieving news from API: ", error);
+				}
+			},
+
 			getDiscussions: async () => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussions`);
 					const discussions = await resp.json();
 					setStore({ discussions: discussions });
 				} catch (error) {
-					console.log(error, "this is and error from the discussion get");
+					console.log("There was an error retrieving discussions from API: ", error);
 				}
 			},
 

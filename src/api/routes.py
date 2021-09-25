@@ -35,7 +35,7 @@ def get_me():
     return jsonify(me.serialize()), 200
 
 @api.route('/news', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def news_handler():
 
     news = News.query.all()
