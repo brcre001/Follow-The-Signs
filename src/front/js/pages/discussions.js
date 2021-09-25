@@ -36,6 +36,10 @@ export const Discussions = () => {
 		}
 	};
 
+	useEffect(() => {
+		actions.getDiscussions();
+	}, []);
+
 	return (
 		<>
 			<div className="jumbotron jumbotron-fluid">

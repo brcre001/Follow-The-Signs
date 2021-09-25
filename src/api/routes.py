@@ -9,6 +9,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from api.email_vaildation import send_mail
+import datetime
 api = Blueprint('api', __name__)
 # app = Flask(__name__)
 
@@ -153,8 +154,8 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
     
     # create a new token with the user id inside
-    access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
+    access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(minutes=60))
+    return jsonify({ "token": access_token, "user_id": user.id, "username": user.username })
 
 @api.route('/user', methods=["POST"])
 def create_user():
