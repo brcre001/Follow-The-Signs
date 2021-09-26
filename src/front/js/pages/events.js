@@ -8,10 +8,11 @@ import { EventsCard } from "../component/EventsCard";
 export const Events = () => {
 	const { actions, store } = useContext(Context);
 
-	useEffect(() => {
-		actions.getEvents();
-		console.log("Events were retrieved: ", store.events);
-	}, []);
+	// REPLACED BY GETINFO FUNCTION ON FLUX
+	// useEffect(() => {
+	// 	actions.getEvents();
+	// 	console.log("Events were retrieved: ", store.events);
+	// }, []);
 
 	return (
 		<>

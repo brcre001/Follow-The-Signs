@@ -176,6 +176,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					alert("Please Add A Message");
 				}
+			},
+
+			//RETRIEVE NEWS, DISCUSSION, AND EVENTS FOR FIRST LOAD
+			getInfo: () => {
+				getActions().getNews();
+				getActions().getEvents();
+				getActions().getDiscussions();
 			}
 		}
 	};
