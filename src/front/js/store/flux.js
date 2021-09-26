@@ -60,7 +60,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				const data = await resp.json();
-				console.log(data, "this is the resp for the login");
 
 				// save your token in the sessionStorage
 				sessionStorage.setItem("jwt-token", data.token);

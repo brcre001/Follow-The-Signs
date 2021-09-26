@@ -18,7 +18,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div className="h-auto">
 			<MainNavbar />
 			<Switch>
 				<Route exact path="/">
