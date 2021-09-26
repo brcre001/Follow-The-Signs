@@ -1,8 +1,11 @@
 // import socket io
 import io from "socket.io-client";
+
 // CONNECT WITH SERVER USING SOCKET IO
 let socket = io.connect(`${process.env.BACKEND_URL}`);
 
+// THESE ARE EXAMPLE LISTENERS FOR THE SOCKET
+// WE DON'T USE HERE BECAUSE WE SEND TO BACK END
 let listeners = {
 	// example listeners
 	// messenger: () => null,
@@ -172,6 +175,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					alert("Please Add A Message");
 				}
+			},
+
+			//RETRIEVE NEWS, DISCUSSION, AND EVENTS FOR FIRST LOAD
+			getInfo: () => {
+				getActions().getNews();
+				getActions().getEvents();
+				getActions().getDiscussions();
 			}
 		}
 	};

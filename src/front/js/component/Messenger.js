@@ -41,16 +41,17 @@ export const Messenger = () => {
 
 	return (
 		<div className="text-center justify-content-center p-2">
-			<h2>FTS Chat</h2>
-			<h2>Room: Session</h2>
+			<h2>Follow The Signs Global Chat</h2>
+			<h2>Welcome!</h2>
 			<br />
 			<div className="text-left mx-auto box">
 				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
 				{messages.length > 0 &&
 					messages.map((payload, index) => (
 						<div key={index}>
-							<p>{payload.username}</p>
-							<p className="px-1">{payload.message}</p>
+							<p className="px-1 m-0">
+								{payload.username}: {payload.message}
+							</p>
 						</div>
 					))}
 				<div ref={messagesEndRef} />

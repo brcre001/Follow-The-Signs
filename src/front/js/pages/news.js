@@ -8,9 +8,11 @@ import { Context } from "../store/appContext";
 
 export const News = () => {
 	const { actions, store } = useContext(Context);
-	useEffect(() => {
-		actions.getNews();
-	}, []);
+
+	// REPLACED BY GETINFO FUNCTION ON FLUX
+	// useEffect(() => {
+	// 	actions.getNews();
+	// }, []);
 
 	return (
 		<>

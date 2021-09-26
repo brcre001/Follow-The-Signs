@@ -33,9 +33,10 @@ export const Discussions = () => {
 		}
 	};
 
-	useEffect(() => {
-		actions.getDiscussions();
-	}, []);
+	// REPLACED BY GETINFO FUNCTION ON FLUX
+	// useEffect(() => {
+	// 	actions.getDiscussions();
+	// }, []);
 
 	return (
 		<>
