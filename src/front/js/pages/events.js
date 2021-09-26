@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { EventsCard } from "../component/EventsCard";
+import { SearchBar } from "../component/SearchBar";
 
 export const Events = () => {
 	const { actions, store } = useContext(Context);
@@ -24,10 +25,11 @@ export const Events = () => {
 						Events for the community to enjoy <br /> Attend an event and become more involved with the
 						community
 					</p>
-					<Form className="d-flex">
+					<SearchBar array={store.events} />
+					{/* <Form className="d-flex">
 						<FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
 						<Button className="search-bar">Search</Button>
-					</Form>
+					</Form> */}
 				</div>
 			</div>
 
