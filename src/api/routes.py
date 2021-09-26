@@ -54,8 +54,8 @@ def create_news():
     db.session.commit()
     return jsonify(news.serialize())
 
-@api.route('/event', methods=['GET'])
-@jwt_required()
+@api.route('/events', methods=['GET'])
+# @jwt_required()
 def event_handler():
 
     events = Event.query.all()
@@ -165,9 +165,6 @@ def create_user():
     db.session.commit()
     return jsonify(new_user.serialize())
 
-
-
-# THIS FUNCTION DOES A GET AND POST
 @api.route('/discussions', methods=["POST"])
 @jwt_required()
 def create_discussion():

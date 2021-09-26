@@ -8,6 +8,7 @@ import { Context } from "../store/appContext";
 
 export const News = () => {
 	const { actions, store } = useContext(Context);
+
 	useEffect(() => {
 		actions.getNews();
 	}, []);
