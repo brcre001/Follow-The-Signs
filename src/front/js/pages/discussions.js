@@ -135,13 +135,12 @@ export const Discussions = () => {
 			</Modal>
 
 			{/* This is how the cards are made */}
+
 			<div className="row px-5 py-3 justify-content-center">
-				<div className="row justify-content-center p-1">
-					{/* MAPPING DISCUSSIONS FROM THE STORE*/}
-					{store.discussions.map((discussion, index) => (
-						<DiscussionsCard key={index} index={index} disObject={discussion} />
-					))}
-				</div>
+				{/* MAPPING DISCUSSIONS FROM THE STORE*/}
+				{store.discussions.map((discussion, index) => (
+					<DiscussionsCard key={index} index={index} disObject={discussion} />
+				))}
 			</div>
 		</>
 	);

@@ -23,7 +23,7 @@ export const Discussion = props => {
 				</Link>
 			</div>
 
-			<div>
+			<div className="">
 				{store.discussions[params.theid] &&
 					store.discussions[params.theid].discussion_comments.map((item, index) => {
 						return (
