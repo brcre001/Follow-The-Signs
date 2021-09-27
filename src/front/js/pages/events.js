@@ -4,10 +4,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { EventsCard } from "../component/EventsCard";
+import queryString from "query-string";
 
 export const Events = () => {
 	const { actions, store } = useContext(Context);
-	const [searchValue, setSearchValue] = useState("");
 	const [eventsArray, setEventsArray] = useState(store.events);
 	console.log("This is the events data: ", store.events);
 
@@ -17,15 +17,30 @@ export const Events = () => {
 	// 	console.log("Events were retrieved: ", store.events);
 	// }, []);
 
-	const searchFunction = () => {
+	useEffect(() => {
+		const qs = queryString.parse(location.hash);
+		console.log("This is parsed info: ", qs);
+		searchFunction(qs.keyword);
+	}, [store.events]);
+
+	const searchFunction = keyword => {
+		console.log("Search function keyword: ", keyword);
 		let filteredArray = store.events.filter(item => {
-			if (searchValue == "") {
+			if (keyword == "" || keyword == undefined) {
 				return item;
-			} else if (item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+			} else if (item.title.toLowerCase().includes(keyword.toLowerCase())) {
 				return item;
 			}
 		});
 		setEventsArray(filteredArray);
+	};
+
+	const searchHash = event => {
+		searchFunction(event.target.value);
+		if (event.target.value == "") {
+			setEventsArray(store.events);
+		}
+		location.hash = `keyword=${event.target.value}`;
 	};
 
 	return (
@@ -44,13 +59,7 @@ export const Events = () => {
 							placeholder="Search"
 							className="mr-2"
 							aria-label="Search"
-							onChange={event => {
-								setSearchValue(event.target.value);
-								searchFunction();
-								if (event.target.value == "") {
-									setEventsArray(store.events);
-								}
-							}}
+							onChange={event => searchHash(event)}
 						/>
 					</Form>
 					{/* <Form className="d-flex">
