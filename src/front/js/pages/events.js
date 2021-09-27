@@ -1,19 +1,32 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { EventsCard } from "../component/EventsCard";
-import { SearchBar } from "../component/SearchBar";
 
 export const Events = () => {
 	const { actions, store } = useContext(Context);
+	const [searchValue, setSearchValue] = useState("");
+	const [eventsArray, setEventsArray] = useState(store.events);
+	console.log("This is the events data: ", store.events);
 
 	// REPLACED BY GETINFO FUNCTION ON FLUX
 	// useEffect(() => {
 	// 	actions.getEvents();
 	// 	console.log("Events were retrieved: ", store.events);
 	// }, []);
+
+	const searchFunction = () => {
+		let filteredArray = store.events.filter(item => {
+			if (searchValue == "") {
+				return item;
+			} else if (item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+				return item;
+			}
+		});
+		setEventsArray(filteredArray);
+	};
 
 	return (
 		<>
@@ -25,7 +38,21 @@ export const Events = () => {
 						Events for the community to enjoy <br /> Attend an event and become more involved with the
 						community
 					</p>
-					<SearchBar array={store.events} />
+					<Form className="d-flex">
+						<FormControl
+							type="search"
+							placeholder="Search"
+							className="mr-2"
+							aria-label="Search"
+							onChange={event => {
+								setSearchValue(event.target.value);
+								searchFunction();
+								if (event.target.value == "") {
+									setEventsArray(store.events);
+								}
+							}}
+						/>
+					</Form>
 					{/* <Form className="d-flex">
 						<FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
 						<Button className="search-bar">Search</Button>
@@ -35,10 +62,9 @@ export const Events = () => {
 
 			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
 			<div className="row px-5 py-3 justify-content-center">
-				{store.events &&
-					store.events.map((item, index) => (
-						<EventsCard key={index} title={item.title} description={item.description} />
-					))}
+				{eventsArray.map((item, index) => (
+					<EventsCard key={index} title={item.title} description={item.description} />
+				))}
 			</div>
 		</>
 	);

@@ -8,7 +8,6 @@ export const Private = props => {
 	const history = useHistory();
 	if (!sessionStorage.getItem("jwt-token") || sessionStorage.getItem("jwt-token") == undefined)
 		history.push("/login");
-	console.log("This is the local storage: ", sessionStorage.getItem("jwt-token"));
 	return <>{props.children}</>;
 };
 
