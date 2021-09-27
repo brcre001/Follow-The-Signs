@@ -70,10 +70,18 @@ export const Events = () => {
 			</div>
 
 			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
-			<div className="row px-5 py-3 justify-content-center">
-				{eventsArray.map((item, index) => (
-					<EventsCard key={index} title={item.title} description={item.description} />
-				))}
+			<div className="row px-5 py-3 justify-content-center w-100">
+				{eventsArray.length > 0 ? (
+					eventsArray.map((item, index) => (
+						<EventsCard key={index} title={item.title} description={item.description} />
+					))
+				) : (
+					<div className="container" style={{ height: "36vh" }}>
+						<div className="alert alert-danger" role="alert">
+							No results found for search term!
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);

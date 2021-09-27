@@ -171,7 +171,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (message !== "") {
 					// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
 					console.log("emitting the message", store.currentUser, message);
-					socket.emit("message", { message, token: store.currentUser.token });
+					let timestamp = new Date();
+					timestamp = `${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}`;
+
+					socket.emit("message", { message, token: store.currentUser.token, time: timestamp });
 				} else {
 					alert("Please Add A Message");
 				}

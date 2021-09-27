@@ -50,7 +50,7 @@ export const Messenger = () => {
 					messages.map((payload, index) => (
 						<div key={index}>
 							<p className="px-1 m-0">
-								{payload.username}: {payload.message}
+								({payload.time}) {payload.username}: {payload.message}
 							</p>
 						</div>
 					))}
