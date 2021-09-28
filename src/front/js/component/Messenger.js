@@ -41,8 +41,8 @@ export const Messenger = () => {
 
 	return (
 		<div className="text-center justify-content-center p-2">
-			<h2>Follow The Signs Global Chat</h2>
-			<h2>Welcome!</h2>
+			<h2>Follow The Signs</h2>
+			<h2>Welcome To The Global Chat!</h2>
 			<br />
 			<div className="text-left mx-auto box">
 				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
