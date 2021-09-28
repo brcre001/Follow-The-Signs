@@ -17,7 +17,7 @@ api = Blueprint('api', __name__)
 
 
 @api.route('/user', methods=['GET'])
-@jwt_required()
+# @jwt_required()
 def get_all_users():
 
     users = User.query.all()
@@ -91,23 +91,6 @@ def comment_handler():
     # user_comment =User(comment=request_data['comment'], is_active=True)
     return jsonify(comments), 200
 
-# @api.route('/discussion_comment/<int:discussion_id>', methods=['GET'])
-# # @jwt_required()
-# def discussion_comment_caller(discussion_id):
-
-#     request_data = request.get_json()
-#     # print(discussion_id)
-#     discussion_comment = DiscussionComment.query.all()
-
-#     discussion_comment =  list(map(lambda discussion_comment: discussion_comment.serialize(), discussion_comment))
-#     print(discussion_comment, "TEST")
-#     filter_comment = []
-#     for dictionary in discussion_comment:
-#         if(dictionary['discussion_id'] == discussion_id):
-#             filter_comment.append(dictionary)
-#         print(dictionary['discussion_id'], discussion_id)
-
-#     return jsonify(filter_comment), 200
 
 
 @api.route('/discussion_comment/<int:discussion_id>', methods=['GET'])
@@ -120,6 +103,19 @@ def discussion_comment_puller(discussion_id):
     discussion_comment = list(map(lambda discussion_comment: discussion_comment.serialize(), discussion_comment))
 
     return jsonify(discussion_comment)
+
+@api.route('/discussion_comment/<int:discussion_id>', methods=['DELETE'])
+# @jwt_required()
+def discussion_comment_delete(discussion_id):
+
+    discussion_comment = DiscussionComment.query.get(discussion_id)
+    
+    db.session.delete(discussion_comment)
+    db.session.commit()
+
+    return jsonify("Succuss", 200)
+
+    
 
 @api.route('/discussion_comment/<int:discussion_id>', methods=['POST'])
 @jwt_required()

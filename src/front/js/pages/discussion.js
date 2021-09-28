@@ -8,6 +8,8 @@ export const Discussion = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
+	useEffect(() => {}, [store.discussions]);
+
 	return (
 		<>
 			<div className="jumbotron">
@@ -26,9 +28,19 @@ export const Discussion = props => {
 			<div className="">
 				{store.discussions[params.theid] &&
 					store.discussions[params.theid].discussion_comments.map((item, index) => {
+						const username = store.users.filter(user => user.id === item.user_id);
+						console.log(username, "THIS IS THE USERNAME FILTER");
 						return (
 							<p key={index}>
-								{item.user_id}:{item.body}
+								{username[0] && username[0].username}:{item.body}
+								<button
+									onClick={() => {
+										actions.deleteDiscussionComments(item.id);
+										actions.getDiscussions();
+										console.log(actions.getDiscussions, "This is the getDiscssion");
+									}}>
+									delete
+								</button>
 							</p>
 						);
 					})}
