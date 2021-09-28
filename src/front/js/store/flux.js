@@ -21,6 +21,7 @@ socket.on("message", msg => {
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			users: [],
 			currentUser: null,
 			message: null,
 			comment: null,
@@ -72,6 +73,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ currentUser: null });
 			},
 
+			getUser: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/user`);
+					const users = await resp.json();
+					setStore({ users: users });
+				} catch (error) {
+					console.log("user is null", error);
+				}
+			},
+
 			getNews: async () => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/news`);
@@ -99,6 +110,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ discussions: discussions });
 				} catch (error) {
 					console.log("There was an error retrieving discussions from API: ", error);
+				}
+			},
+			deleteDiscussionComments: async id => {
+				try {
+					await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${id}`, {
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" }
+					});
+				} catch (error) {
+					console.log("ERROR WITH DELETING COMMENT", error);
 				}
 			},
 
@@ -185,6 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().getNews();
 				getActions().getEvents();
 				getActions().getDiscussions();
+				getActions().getUser();
 			}
 		}
 	};
