@@ -7,6 +7,19 @@ import { DiscussionsCard } from "../component/DiscussionsCard";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
 
+// FUNCTION TO PICK A CERTAIN AMOUNT OF ITEMS FROM AN ARRAY
+// AND MAKE A NEW ARRAY FROM THAT
+//
+// const createRandomArray = (numberOfItems, infoArray) => {
+// 	let newArray = [];
+// 	for (let x = 0; x < numberOfItems; x++) {
+// 		let randomNumber = Math.floor(Math.random() * infoArray.length);
+// 		let randomItem = infoArray[randomNumber];
+// 		newArray.push(randomItem);
+// 	}
+// 	return newArray;
+// };
+
 export const Home = props => {
 	const { store, actions } = useContext(Context);
 
@@ -36,8 +49,8 @@ export const Home = props => {
 			<div className="px-5 pt-5 h-100">
 				<h2 className="mb-4">Upcoming Events</h2>
 				<div className="row mb-2">
-					{[1, 2, 3, 4].map(index => (
-						<EventsCard key={index} />
+					{store.events.map((item, index) => (
+						<EventsCard key={index} title={item.title} description={item.description} />
 					))}
 				</div>
 			</div>
