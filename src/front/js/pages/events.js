@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { EventsCard } from "../component/EventsCard";
@@ -9,7 +8,6 @@ import queryString from "query-string";
 export const Events = () => {
 	const { actions, store } = useContext(Context);
 	const [eventsArray, setEventsArray] = useState(store.events);
-	console.log("This is the events data: ", store.events);
 
 	// REPLACED BY GETINFO FUNCTION ON FLUX
 	// useEffect(() => {
@@ -19,12 +17,10 @@ export const Events = () => {
 
 	useEffect(() => {
 		const qs = queryString.parse(location.hash);
-		console.log("This is parsed info: ", qs);
 		searchFunction(qs.keyword);
 	}, [store.events]);
 
 	const searchFunction = keyword => {
-		console.log("Search function keyword: ", keyword);
 		let filteredArray = store.events.filter(item => {
 			if (keyword == "" || keyword == undefined) {
 				return item;

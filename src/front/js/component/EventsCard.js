@@ -20,7 +20,7 @@ export const EventsCard = props => {
 			<Card style={styles.card}>
 				<Row>
 					<Col className="align-center">
-						<Card.Img src="https://picsum.photos/seed/picsum/200/300" style={styles.cardImage} />
+						<Card.Img src="https://picsum.photos/seed/picsum/300/200" style={styles.cardImage} />
 					</Col>
 					<Col>
 						<Card.Body>
@@ -37,5 +37,7 @@ export const EventsCard = props => {
 
 EventsCard.propTypes = {
 	title: PropTypes.string,
-	description: PropTypes.string
+	description: PropTypes.string,
+	imageURL: PropTypes.string,
+	pageURL: PropTypes.string
 };
