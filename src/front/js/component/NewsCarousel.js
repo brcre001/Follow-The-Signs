@@ -33,17 +33,11 @@ export const NewsCarousel = () => {
 					carouselArray.map((item, index) => {
 						return (
 							<Carousel.Item key={index}>
-								<img
-									className="d-block w-100 rounded"
-									src={item.imageURL}
-									alt={item.title}
-									width="350"
-									height="400"
-								/>
+								<img className="d-block w-100 rounded img-fluid" src={item.imageURL} alt={item.title} />
 								<Carousel.Caption>
 									<a href={item.pageURL}>
-										<h3 className="h-25">{item.title}</h3>
-										<p>{item.description}</p>
+										<h3 className="h-25 text-shadow">{item.title}</h3>
+										<p className="text-shadow">{item.description}</p>
 									</a>
 								</Carousel.Caption>
 							</Carousel.Item>

@@ -19,7 +19,7 @@ export const NewsCard = props => {
 		<CardGroup className="col-12 col-lg-6 p-2">
 			<Card style={styles.card}>
 				<Row>
-					<Col className="align-center">
+					<Col className="align-self-center">
 						<Card.Img src={props.imageURL} style={styles.cardImage} />
 					</Col>
 					<Col>
