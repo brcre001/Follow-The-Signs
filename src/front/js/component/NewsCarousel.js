@@ -1,57 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { Context } from "../store/appContext";
 
 export const NewsCarousel = () => {
 	const [index, setIndex] = useState(0);
+	const [carouselArray, setCarouselArray] = useState([]);
+	const { actions, store } = useContext(Context);
 
 	const handleSelect = (selectedIndex, e) => {
 		setIndex(selectedIndex);
 	};
 
+	useEffect(() => {
+		if (store.news.length > 0) {
+			let newArray = [];
+			let infoArray = [...store.news];
+			for (let x = 0; x < 4; x++) {
+				let randomNumber = Math.floor(Math.random() * infoArray.length);
+				let randomItem = infoArray[randomNumber];
+				newArray.push(randomItem);
+				infoArray.splice(randomNumber, 1);
+			}
+			setCarouselArray(newArray);
+			console.log("This is news carousel array: ", newArray);
+		}
+	}, [store.news]);
+
 	return (
 		<div className="col-lg-10 col-12 justify-content-center mx-auto">
 			<Carousel activeIndex={index} onSelect={handleSelect} className="h-70">
-				<Carousel.Item>
-					<img
-						className="d-block w-100 rounded"
-						src="https://images.pexels.com/photos/3863792/pexels-photo-3863792.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-						alt="First slide"
-						width="350"
-						height="400"
-					/>
-					<Carousel.Caption>
-						<h3 className="h-25">First slide label</h3>
-						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-					</Carousel.Caption>
-				</Carousel.Item>
-				<Carousel.Item>
-					<img
-						className="d-block w-100 rounded"
-						src="https://images.pexels.com/photos/3844790/pexels-photo-3844790.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-						alt="Second slide"
-						width="350"
-						height="400"
-					/>
-
-					<Carousel.Caption>
-						<h3 className="h-25">Second slide label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</Carousel.Caption>
-				</Carousel.Item>
-				<Carousel.Item>
-					<img
-						className="d-block w-100 rounded"
-						src="https://images.pexels.com/photos/4386875/pexels-photo-4386875.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-						alt="Third slide"
-						width="350"
-						height="400"
-					/>
-
-					<Carousel.Caption>
-						<h3 className="h-25">Third slide label</h3>
-						<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-					</Carousel.Caption>
-				</Carousel.Item>
+				{carouselArray.length > 0 &&
+					carouselArray.map((item, index) => {
+						return (
+							<Carousel.Item key={index}>
+								<img
+									className="d-block w-100 rounded"
+									src={item.imageURL}
+									alt={item.title}
+									width="350"
+									height="400"
+								/>
+								<Carousel.Caption>
+									<a href={item.pageURL}>
+										<h3 className="h-25">{item.title}</h3>
+										<p>{item.description}</p>
+									</a>
+								</Carousel.Caption>
+							</Carousel.Item>
+						);
+					})}
 			</Carousel>
 		</div>
 	);
