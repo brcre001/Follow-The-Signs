@@ -4,7 +4,7 @@ from urllib.request import urlopen #  Py Lib Tools for working with URLs
 import re # Regular Expression Module 
 import requests
 # from flask import Flask, request, jsonify, url_for, Blueprint
-# from api.models import db, News
+from api.models import db, Event
 # from models import db, News
 from bs4 import BeautifulSoup
 
@@ -17,6 +17,7 @@ def bslURL_events_scrape ():
     "https://bda.org.uk/category/events/",
     "https://thelowry.com/whats-on/access/british-sign-language-bsl/"
     ] 
+
     for url in bslURLs:
         # html = requests.get(b).text
         bsl_events_url =  url
@@ -39,6 +40,16 @@ def bslURL_events_scrape ():
                 print(item_link)
                 print(img_link)
                 print("#######################")
+                alreadyStored = Event.query.filter_by(title=item_title).first()
+                if alreadyStored is not None:
+                    continue
+                storeEvent = Event(
+                    title=item_title, 
+                    imageURL=img_link, 
+                    pageURL=item_link)
+                print(storeEvent)
+                db.session.add(storeEvent)
+                db.session.commit()
 
         if bslURLs.index(url) == 1:
             all_items = bsl_events_url_Soup.find_all("div", class_="o-layout__item")
@@ -48,6 +59,8 @@ def bslURL_events_scrape ():
                 if item_title is None:
                     continue
                 print(item_title.get_text())
+                item_title = item_title.get_text()
+                # item_title = item_title.get_text()
                 #### FINDING THE LINKS ####
                 item_link = item.find("a").get("href")
                 print(item_link)
@@ -55,6 +68,16 @@ def bslURL_events_scrape ():
                 img_links = img_links.replace('-16x10.jpg', ".jpg")
                 print(img_links)
                 print("#######################")
+                alreadyStored = Event.query.filter_by(title=item_title).first()
+                if alreadyStored is not None:
+                    continue
+                storeEvent = Event(
+                    title=item_title, 
+                    imageURL=img_links, 
+                    pageURL=item_link)
+                print(storeEvent)
+                db.session.add(storeEvent)
+                db.session.commit()
 
 
 
@@ -65,12 +88,12 @@ def bslURL_events_scrape ():
 
 
 # # FOR TESTING # 
-bslURL_events_scrape()
+# bslURL_events_scrape()
 
 
 ############################ ASL SCRAPE ##########################################
 
-def bslURL_events_scrape (): 
+def aslURL_events_scrape (): 
 
     bslURLs = [
     "https://bda.org.uk/category/events/",
@@ -98,6 +121,16 @@ def bslURL_events_scrape ():
                 print(item_link)
                 print(img_link)
                 print("#######################")
+            # already = News.query.filter_by(title=the_title).first()
+            #     if already is not None:
+            #         continue
+            #     news = News(
+            #         title=the_title, 
+            #         imageURL=single_img_link, 
+            #         pageURL=page_link)
+            #     print(news)
+            #     db.session.add(news)
+            #     db.session.commit()
 
         if bslURLs.index(url) == 1:
             all_items = bsl_events_url_Soup.find_all("div", class_="o-layout__item")
@@ -124,5 +157,5 @@ def bslURL_events_scrape ():
 
 
 # # FOR TESTING # 
-aslURL_events_scrape()
+# aslURL_events_scrape()
 

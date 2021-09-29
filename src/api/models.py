@@ -79,12 +79,15 @@ class Event(db.Model):
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
     def __repr__(self):
-        return '<Event %r>' % self.title
+        # return '<Event %r>' % self.title + ' ' + self.imageURL + ' ' + self.pageURL
+        return self.title + ' ' + self.imageURL + ' ' + self.pageURL
 
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
+            "imageURL": self.imageURL,
+            "pageURL": self.pageURL,
             "description": self.description,
             "location": self.location,
             "category": self.category,

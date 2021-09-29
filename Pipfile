@@ -24,6 +24,7 @@ beautifulsoup4 = "*"
 requests = "*"
 sendgrid = "*"
 flask-session = "*"
+flask-crontab = "*"
 
 [requires]
 python_version = "3.8"
