@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext";
-
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import "../../styles/discussions.scss";
 import Alert from "react-bootstrap/Alert";
 import { DiscussionsCard } from "../component/DiscussionsCard";
+import queryString from "query-string";
+import "../../styles/discussions.scss";
 
 export const Discussions = () => {
 	const [modalShow, setModalShow] = useState(false);
@@ -19,6 +18,7 @@ export const Discussions = () => {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [alert, setAlert] = useState(false);
+	const [discussionsArray, setDiscussionsArray] = useState(store.discussions);
 
 	// T IS FOR Title, D IS FOR DESCRIPTION
 	const sendDiscussion = () => {
@@ -38,8 +38,33 @@ export const Discussions = () => {
 	// 	actions.getDiscussions();
 	// }, []);
 
+	useEffect(() => {
+		const qs = queryString.parse(location.hash);
+		searchFunction(qs.keyword);
+	}, [store.discussions]);
+
+	const searchFunction = keyword => {
+		let filteredArray = store.discussions.filter(item => {
+			if (keyword == "" || keyword == undefined) {
+				return item;
+			} else if (item.title.toLowerCase().includes(keyword.toLowerCase())) {
+				return item;
+			}
+		});
+		setDiscussionsArray(filteredArray);
+	};
+
+	const searchHash = event => {
+		searchFunction(event.target.value);
+		if (event.target.value == "") {
+			setDiscussionsArray(store.discussions);
+		}
+		location.hash = `keyword=${event.target.value}`;
+	};
+
 	return (
 		<>
+			{/* JUMBOTRON */}
 			<div className="jumbotron jumbotron-fluid">
 				<div className="container page-animation">
 					<h1 className="display-4 text-center">Discussions Board</h1>
@@ -47,13 +72,18 @@ export const Discussions = () => {
 						Create, Read, Or Comment <br />A place to read discussions and chat with people.
 					</p>
 					<Form className="d-flex">
-						<FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
-						<Button className="search-bar">Search</Button>
+						<FormControl
+							type="search"
+							placeholder="Search"
+							className="mr-2"
+							aria-label="Search"
+							onChange={event => searchHash(event)}
+						/>
 					</Form>
 				</div>
 			</div>
 
-			{/* THIS IS THE CREATE BUTTON */}
+			{/* THIS IS THE CREATE DISCUSSION BUTTON */}
 			<div className="discussion-creation">
 				<h2 className="discussion-article text-center">Discussions</h2>
 				<Button className="ml-5" variant="primary" onClick={handleShow}>
@@ -61,7 +91,7 @@ export const Discussions = () => {
 				</Button>
 			</div>
 
-			{/* THIS IS THE MODAL */}
+			{/* THIS IS THE MODAL TO CREATE DISCUSSION */}
 			<Modal
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
@@ -120,10 +150,14 @@ export const Discussions = () => {
 						</div> */}
 					</div>
 				</Modal.Body>
+
 				<Modal.Footer>
+					{/* THIS CLOSES THE MODAL WITHOUT POSTING */}
 					<Button className="btn btn-sm" variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
+
+					{/* THIS POSTS THE DISCUSSION AND THEN CLOSES THE MODAL */}
 					<Button
 						className="btn btn-sm"
 						onClick={() => {
@@ -135,13 +169,19 @@ export const Discussions = () => {
 				</Modal.Footer>
 			</Modal>
 
-			{/* This is how the cards are made */}
-
+			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
 			<div className="row px-5 py-3 justify-content-center">
-				{/* MAPPING DISCUSSIONS FROM THE STORE*/}
-				{store.discussions.map((discussion, index) => (
-					<DiscussionsCard key={index} index={index} disObject={discussion} />
-				))}
+				{discussionsArray.length > 0 ? (
+					discussionsArray.map((discussion, index) => (
+						<DiscussionsCard key={index} index={index} disObject={discussion} />
+					))
+				) : (
+					<div className="container" style={{ height: "36vh" }}>
+						<div className="alert alert-danger" role="alert">
+							No results found for search!
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);

@@ -74,7 +74,7 @@ export const Events = () => {
 				) : (
 					<div className="container" style={{ height: "36vh" }}>
 						<div className="alert alert-danger" role="alert">
-							No results found for search term!
+							No results found for search!
 						</div>
 					</div>
 				)}

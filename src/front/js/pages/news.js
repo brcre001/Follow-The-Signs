@@ -61,6 +61,8 @@ export const News = () => {
 					</Form>
 				</div>
 			</div>
+
+			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
 			<div className="px-5 pt-3">
 				{store.news.length == newsArray.length && (
 					<>
@@ -84,7 +86,7 @@ export const News = () => {
 					) : (
 						<div className="container" style={{ height: "36vh" }}>
 							<div className="alert alert-danger" role="alert">
-								No results found for search term!
+								No results found for search!
 							</div>
 						</div>
 					)}
