@@ -50,7 +50,13 @@ export const Home = props => {
 				<h2 className="mb-4">Upcoming Events</h2>
 				<div className="row mb-2">
 					{store.events.map((item, index) => (
-						<EventsCard key={index} title={item.title} description={item.description} />
+						<EventsCard
+							key={index}
+							title={item.title}
+							description={item.description}
+							pageURL={item.pageURL}
+							imageURL={item.imageURL}
+						/>
 					))}
 				</div>
 			</div>

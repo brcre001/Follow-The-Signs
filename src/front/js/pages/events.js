@@ -69,7 +69,13 @@ export const Events = () => {
 			<div className="row px-5 py-3 justify-content-center w-100">
 				{eventsArray.length > 0 ? (
 					eventsArray.map((item, index) => (
-						<EventsCard key={index} title={item.title} description={item.description} />
+						<EventsCard
+							key={index}
+							title={item.title}
+							description={item.description}
+							pageURL={item.pageURL}
+							imageURL={item.imageURL}
+						/>
 					))
 				) : (
 					<div className="container" style={{ height: "36vh" }}>

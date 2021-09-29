@@ -49,7 +49,7 @@ def create_news():
     request_data = request.get_json()
     news = News(
         title=request_data['title'], imageURL=request_data['imageURL'],
-        description=request_data['description'])
+        description=request_data['description'], pageURL=request_data['pageURL'])
     db.session.add(news)
     db.session.commit()
     return jsonify(news.serialize())
@@ -62,7 +62,16 @@ def event_handler():
     if events == False: return "Error Can't find news", 404
     events = list(map(lambda events: events.serialize(), events))
 
-    return jsonify(events), 200   
+    return jsonify(events), 200
+
+@api.route('/events', methods=["POST"])
+def create_events():
+    request_data = request.get_json()
+    event = Event(title=request_data['title'], imageURL=request_data['imageURL'],
+        description=request_data['description'], pageURL=request_data['pageURL'])
+    db.session.add(event)
+    db.session.commit()
+    return jsonify(event.serialized())
 
 @api.route('/discussion/<int:position>', methods=['GET'])
 @jwt_required()

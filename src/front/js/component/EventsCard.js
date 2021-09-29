@@ -20,13 +20,13 @@ export const EventsCard = props => {
 			<Card style={styles.card}>
 				<Row>
 					<Col className="align-center">
-						<Card.Img src="https://picsum.photos/seed/picsum/300/200" style={styles.cardImage} />
+						<Card.Img src={props.imageURL} style={styles.cardImage} />
 					</Col>
 					<Col>
 						<Card.Body>
 							<Card.Title>{props.title}</Card.Title>
 							<Card.Text style={styles.cardText}>{props.description}</Card.Text>
-							<Button>Learn More</Button>
+							<Button href={props.pageURL}>Learn More</Button>
 						</Card.Body>
 					</Col>
 				</Row>

@@ -73,8 +73,8 @@ class Event(db.Model):
     description = db.Column(db.String(300), unique=False, nullable=False)
     location = db.Column(db.String(120), unique=False, nullable=False)
     category = db.Column (db.String(120), unique=False, nullable=False)
-    users_interested = db.Column(db.Integer, unique=False, nullable=True)
-    users_attending = db.Column(db.Integer, unique=False, nullable=True)
+    imageURL = db.Column(db.String(300), unique=False, nullable=False)
+    pageURL = db.Column(db.String(300), unique=False, nullable=False)
     # event_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
@@ -88,8 +88,8 @@ class Event(db.Model):
             "description": self.description,
             "location": self.location,
             "category": self.category,
-            "users_interested": self.users_interested,
-            "users_attending": self.users_attending,
+            "imageURL": self.imageURL,
+            "pageURL": self.pageURL,
             # "event_date": self.event_date,
             "creation_date": self.creation_date
         }
