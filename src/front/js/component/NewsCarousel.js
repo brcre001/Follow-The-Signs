@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { Context } from "../store/appContext";
+import "../../styles/banner.scss";
 
 export const NewsCarousel = () => {
 	const [index, setIndex] = useState(0);
@@ -27,7 +28,7 @@ export const NewsCarousel = () => {
 	}, [store.news]);
 
 	return (
-		<div className="col-lg-10 col-12 justify-content-center mx-auto">
+		<div className="col-lg-10 col-12 justify-content-center mx-auto news-carousel">
 			<Carousel activeIndex={index} onSelect={handleSelect} className="h-70">
 				{carouselArray.length > 0 &&
 					carouselArray.map((item, index) => {

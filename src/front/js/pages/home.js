@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.scss";
 import { NewsCarousel } from "../component/NewsCarousel";
 import { EventsCard } from "../component/EventsCard";
 import { DiscussionsCard } from "../component/DiscussionsCard";
+import { Banner } from "./banner";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
 
@@ -39,15 +39,23 @@ export const Home = props => {
 
 			{/* NEWS SECTION OF HOME PAGE */}
 			<div className="px-5 pt-3 h-100">
-				<h2 className="mb-4">Top News</h2>
+				<h2 className="mb-4 text-center">Top News</h2>
 				<div className="text-center">
 					<NewsCarousel />
 				</div>
 			</div>
 
+			{/* BANNER SECTION OF HOME PAGE */}
+			<div className="px-5 pt-3 h-100">
+				<div className="text-center">
+					<Banner />
+				</div>
+				<hr className="hr-style" />
+			</div>
+
 			{/* EVENTS SECTION OF HOME PAGE */}
 			<div className="px-5 pt-5 h-100">
-				<h2 className="mb-4">Upcoming Events</h2>
+				<h2 className="mb-4 text-center">Upcoming Events</h2>
 				<div className="row mb-2">
 					{store.events.map((item, index) => (
 						<EventsCard
@@ -63,7 +71,7 @@ export const Home = props => {
 
 			{/* DISCUSSIONS SECTION OF HOME PAGE */}
 			<div className="px-5 py-5 h-100">
-				<h2>Trending Discussions</h2>
+				<h2 className="text-center">Trending Discussions</h2>
 				<div className="row py-3 justify-content-center">
 					{store.discussions.map((discussion, index) => (
 						<DiscussionsCard key={index} index={index} disObject={discussion} />
