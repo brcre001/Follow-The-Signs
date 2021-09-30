@@ -46,12 +46,12 @@ export const Discussion = props => {
 								{item.username}: {item.body}
 								{item.username == store.currentUser?.username && (
 									<button
-										className="pl-2"
+										className="pl-2 btn btn-danger"
 										onClick={() => {
 											actions.deleteDiscussionComments(item.id);
 											actions.getDiscussions();
 										}}>
-										delete
+										<i className="fas fa-trash-alt"></i>
 									</button>
 								)}
 							</p>
