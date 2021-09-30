@@ -28,13 +28,17 @@ export const NewsCarousel = () => {
 	}, [store.news]);
 
 	return (
-		<div className="col-lg-10 col-12 justify-content-center mx-auto news-carousel">
-			<Carousel activeIndex={index} onSelect={handleSelect} className="h-70">
+		<div className="col-lg-10 col-12 justify-content-center mb-5 mx-auto">
+			<Carousel activeIndex={index} onSelect={handleSelect} className="">
 				{carouselArray.length > 0 &&
 					carouselArray.map((item, index) => {
 						return (
-							<Carousel.Item key={index}>
-								<img className="d-block w-100 rounded img-fluid" src={item.imageURL} alt={item.title} />
+							<Carousel.Item className="carousel-item" key={index}>
+								<img
+									className="d-block w-100 rounded img-fluid news-carousel"
+									src={item.imageURL}
+									alt={item.title}
+								/>
 								<Carousel.Caption>
 									<a href={item.pageURL}>
 										<h3 className="h-25 text-shadow">{item.title}</h3>
