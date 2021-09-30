@@ -71,7 +71,7 @@ def create_events():
         description=request_data['description'], pageURL=request_data['pageURL'])
     db.session.add(event)
     db.session.commit()
-    return jsonify(event.serialized())
+    return jsonify(event.serialize())
 
 @api.route('/discussion/<int:position>', methods=['GET'])
 @jwt_required()
@@ -100,21 +100,18 @@ def comment_handler():
     # user_comment =User(comment=request_data['comment'], is_active=True)
     return jsonify(comments), 200
 
-
-
 @api.route('/discussion_comment/<int:discussion_id>', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def discussion_comment_puller(discussion_id):
-
     discussion_comment = DiscussionComment.query.filter_by(discussion_id = discussion_id)
     if(discussion_comment is None):
-        return "This discussion don't exist ", 400 
+        return "This discussion doesn't exist ", 400 
     discussion_comment = list(map(lambda discussion_comment: discussion_comment.serialize(), discussion_comment))
 
     return jsonify(discussion_comment)
 
 @api.route('/discussion_comment/<int:discussion_id>', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def discussion_comment_delete(discussion_id):
 
     discussion_comment = DiscussionComment.query.get(discussion_id)
@@ -122,19 +119,21 @@ def discussion_comment_delete(discussion_id):
     db.session.delete(discussion_comment)
     db.session.commit()
 
-    return jsonify("Succuss", 200)
+    return jsonify("Success", 200)
 
     
 
 @api.route('/discussion_comment/<int:discussion_id>', methods=['POST'])
 @jwt_required()
 def discussion_comment_handler(discussion_id):
-
     request_data = request.get_json()
-    discussion_comment = DiscussionComment(body=request_data(body))
-
+    current_user_id = get_jwt_identity()
+    me = User.query.filter_by(id=current_user_id).first()
+    discussion_comment = DiscussionComment(body=request_data['comment'], discussion_id=discussion_id, user_id=me.id, username=me.username)
+    db.session.add(discussion_comment)
+    db.session.commit()
    
-    return jsonify(comments), 200
+    return jsonify("Success in posting comment"), 200
 
 # @api.route('/comment', methods=["POST"])
 # @jwt_required()

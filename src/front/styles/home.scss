@@ -63,9 +63,16 @@ a, a:hover {
 }
 
 .news-carousel {
-    margin-bottom: 100px;
-    // width: auto;
-    // height: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // position:absolute;
+    clip:rect(0, 0, 0, 100px);
+}
+
+.carousel-item {
+    height: 1000px;
+    // bottom: 1000px;
 }
 
 

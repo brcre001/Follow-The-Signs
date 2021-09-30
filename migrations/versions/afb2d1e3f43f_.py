@@ -1,5 +1,11 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/464bb11e2537_.py
+<<<<<<< HEAD:migrations/versions/464bb11e2537_.py
+Revision ID: 464bb11e2537
+Revises: 
+Create Date: 2021-09-30 04:25:29.636280
+=======
 <<<<<<< HEAD:migrations/versions/9c6d85c8c974_.py
 Revision ID: 9c6d85c8c974
 Revises: 
@@ -9,6 +15,12 @@ Revision ID: 6ee8a05c757c
 Revises: 
 Create Date: 2021-09-29 23:49:21.841357
 >>>>>>> 3f3b88e84204167ac8b4a12e6c0494b47ec0fe8f:migrations/versions/6ee8a05c757c_.py
+>>>>>>> dfbbac7329ff67c4ccbb6ef1e112905c15215e3c:migrations/versions/6ee8a05c757c_.py
+=======
+Revision ID: afb2d1e3f43f
+Revises: 
+Create Date: 2021-09-30 22:33:47.338080
+>>>>>>> e0e58de7cbb8fcde4014c970726afcc1373189b1:migrations/versions/afb2d1e3f43f_.py
 
 """
 from alembic import op
@@ -16,11 +28,19 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD:migrations/versions/464bb11e2537_.py
+<<<<<<< HEAD:migrations/versions/464bb11e2537_.py
+revision = '464bb11e2537'
+=======
 <<<<<<< HEAD:migrations/versions/9c6d85c8c974_.py
 revision = '9c6d85c8c974'
 =======
 revision = '6ee8a05c757c'
 >>>>>>> 3f3b88e84204167ac8b4a12e6c0494b47ec0fe8f:migrations/versions/6ee8a05c757c_.py
+>>>>>>> dfbbac7329ff67c4ccbb6ef1e112905c15215e3c:migrations/versions/6ee8a05c757c_.py
+=======
+revision = 'afb2d1e3f43f'
+>>>>>>> e0e58de7cbb8fcde4014c970726afcc1373189b1:migrations/versions/afb2d1e3f43f_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,9 +58,9 @@ def upgrade():
     op.create_table('event',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=300), nullable=False),
-    sa.Column('location', sa.String(length=120), nullable=False),
-    sa.Column('category', sa.String(length=120), nullable=False),
+    sa.Column('description', sa.String(length=300), nullable=True),
+    sa.Column('location', sa.String(length=120), nullable=True),
+    sa.Column('category', sa.String(length=120), nullable=True),
     sa.Column('imageURL', sa.String(length=300), nullable=False),
     sa.Column('pageURL', sa.String(length=300), nullable=False),
     sa.Column('creation_date', sa.DateTime(), nullable=False),
@@ -82,10 +102,10 @@ def upgrade():
     sa.Column('body', sa.String(length=120), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('discussion_id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=120), nullable=False),
     sa.ForeignKeyConstraint(['discussion_id'], ['discussion.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('body')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pivots',
     sa.Column('dicussion_id', sa.Integer(), nullable=False),

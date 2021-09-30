@@ -44,7 +44,7 @@ const Layout = () => {
 						<Connections />
 					</Private>
 				</Route>
-				<Route exact path="/discussion/:theid">
+				<Route exact path="/discussion/:discussion_id">
 					<Private>
 						<Discussion />
 					</Private>
