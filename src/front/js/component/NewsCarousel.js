@@ -37,8 +37,8 @@ export const NewsCarousel = () => {
 								<img className="d-block w-100 rounded img-fluid" src={item.imageURL} alt={item.title} />
 								<Carousel.Caption>
 									<a href={item.pageURL}>
-										<h3 className="h-25 text-shadow">{item.title}</h3>
-										<p className="text-shadow">{item.description}</p>
+										<h3 className="h-25 text-shadow bg-dark rounded">{item.title}</h3>
+										{/* <p className="text-shadow">{item.description}</p> */}
 									</a>
 								</Carousel.Caption>
 							</Carousel.Item>
