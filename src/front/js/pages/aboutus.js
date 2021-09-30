@@ -7,7 +7,7 @@ import "../../styles/aboutus.scss";
 
 export const About = () => {
 	return (
-		<div className="d-flex h-100 vw-100 about-us">
+		<div className="d-flex about-us">
 			<div className="m-auto">
 				<div className="container">
 					<h1 className="display-4">Fluid jumbotron</h1>
