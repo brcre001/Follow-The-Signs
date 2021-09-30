@@ -1,5 +1,5 @@
 
-import app
+# import app
 from urllib.request import urlopen #  Py Lib Tools for working with URLs
 import re # Regular Expression Module 
 import requests
@@ -52,9 +52,10 @@ def dailyMothNewsURL_news_scrape ():
             print("#######################")
             #### FINDING THE PATH ####
             page_path = all_links.get("href")
-            page_link = f'https://www.dailymoth.com/{page_path}'
+            page_link = f'https://www.dailymoth.com{page_path}'
             print(f'https://www.dailymoth.com/{page_path}')
         print("#######################")
+        ## ONLY CONFIGURE AFTER TESTING IS COMPLETE ##        
         already = News.query.filter_by(title=the_title).first()
         if already is not None:
             continue
@@ -79,24 +80,9 @@ def deafnewstoday_news_scrape ():
     deafnewstodayPAGE = requests.get(deafnewstodayURLwix)
     deafnewstodayPage_text= deafnewstodayPAGE.text
     deafnewstodaySOUP = BeautifulSoup(deafnewstodayPAGE.content, "html.parser")
-
-    # print(deafnewstodayPage_text)
-
-    ## TESTING ## THIS WORKED  
-    # all_articles = deafnewstodaySOUP.find("div", class_="pro-gallery")
-
     all_articles = deafnewstodaySOUP.find_all("div", class_="gallery-item-container")
-
-    # pretty_articles = all_articles.prettify()
-
-    # print(all_articles)
-
-    # all_items = deafnewstodaySOUP.find_all("article", class_="BlogList-item")
-
     number_of_items = len(deafnewstodaySOUP.find_all("div", class_="gallery-item-container"))
-
     print(number_of_items)
-
 
     for item in all_articles:
         #### FINDING THE TITLE ####
@@ -127,6 +113,7 @@ def deafnewstoday_news_scrape ():
             page_link = page_path['href']
             print(page_link)
             print("#######################")
+        ## ONLY CONFIGURE AFTER TESTING IS COMPLETE ##
         already = News.query.filter_by(title=the_title).first()
         if already is not None:
             continue
@@ -139,6 +126,6 @@ def deafnewstoday_news_scrape ():
         db.session.commit()
 
 
-# # FOR TESTING # 
+# # FOR TESTING # #
 # deafnewstoday_news_scrape()
 

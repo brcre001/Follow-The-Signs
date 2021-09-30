@@ -70,25 +70,27 @@ class Event(db.Model):
     # These are ATTRIBUTES
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, nullable=False)
-    description = db.Column(db.String(300), unique=False, nullable=False)
-    location = db.Column(db.String(120), unique=False, nullable=False)
-    category = db.Column (db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(300), unique=False, nullable=True)
+    location = db.Column(db.String(120), unique=False, nullable=True)
+    category = db.Column (db.String(120), unique=False, nullable=True)
     imageURL = db.Column(db.String(300), unique=False, nullable=False)
     pageURL = db.Column(db.String(300), unique=False, nullable=False)
     # event_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
     def __repr__(self):
-        return '<Event %r>' % self.title
+        # return '<Event %r>' % self.title + ' ' + self.imageURL + ' ' + self.pageURL
+        return self.title + ' ' + self.imageURL + ' ' + self.pageURL
 
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
+            "imageURL": self.imageURL,
+            "pageURL": self.pageURL,
             "description": self.description,
             "location": self.location,
             "category": self.category,
-            "imageURL": self.imageURL,
             "pageURL": self.pageURL,
             # "event_date": self.event_date,
             "creation_date": self.creation_date
