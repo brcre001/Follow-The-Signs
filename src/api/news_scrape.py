@@ -52,7 +52,7 @@ def dailyMothNewsURL_news_scrape ():
             print("#######################")
             #### FINDING THE PATH ####
             page_path = all_links.get("href")
-            page_link = f'https://www.dailymoth.com/{page_path}'
+            page_link = f'https://www.dailymoth.com{page_path}'
             print(f'https://www.dailymoth.com/{page_path}')
         print("#######################")
         ## ONLY CONFIGURE AFTER TESTING IS COMPLETE ##        

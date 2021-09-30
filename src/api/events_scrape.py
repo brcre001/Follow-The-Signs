@@ -95,19 +95,19 @@ def bslURL_events_scrape ():
 
 def aslURL_events_scrape (): 
 
-    bslURLs = [
+    aslURLs = [
     "https://bda.org.uk/category/events/",
     "https://thelowry.com/whats-on/access/british-sign-language-bsl/"
     ] 
-    for url in bslURLs:
+    for url in aslURLs:
         # html = requests.get(b).text
-        bsl_events_url =  url
-        bsl_events_url_page = requests.get(url)
-        bsl_events_url_page_text = bsl_events_url_page.text
-        bsl_events_url_Soup = BeautifulSoup(bsl_events_url_page.content, "html.parser")
+        asl_events_url =  url
+        asl_events_url_page = requests.get(url)
+        asl_events_url_page_text = asl_events_url_page.text
+        asl_events_url_Soup = BeautifulSoup(asl_events_url_page.content, "html.parser")
         all_items = ""
-        if bslURLs.index(url) == 0:
-            all_items = bsl_events_url_Soup.find_all("article", class_="post")
+        if aslURLs.index(url) == 0:
+            all_items = asl_events_url_Soup.find_all("article", class_="post")
             for item in all_items:
                  ## GETTING THE TITLE ## 
                 item_title = item.find("h4", class_="entry-title")
@@ -132,8 +132,8 @@ def aslURL_events_scrape ():
             #     db.session.add(news)
             #     db.session.commit()
 
-        if bslURLs.index(url) == 1:
-            all_items = bsl_events_url_Soup.find_all("div", class_="o-layout__item")
+        if aslURLs.index(url) == 1:
+            all_items = asl_events_url_Soup.find_all("div", class_="o-layout__item")
             for item in all_items:
                  ## GETTING THE TITLE ## 
                 item_title = item.find("h4", class_="c-col-title")

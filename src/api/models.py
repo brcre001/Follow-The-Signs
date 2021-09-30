@@ -70,9 +70,9 @@ class Event(db.Model):
     # These are ATTRIBUTES
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, nullable=False)
-    description = db.Column(db.String(300), unique=False, nullable=False)
-    location = db.Column(db.String(120), unique=False, nullable=False)
-    category = db.Column (db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(300), unique=False, nullable=True)
+    location = db.Column(db.String(120), unique=False, nullable=True)
+    category = db.Column (db.String(120), unique=False, nullable=True)
     imageURL = db.Column(db.String(300), unique=False, nullable=False)
     pageURL = db.Column(db.String(300), unique=False, nullable=False)
     # event_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -91,7 +91,6 @@ class Event(db.Model):
             "description": self.description,
             "location": self.location,
             "category": self.category,
-            "imageURL": self.imageURL,
             "pageURL": self.pageURL,
             # "event_date": self.event_date,
             "creation_date": self.creation_date
