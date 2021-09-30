@@ -64,11 +64,19 @@ a, a:hover {
 
 .news-carousel {
     margin-bottom: 100px;
+    // width: auto;
+    // height: 50%;
 }
+
 
 .text-shadow {
     text-shadow: -1px 1px 0 #000,
                           1px 1px 0 #000,
                          1px -1px 0 #000,
                         -1px -1px 0 #000;
+}
+
+.hr-style {
+    background: #081B26;
+    width: 50%;
 }

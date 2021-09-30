@@ -12,5 +12,9 @@ export const Footer = () => (
 				</Link>
 			</Navbar.Brand>
 		</Navbar>
+		<div>
+			{/* THIS WILL BE A LINK, WILL FINISH 9/30 */}
+			<p className="lead text-center footer-text">hello</p>
+		</div>
 	</div>
 );
