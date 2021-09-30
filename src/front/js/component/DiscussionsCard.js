@@ -10,7 +10,7 @@ export const DiscussionsCard = props => {
 			<Card.Body>
 				<Card.Title>{props.disObject.title}</Card.Title>
 				<Card.Text>{props.disObject.description}</Card.Text>
-				<Link to={"/discussion/" + String(props.index)}>
+				<Link to={"/discussion/" + props.disObject.id}>
 					<Button variant="primary">Join Discussion</Button>
 				</Link>
 			</Card.Body>

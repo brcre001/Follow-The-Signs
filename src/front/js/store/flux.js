@@ -123,7 +123,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			userComment: async discussion_id => {
+			// userComment: async discussion_id => {
+			// 	try {
+			// 		const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`);
+			// 		const discussion_comment = await resp.json();
+			// 		console.log(discussion_comment);
+			// 		setStore({ discussionComments: discussion_comment });
+			// 	} catch (error) {
+			// 		console.log(error, "this is and error from the discussion get");
+			// 	}
+			// },
+
+			getDiscussionComments: async discussion_id => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`);
 					const discussion_comment = await resp.json();
@@ -132,6 +143,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error, "this is and error from the discussion get");
 				}
+			},
+
+			createComment: async (discussion_id, comment) => {
+				let token = sessionStorage.getItem("jwt-token");
+				let response = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+					body: JSON.stringify({ comment })
+				});
+				console.log(response);
+				if (!response.ok) {
+					throw Error("Comment invalid");
+				}
+				let new_comment = await response.json();
+
+				return new_comment;
 			},
 
 			syncSession: async () => {
@@ -155,7 +182,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createUser: async (full_name, username, email, password) => {
-				//
 				let response = await fetch(`${process.env.BACKEND_URL}/api/user`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
