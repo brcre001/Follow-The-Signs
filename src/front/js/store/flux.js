@@ -125,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("ERROR WITH DELETING COMMENT", error);
 				}
+				console.log("THIS IS THE COMMENT DELETE FUNCTION");
 			},
 
 			getDiscussionComments: async discussion_id => {

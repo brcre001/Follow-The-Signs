@@ -8,7 +8,7 @@ import "../../styles/banner.scss";
 export const Banner = () => {
 	return (
 		<>
-			<div className="">
+			<div className="mx-auto">
 				<div className="banner rounded">
 					<div className="banner-text">
 						<h1 className="display-4 font-weight-bold">Information From Trusted Sites</h1>

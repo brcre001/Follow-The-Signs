@@ -38,7 +38,7 @@ export const Messenger = () => {
 	console.log("Messenger refreshing with messages: ", messages);
 
 	return (
-		<div className="text-center justify-content-center p-2">
+		<div className="text-center justify-content-center p-2 message-container">
 			<h2>Follow The Signs</h2>
 			<h2>Welcome To The Global Chat!</h2>
 			<br />
@@ -60,7 +60,7 @@ export const Messenger = () => {
 				<div ref={messagesEndRef} />
 			</div>
 
-			<div>
+			<div className="messagebar mx-auto">
 				{/* MESSAGE BAR */}
 				<input
 					className="m-2 w-50"

@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import { CardGroup, Card, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import "../../styles/discussions.scss";
 
 export const Discussion = props => {
 	const { store, actions } = useContext(Context);

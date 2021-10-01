@@ -171,7 +171,7 @@ export const Discussions = () => {
 			</Modal>
 
 			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
-			<div className="row px-5 py-3 justify-content-center">
+			<div className="row px-5 py-3 justify-content-center w-100 discussion-styling">
 				{discussionsArray.length > 0 ? (
 					discussionsArray.map((discussion, index) => (
 						<DiscussionsCard key={index} index={index} disObject={discussion} />
