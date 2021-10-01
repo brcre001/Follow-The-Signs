@@ -113,11 +113,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			deleteDiscussionComments: async id => {
+				let token = sessionStorage.getItem("jwt-token");
 				try {
-					await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${id}`, {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${id}`, {
 						method: "DELETE",
-						headers: { "Content-Type": "application/json" }
+						headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
 					});
+					const discussions = await resp.json();
+					console.log(discussions);
+					setStore({ discussions: discussions });
 				} catch (error) {
 					console.log("ERROR WITH DELETING COMMENT", error);
 				}
@@ -209,7 +213,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
 					console.log("emitting the message", store.currentUser, message);
 					let timestamp = new Date();
-					timestamp = `${timestamp.getHours()}:${timestamp.getMinutes()}:${timestamp.getSeconds()}`;
+					timestamp = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
 
 					socket.emit("message", { message, token: store.currentUser.token, time: timestamp });
 				} else {

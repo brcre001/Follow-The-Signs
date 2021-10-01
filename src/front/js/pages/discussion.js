@@ -23,132 +23,72 @@ export const Discussion = props => {
 	if (discussion === undefined) return "loading discussion...";
 	return (
 		<>
-			<div className="container">
-				<div className="row">
-					<div className="col">
-						{/* JUMBOTRON */}
-						<Card className="individual-discussion">
-							<Card.Body className="float-right w-25" style={{ marginTop: "5rem" }}>
-								<Card.Title>{discussion && discussion.title}</Card.Title>
-								<hr className="my-4" />
-								<Card.Text>{discussion && discussion.description}</Card.Text>
-								<Card.Link to="/discussions">
-									<span className="btn btn-primary" role="button">
-										Back To Discussion Board
-									</span>
-								</Card.Link>
-							</Card.Body>
-							{/* LIST OF COMMENTS WITH DELETE BUTTON */}
-							<div>
-								<div className="float-left comments-section">
-									{discussion &&
-										discussion.discussion_comments.map((item, index) => {
-											// const username = store.users.filter(user => user.id === item.user_id);
-											// console.log(username, "THIS IS THE USERNAME FILTER");
-											console.log("looping item username: ", item.username);
-											console.log("Username in the store: ", store.currentUser?.username);
-											return (
-												<p key={index}>
-													{item.username}: {item.body}
-													{item.username == store.currentUser?.username && (
-														<button
-															className="pl-2 btn btn-danger"
-															onClick={() => {
-																actions.deleteDiscussionComments(item.id);
-																actions.getDiscussions();
-															}}>
-															<i className="fas fa-trash-alt"></i>
-														</button>
-													)}
-												</p>
-											);
-										})}
-								</div>
-								{/* MAKE A COMMENT */}
-								<div className="comment">
-									<Form className="mx-auto" style={{ width: "30rem" }}>
-										<div className="justify-content-center">
-											<Form.Group className="mb-3" controlId="formBasicEmail">
-												<Form.Control
-													type="comment"
-													placeholder="Write a Comment"
-													onChange={event => {
-														setComment(event.target.value);
-													}}
-												/>
-											</Form.Group>
-											<Button
-												className="text-center p-2 mx-auto"
-												variant="primary"
-												type="button"
-												onClick={() => {
-													actions
-														.createComment(params.discussion_id, comment)
-														.then(() => actions.getDiscussions());
-												}}>
-												Send Comment
-											</Button>
-										</div>
-									</Form>
-								</div>
-							</div>
-						</Card>
-					</div>
-					{/* <div className="col"> */}
-					{/* LIST OF COMMENTS WITH DELETE BUTTON */}
-					{/* <div className="mx-auto comments-section">
-							{discussion &&
-								discussion.discussion_comments.map((item, index) => {
-									// const username = store.users.filter(user => user.id === item.user_id);
-									// console.log(username, "THIS IS THE USERNAME FILTER");
-									console.log("looping item username: ", item.username);
-									console.log("Username in the store: ", store.currentUser?.username);
-									return (
-										<p key={index}>
-											{item.username}: {item.body}
-											{item.username == store.currentUser?.username && (
-												<button
-													className="pl-2 btn btn-danger"
-													onClick={() => {
-														actions.deleteDiscussionComments(item.id);
-														actions.getDiscussions();
-													}}>
-													<i className="fas fa-trash-alt"></i>
-												</button>
-											)}
-										</p>
-									);
-								})}
-						</div> */}
-					{/* </div> */}
-					{/* MAKE A COMMENT */}
-					{/* <div className="comment">
-						<Form className="mx-auto" style={{ width: "30rem" }}>
-							<div className="justify-content-center">
-								<Form.Group className="mb-3" controlId="formBasicEmail">
-									<Form.Control
-										type="comment"
-										placeholder="Write a Comment"
-										onChange={event => {
-											setComment(event.target.value);
-										}}
-									/>
-								</Form.Group>
-								<Button
-									className="text-center p-2 mx-auto"
-									variant="primary"
-									type="button"
-									onClick={() => {
-										actions
-											.createComment(params.discussion_id, comment)
-											.then(() => actions.getDiscussions());
-									}}>
-									Send Comment
-								</Button>
-							</div>
-						</Form>
-					</div> */}
-				</div>
+			{/* JUMBOTRON */}
+			<div className="jumbotron">
+				<h1 className="display-4">{discussion && discussion.title}</h1>
+				<hr className="my-4" />
+				<p>{discussion && discussion.description}</p>
+				<Link to="/discussions">
+					<span className="btn btn-primary" role="button">
+						Back To Discussion Board
+					</span>
+				</Link>
+			</div>
+
+			{/* LIST OF COMMENTS WITH DELETE BUTTON */}
+			<div>
+				{discussion &&
+					discussion.discussion_comments.map((item, index) => {
+						// const username = store.users.filter(user => user.id === item.user_id);
+						// console.log(username, "THIS IS THE USERNAME FILTER");
+						console.log("looping item username: ", item.username);
+						console.log("Username in the store: ", store.currentUser?.username);
+						return (
+							<p key={index} className="p-1 m-0">
+								{item.username}: {item.body}
+								{item.username == store.currentUser?.username && (
+									<button
+										className="btn btn-danger ml-2"
+										onClick={() => {
+											actions.deleteDiscussionComments(item.id);
+											actions.getDiscussions();
+										}}>
+										<i className="fas fa-trash-alt"></i>
+									</button>
+								)}
+							</p>
+						);
+					})}
+			</div>
+			<br />
+
+			{/* MAKE A COMMENT */}
+			<div>
+				<input
+					className="form-control border-0 w-75 mx-auto my-2"
+					type="comment"
+					placeholder="Write a Comment"
+					value={comment}
+					onChange={event => {
+						setComment(event.target.value);
+					}}
+					onKeyPress={event => {
+						if (event.key == "Enter") {
+							actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
+							setComment("");
+						}
+					}}
+				/>
+				<button
+					className="my-2 btn btn-primary mx-auto"
+					variant="primary"
+					type="button"
+					onClick={() => {
+						actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
+						setComment("");
+					}}>
+					Send Comment
+				</button>
 			</div>
 		</>
 	);
