@@ -42,12 +42,16 @@ export const Home = props => {
 	useEffect(() => {
 		if (store.discussions.length > 0) {
 			let newDiscussionsArray = [];
-			let oldDiscussionsArray = [...store.news];
+			let oldDiscussionsArray = [...store.discussions];
 			for (let x = 0; x < 4; x++) {
 				let randomNumber = Math.floor(Math.random() * oldDiscussionsArray.length);
-				let randomItem = oldDiscussionsArray[randomNumber];
-				newDiscussionsArray.push(randomItem);
-				oldDiscussionsArray.splice(randomNumber, 1);
+				if (!oldDiscussionsArray[randomNumber]) {
+					continue;
+				} else {
+					let randomItem = oldDiscussionsArray[randomNumber];
+					newDiscussionsArray.push(randomItem);
+					oldDiscussionsArray.splice(randomNumber, 1);
+				}
 			}
 			setDiscussionsArray(newDiscussionsArray);
 		}
