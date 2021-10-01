@@ -1,11 +1,8 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import PropTypes from "prop-types";
-import { CardGroup, Card, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import "../../styles/discussions.scss";
 
 export const Discussion = props => {
@@ -15,12 +12,21 @@ export const Discussion = props => {
 
 	let discussion = store.discussions.find(d => d.id == params.discussion_id);
 
+	// Creating reference for end of div
+	const discussionsEndRef = useRef(null);
+
+	// Function to scroll to bottom of div
+	const scrollToBottom = () => {
+		discussionsEndRef.current?.scrollIntoView({ behavior: "auto" });
+	};
+
 	useEffect(() => {
 		actions.getDiscussions();
 	}, []);
 
 	useEffect(() => {
 		actions.getDiscussions();
+		scrollToBottom;
 	}, [store.discussions]);
 
 	console.log("Refreshing discussion: ", store.discussions, "Params.discussion_id: ", params.discussion_id);
@@ -63,6 +69,7 @@ export const Discussion = props => {
 							</p>
 						);
 					})}
+				<div ref={discussionsEndRef} />
 			</div>
 			<br />
 
