@@ -39,7 +39,7 @@ export const Signup = () => {
 
 	return (
 		<>
-			<div className="container text-center w-50 mx-auto signup">
+			<div className="container text-center w-50 mx-auto signup bg-white">
 				<i className="fas fa-sign-language fa-7x mb-4" />
 				<h2 className="mb-5 signup-text">Follow The Signs</h2>
 				{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
