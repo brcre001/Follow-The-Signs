@@ -42,11 +42,11 @@ export const Discussion = props => {
 						console.log("looping item username: ", item.username);
 						console.log("Username in the store: ", store.currentUser?.username);
 						return (
-							<p key={index}>
+							<p key={index} className="p-1 m-0">
 								{item.username}: {item.body}
 								{item.username == store.currentUser?.username && (
 									<button
-										className="pl-2 btn btn-danger"
+										className="btn btn-danger ml-2"
 										onClick={() => {
 											actions.deleteDiscussionComments(item.id);
 											actions.getDiscussions();
@@ -58,33 +58,35 @@ export const Discussion = props => {
 						);
 					})}
 			</div>
+			<br />
 
 			{/* MAKE A COMMENT */}
 			<div>
-				<Form>
-					<div className="justify-content-center">
-						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Control
-								type="comment"
-								placeholder="Write a Comment"
-								onChange={event => {
-									setComment(event.target.value);
-								}}
-							/>
-						</Form.Group>
-						<Button
-							className="text-center p-2 mx-auto"
-							variant="primary"
-							type="button"
-							onClick={() => {
-								actions
-									.createComment(params.discussion_id, comment)
-									.then(() => actions.getDiscussions());
-							}}>
-							Send Comment
-						</Button>
-					</div>
-				</Form>
+				<input
+					className="form-control border-0 w-75 mx-auto my-2"
+					type="comment"
+					placeholder="Write a Comment"
+					value={comment}
+					onChange={event => {
+						setComment(event.target.value);
+					}}
+					onKeyPress={event => {
+						if (event.key == "Enter") {
+							actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
+							setComment("");
+						}
+					}}
+				/>
+				<button
+					className="my-2 btn btn-primary mx-auto"
+					variant="primary"
+					type="button"
+					onClick={() => {
+						actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
+						setComment("");
+					}}>
+					Send Comment
+				</button>
 			</div>
 		</>
 	);

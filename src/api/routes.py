@@ -118,8 +118,10 @@ def discussion_comment_delete(discussion_id):
     
     db.session.delete(discussion_comment)
     db.session.commit()
+    discussions = Discussion.query.all()
+    discussions = list(map(lambda discussion: discussion.serialize(), discussions))
 
-    return jsonify("Success", 200)
+    return jsonify(discussions), 200
 
     
 

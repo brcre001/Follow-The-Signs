@@ -113,26 +113,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			deleteDiscussionComments: async id => {
+				let token = sessionStorage.getItem("jwt-token");
 				try {
-					await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${id}`, {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${id}`, {
 						method: "DELETE",
-						headers: { "Content-Type": "application/json" }
+						headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
 					});
+					const discussions = await resp.json();
+					console.log(discussions);
+					setStore({ discussions: discussions });
 				} catch (error) {
 					console.log("ERROR WITH DELETING COMMENT", error);
 				}
 			},
-
-			// userComment: async discussion_id => {
-			// 	try {
-			// 		const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`);
-			// 		const discussion_comment = await resp.json();
-			// 		console.log(discussion_comment);
-			// 		setStore({ discussionComments: discussion_comment });
-			// 	} catch (error) {
-			// 		console.log(error, "this is and error from the discussion get");
-			// 	}
-			// },
 
 			getDiscussionComments: async discussion_id => {
 				try {
