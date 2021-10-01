@@ -119,13 +119,14 @@ export const Discussions = () => {
 					</label> */}
 					<div>
 						{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
-						<label>Title</label>
 						<input
+							className="form-control border-0"
 							placeholder="Place title here"
 							onChange={event => setTitle(event.target.value)}
 							value={title}
 							required
 						/>
+						<hr />
 						<input
 							className="form-control border-0"
 							id="exampleFormControlTextarea1"
