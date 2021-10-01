@@ -16,7 +16,7 @@ export const NewsCarousel = () => {
 		if (store.news.length > 0) {
 			let newArray = [];
 			let infoArray = [...store.news];
-			for (let x = 0; x < 4; x++) {
+			for (let x = 0; x < 8; x++) {
 				let randomNumber = Math.floor(Math.random() * infoArray.length);
 				let randomItem = infoArray[randomNumber];
 				newArray.push(randomItem);
