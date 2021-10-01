@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { EventsCard } from "../component/EventsCard";
 import queryString from "query-string";
+import "../../styles/event.scss";
 
 export const Events = () => {
 	const { actions, store } = useContext(Context);
@@ -66,7 +67,7 @@ export const Events = () => {
 			</div>
 
 			{/* MAPPING FUNCTION TO CREATE THE CARDS */}
-			<div className="row px-5 py-3 justify-content-center w-100">
+			<div className="row px-5 py-3 justify-content-center w-100 event-styling">
 				{eventsArray.length > 0 ? (
 					eventsArray.map((item, index) => (
 						<EventsCard

@@ -43,21 +43,27 @@
 }
 
 .discussion-article {
-    margin-left: 1.5rem;
+    margin-left: 1rem;
 }
 .discussion-card {
     padding: 1rem;
 }
 
-.individual-discussion {
-    margin: 10rem 0 10rem 0;
-    padding-bottom: 20rem;
-    width: 30rem;
-    height: 20rem;
-}
+// .individual-discussion {
+//     margin: 10rem 0 10rem 0;
+//     padding-bottom: 20rem;
+//     width: 30rem;
+//     height: 20rem;
+//     overflow-x: hidden;
+// }
 
 .comments-section {
     background: grey;
     width: 200px;
     // padding-bottom: 50rem;
+}
+
+.discussion-styling {
+    margin-bottom: 9rem;
+    overflow-y: hidden;
 }
