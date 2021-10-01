@@ -16,6 +16,11 @@ export const Messenger = () => {
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
 	};
+	// componentDidUpdate method as hook (useEffect)
+	// this will auto call when message length changes
+	useEffect(() => {
+		scrollToBottom();
+	}, [messages.length]);
 
 	useEffect(() => {
 		// callback function being passed to the listeners
@@ -24,12 +29,6 @@ export const Messenger = () => {
 			setMessages(_messages => [..._messages, msg]);
 		});
 	}, []);
-
-	// componentDidUpdate method as hook (useEffect)
-	// this will auto call when message length changes
-	useEffect(() => {
-		scrollToBottom();
-	}, [messages.length]);
 
 	// ON CHANGE INPUT FILED THIS WILL CALL
 	const onChange = e => {

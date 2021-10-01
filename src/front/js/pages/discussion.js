@@ -12,22 +12,24 @@ export const Discussion = props => {
 
 	let discussion = store.discussions.find(d => d.id == params.discussion_id);
 
-	// Creating reference for end of div
-	const discussionsEndRef = useRef(null);
+	// // Creating reference for end of div
+	// const discussionsEndRef = useRef(null);
 
-	// Function to scroll to bottom of div
-	const scrollToBottom = () => {
-		discussionsEndRef.current?.scrollIntoView({ behavior: "auto" });
-	};
+	// // Function to scroll to bottom of div
+	// const scrollToBottom = () => {
+	// 	discussionsEndRef.current?.scrollIntoView({ behavior: "auto" });
+	// };
+
+	// useEffect(() => {
+	// 	scrollToBottom();
+	// }, [discussion.discussion_comments]);
 
 	useEffect(() => {
 		actions.getDiscussions();
-		scrollToBottom();
 	}, []);
 
 	useEffect(() => {
 		actions.getDiscussions();
-		scrollToBottom();
 	}, [store.discussions]);
 
 	console.log("Refreshing discussion: ", store.discussions, "Params.discussion_id: ", params.discussion_id);
@@ -59,7 +61,7 @@ export const Discussion = props => {
 								{item.username}: {item.body}
 								{item.username == store.currentUser?.username && (
 									<button
-										className="btn btn-danger ml-2"
+										className="rounded btn-danger ml-2"
 										onClick={() => {
 											actions.deleteDiscussionComments(item.id);
 											actions.getDiscussions();
@@ -70,7 +72,7 @@ export const Discussion = props => {
 							</p>
 						);
 					})}
-				<div ref={discussionsEndRef} />
+				{/* <div ref={discussionsEndRef} /> */}
 			</div>
 			<br />
 
