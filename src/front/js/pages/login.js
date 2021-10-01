@@ -36,7 +36,7 @@ export const Login = () => {
 	return (
 		<>
 			<div className="login-view">
-				<div className="container text-center w-50 mx-auto login">
+				<div className="container text-center w-50 mx-auto login bg-white">
 					<div className="login-style">
 						<div className="mb-4">
 							<i className="fas fa-sign-language fa-7x m-2" />

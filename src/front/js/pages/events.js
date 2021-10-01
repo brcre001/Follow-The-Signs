@@ -10,12 +10,6 @@ export const Events = () => {
 	const { actions, store } = useContext(Context);
 	const [eventsArray, setEventsArray] = useState(store.events);
 
-	// REPLACED BY GETINFO FUNCTION ON FLUX
-	// useEffect(() => {
-	// 	actions.getEvents();
-	// 	console.log("Events were retrieved: ", store.events);
-	// }, []);
-
 	useEffect(() => {
 		const qs = queryString.parse(location.hash);
 		searchFunction(qs.keyword);
@@ -59,10 +53,6 @@ export const Events = () => {
 							onChange={event => searchHash(event)}
 						/>
 					</Form>
-					{/* <Form className="d-flex">
-						<FormControl type="search" placeholder="Search" className="mr-2" aria-label="Search" />
-						<Button className="search-bar">Search</Button>
-					</Form> */}
 				</div>
 			</div>
 
@@ -89,18 +79,3 @@ export const Events = () => {
 		</>
 	);
 };
-
-// Previous Card layout
-/* <Card className="col-6">
-	<Card.Img
-		// variant="top"
-		href="https://placeholder.com/"
-		src="https://via.placeholder.com/80x40"
-		className="card-img-left"
-	/>
-	<Card.Body>
-		<Card.Title>Events Article</Card.Title>
-		<Card.Text>This will be an event that you want to attend!</Card.Text>
-		<Button variant="primary">Learn More</Button>
-	</Card.Body>
-</Card> */

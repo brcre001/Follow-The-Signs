@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => (
 	<div>
-		<Navbar variant="dark" className="footer-style justify-content-end">
+		<Navbar variant="dark" className="footer-style justify-content-end align-self-end">
 			<Navbar.Brand>
 				<Link to="/aboutus" className="text-white">
 					About Us
@@ -14,7 +14,7 @@ export const Footer = () => (
 		</Navbar>
 		<div>
 			{/* THIS WILL BE A LINK, WILL FINISH 9/30 */}
-			<p className="lead text-center footer-text">hello</p>
+			{/* <p className="lead text-center footer-text">hello</p> */}
 		</div>
 	</div>
 );

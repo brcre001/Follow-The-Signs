@@ -1,8 +1,6 @@
 // import react and hooks to access state and lifecycle methods
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Context } from "../store/appContext.js";
-
-// Styles
 import "../../styles/messenger.scss";
 
 export const Messenger = () => {
@@ -44,12 +42,17 @@ export const Messenger = () => {
 			<h2>Follow The Signs</h2>
 			<h2>Welcome To The Global Chat!</h2>
 			<br />
-			<div className="text-left mx-auto box bg-white">
+			<div className="text-left mx-auto box bg-white p-1">
 				{/* DISPLAY EACH AND EVERY MESSAGE IN THE STATE AS A FOR LOOP */}
 				{messages.length > 0 &&
 					messages.map((payload, index) => (
 						<div key={index}>
-							<p className="px-1 m-0">
+							<p
+								className={
+									payload.username == store.currentUser?.username
+										? "chat px-1 ml-auto rounded border border-dark self-user"
+										: "chat px-1 mr-auto rounded border border-dark"
+								}>
 								({payload.time}) {payload.username}: {payload.message}
 							</p>
 						</div>
