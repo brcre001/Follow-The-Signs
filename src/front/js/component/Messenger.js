@@ -53,7 +53,7 @@ export const Messenger = () => {
 										? "chat px-1 ml-auto rounded border border-dark self-user"
 										: "chat px-1 mr-auto rounded border border-dark"
 								}>
-								({payload.time}) {payload.username}: {payload.message}
+								{payload.username}: {payload.message} ({payload.time})
 							</p>
 						</div>
 					))}
