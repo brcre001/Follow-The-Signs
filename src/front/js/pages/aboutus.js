@@ -55,7 +55,7 @@ export const About = () => {
 									card&apos;s content.
 								</Card.Text>
 								<Button variant="primary" href="https://github.com/allenstfort23">
-									Go somewhere
+									Allen&apos;s GitHub
 								</Button>
 							</Card.Body>
 						</Col>
@@ -74,7 +74,7 @@ export const About = () => {
 									card&apos;s content.
 								</Card.Text>
 								<Button variant="primary" href="https://github.com/brcre001">
-									Go somewhere
+									Brandon&apos;s GitHub
 								</Button>
 							</Card.Body>
 						</Col>
@@ -93,7 +93,7 @@ export const About = () => {
 									card&apos;s content.
 								</Card.Text>
 								<Button variant="primary" href="https://github.com/YodaFace">
-									Go somewhere
+									William&apos;s GitHub
 								</Button>
 							</Card.Body>
 						</Col>
