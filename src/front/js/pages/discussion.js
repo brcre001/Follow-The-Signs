@@ -17,6 +17,10 @@ export const Discussion = props => {
 		actions.getDiscussions();
 	}, []);
 
+	useEffect(() => {
+		actions.getDiscussions();
+	}, [store.discussions]);
+
 	console.log("Refreshing discussion: ", store.discussions, "Params.discussion_id: ", params.discussion_id);
 	if (discussion === undefined) return "loading discussion...";
 	return (
