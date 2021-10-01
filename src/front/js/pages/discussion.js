@@ -46,7 +46,7 @@ export const Discussion = props => {
 			</div>
 
 			{/* LIST OF COMMENTS WITH DELETE BUTTON */}
-			<div>
+			<div className="mx-auto box bg-white">
 				{discussion &&
 					discussion.discussion_comments.map((item, index) => {
 						// const username = store.users.filter(user => user.id === item.user_id);
@@ -74,7 +74,7 @@ export const Discussion = props => {
 			<br />
 
 			{/* MAKE A COMMENT */}
-			<div>
+			<div className="">
 				<input
 					className="form-control border-0 w-75 mx-auto my-2"
 					type="comment"
@@ -90,16 +90,18 @@ export const Discussion = props => {
 						}
 					}}
 				/>
-				<button
-					className="my-2 btn btn-primary mx-auto"
-					variant="primary"
-					type="button"
-					onClick={() => {
-						actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
-						setComment("");
-					}}>
-					Send Comment
-				</button>
+				<div className="mx-auto justify-content-center send-button">
+					<button
+						className="my-2 btn btn-primary mx-auto"
+						variant="primary"
+						type="button"
+						onClick={() => {
+							actions.createComment(params.discussion_id, comment).then(() => actions.getDiscussions());
+							setComment("");
+						}}>
+						Send Comment
+					</button>
+				</div>
 			</div>
 		</>
 	);
