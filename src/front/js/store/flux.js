@@ -121,18 +121,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("ERROR WITH DELETING COMMENT", error);
 				}
+				console.log("THIS IS THE COMMENT DELETE FUNCTION");
+				// let deleteComment = await resp.json();
+				// setStore({ discussionComments: deleteComment });
 			},
-
-			// userComment: async discussion_id => {
-			// 	try {
-			// 		const resp = await fetch(`${process.env.BACKEND_URL}/api/discussion_comment/${discussion_id}`);
-			// 		const discussion_comment = await resp.json();
-			// 		console.log(discussion_comment);
-			// 		setStore({ discussionComments: discussion_comment });
-			// 	} catch (error) {
-			// 		console.log(error, "this is and error from the discussion get");
-			// 	}
-			// },
 
 			getDiscussionComments: async discussion_id => {
 				try {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import { CardGroup, Card, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Form from "react-bootstrap/Form";
@@ -22,19 +23,22 @@ export const Discussion = props => {
 	return (
 		<>
 			{/* JUMBOTRON */}
-			<div className="jumbotron">
-				<h1 className="display-4">{discussion && discussion.title}</h1>
-				<hr className="my-4" />
-				<p>{discussion && discussion.description}</p>
-				<Link to="/discussions">
-					<span className="btn btn-primary" role="button">
-						Back To Discussion Board
-					</span>
-				</Link>
-			</div>
+
+			<Card className="individual-discussion">
+				<Card.Body className="mx-auto" style={{ marginTop: "5rem" }}>
+					<Card.Title>{discussion && discussion.title}</Card.Title>
+					<hr className="my-4" />
+					<Card.Text>{discussion && discussion.description}</Card.Text>
+					<Card.Link to="/discussions">
+						<span className="btn btn-primary" role="button">
+							Back To Discussion Board
+						</span>
+					</Card.Link>
+				</Card.Body>
+			</Card>
 
 			{/* LIST OF COMMENTS WITH DELETE BUTTON */}
-			<div>
+			<div className="mx-auto comments-section">
 				{discussion &&
 					discussion.discussion_comments.map((item, index) => {
 						// const username = store.users.filter(user => user.id === item.user_id);
@@ -61,7 +65,7 @@ export const Discussion = props => {
 
 			{/* MAKE A COMMENT */}
 			<div>
-				<Form>
+				<Form className="mx-auto" style={{ width: "30rem" }}>
 					<div className="justify-content-center">
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Control
