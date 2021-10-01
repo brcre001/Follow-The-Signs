@@ -22,11 +22,12 @@ export const Discussion = props => {
 
 	useEffect(() => {
 		actions.getDiscussions();
+		scrollToBottom();
 	}, []);
 
 	useEffect(() => {
 		actions.getDiscussions();
-		scrollToBottom;
+		scrollToBottom();
 	}, [store.discussions]);
 
 	console.log("Refreshing discussion: ", store.discussions, "Params.discussion_id: ", params.discussion_id);
