@@ -211,6 +211,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				if (message !== "") {
 					// WHEN FUNCTION CALLED EMIT THE MESSAGE TO SERVER
+					// ALSO EMITS TOKENED USER WHO SENT WITH A TIMESTAMP
 					console.log("emitting the message", store.currentUser, message);
 					let timestamp = new Date();
 					timestamp = `${timestamp.getHours()}:${timestamp.getMinutes()}`;
@@ -221,7 +222,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			//RETRIEVE NEWS, DISCUSSION, AND EVENTS FOR FIRST LOAD
+			//RETRIEVE NEWS, DISCUSSION, AND EVENTS ON FIRST LOAD
 			getInfo: () => {
 				getActions().getNews();
 				getActions().getEvents();

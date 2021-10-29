@@ -16,18 +16,21 @@ export const Signup = () => {
 	const [confirmEmail, setConfirmEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [alert, setAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
 
 	const history = useHistory();
 
 	const sendSignup = () => {
 		if (fullName == "" || username == "" || email == "" || password == "") {
+			setAlertMessage("Missing Field(s)!");
+			setAlert(true);
+		} else if (email != confirmEmail) {
+			setAlertMessage("Emails don't match");
 			setAlert(true);
 		} else {
-			if (confirmEmail == email) {
-				setAlert(false);
-				actions.createUser(fullName, username, email, password);
-				history.push("/congrats");
-			}
+			setAlert(false);
+			actions.createUser(fullName, username, email, password);
+			history.push("/congrats");
 		}
 	};
 
@@ -42,7 +45,9 @@ export const Signup = () => {
 			<div className="container text-center w-50 mx-auto signup bg-white">
 				<i className="fas fa-sign-language fa-7x mb-4" />
 				<h2 className="mb-5 signup-text">Follow The Signs</h2>
-				{alert && <Alert variant="danger">Missing Field(s)!</Alert>}
+				{alert && <Alert variant="danger">{alertMessage}</Alert>}
+
+				{/* FULL NAME INPUT */}
 				<h6 className="text-left signup-text">Full Name</h6>
 				<InputGroup className="mb-3">
 					<FormControl
@@ -55,6 +60,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
+				{/* USERNAME INPUT */}
 				<h6 className="text-left signup-text">Username</h6>
 				<InputGroup className="mb-3">
 					<FormControl
@@ -67,6 +73,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
+				{/* EMAIL ADDRESS INPUT */}
 				<h6 className="text-left signup-text">Email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
@@ -79,6 +86,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
+				{/* CONFIRM EMAIL ADDRESS INPUT */}
 				<h6 className="text-left signup-text">Confirm email address</h6>
 				<InputGroup className="mb-3">
 					<FormControl
@@ -91,6 +99,7 @@ export const Signup = () => {
 					/>
 				</InputGroup>
 
+				{/* PASSWORD INPUT */}
 				<h6 className="text-left signup-text">Password</h6>
 				<InputGroup className="mb-3">
 					<FormControl

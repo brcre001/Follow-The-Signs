@@ -9,7 +9,9 @@ from api.models import db, News
 
 from bs4 import BeautifulSoup
 
-
+### TO RUN THE WEBSCRAPE DO THE FOLLOWING: ###
+### 1. Run 'pipenv shell' in terminal to enter a shell ###
+### 2. Run 
 
 ############################ MOTH NEWS SCRAPE ##########################################
 def dailyMothNewsURL_news_scrape (): 
