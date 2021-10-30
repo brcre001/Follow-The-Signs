@@ -6,12 +6,12 @@ import requests
 # from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, News
 # from models import db, News
-
 from bs4 import BeautifulSoup
 
 ### TO RUN THE WEBSCRAPE DO THE FOLLOWING: ###
 ### 1. Run 'pipenv shell' in terminal to enter a shell ###
-### 2. Run 
+### 2. Run 'flask newsscrape' in terminal to scrape the news data ###
+### 3. The data will then be in the API ###
 
 ############################ MOTH NEWS SCRAPE ##########################################
 def dailyMothNewsURL_news_scrape (): 

@@ -37,7 +37,7 @@ export const Messenger = () => {
 	console.log("Messenger refreshing with messages: ", messages);
 
 	return (
-		<div className="text-center justify-content-center p-2 message-container">
+		<div className="text-center justify-content-center p-2 message-container m-0">
 			<h2>Follow The Signs</h2>
 			<h2>Welcome To The Global Chat!</h2>
 			<br />

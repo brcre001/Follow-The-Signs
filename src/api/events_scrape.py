@@ -8,7 +8,10 @@ from api.models import db, Event
 # from models import db, News
 from bs4 import BeautifulSoup
 
-
+### TO RUN THE WEBSCRAPE DO THE FOLLOWING: ###
+### 1. Run 'pipenv shell' in terminal to enter a shell ###
+### 2. Run 'flask eventsscrape' in terminal to scrape the news data ###
+### 3. The data will then be in the API ###
 
 ############################ BSL EVENTS SCRAPE ##########################################
 def bslURL_events_scrape (): 
