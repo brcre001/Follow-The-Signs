@@ -1,6 +1,6 @@
 # Follow The Signs
 
-This website is a place where the people can stay informed with deaf community news, attend events in the community, and particpate in discussions or chats amongst each other.
+This website is a place where people can stay informed with deaf community news, attend events, and particpate in discussions or chats amongst each other.
 
 ## Home
 
