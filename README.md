@@ -18,6 +18,10 @@ The events page displays experiences and gatherings which anyone can attend to b
 
 The discussions page allows users to create or participate in discussion forums with other users and may delete their own comments if they choose to.
 
+![DiscussionGIF](https://user-images.githubusercontent.com/83432261/139522112-d89f5e6b-8336-440f-a67a-33b42d4fc630.gif)
+
 ## Connections
 
 The connections page encourages users to take part in a global chat where they can talk to other users in real time.
+
+![ConnectionsGIF](https://user-images.githubusercontent.com/83432261/139522145-a8bf2e2c-c4e8-40e7-a941-c4c6aed4c911.gif)
